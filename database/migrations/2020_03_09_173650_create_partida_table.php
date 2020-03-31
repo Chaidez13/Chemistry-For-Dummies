@@ -14,7 +14,7 @@ class CreatePartidaTable extends Migration
     public function up()
     {
         Schema::create('partida', function (Blueprint $table) {
-              $table->bigIncrements('id');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('idJuego');
             $table->foreign('idJuego')->references('id')->on('juego');
             $table->unsignedBigInteger('idUsuario');
