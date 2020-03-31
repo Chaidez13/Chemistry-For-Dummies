@@ -1,6 +1,14 @@
 <template>
   <v-container>
     <time-bar :time="time" :color="timeColor" v-if="game" />
+    <v-row align="center" justify="center" style="margin-top: 4%">
+      <v-btn fab color="primary" @click="startGameButton" class="btn-game">
+          <v-icon>mdi-play</v-icon>
+      </v-btn>
+      <v-btn fab color="error" @click="setGameMemoriaOff" class="btn-game">
+          <v-icon>mdi-backspace</v-icon>
+      </v-btn>
+    </v-row>
     <v-row align="center" justify="center">
       <v-col
         class="carta"
@@ -17,12 +25,6 @@
       >
         <carta-memoria :item="item" />
       </v-col>
-    </v-row>
-    <v-row align="center" justify="center" style="margin-top: 4%">
-      <v-btn @click="startGameButton" color="primary">Empezar</v-btn>
-    </v-row>
-    <v-row align="center" justify="center" style="margin-top: 4%">
-      <v-btn @click="setGameMemoriaOff" color="error">Salir</v-btn>
     </v-row>
   </v-container>
 </template>
@@ -137,7 +139,7 @@ export default {
           this.anterior = item;
           item.activa = true;
           this.cardsActive = 1;
-        } else if (this.cardsActive == 1) {
+        } else if (this.cardsActive == 1 && this.anterior != item) {
           item.activa = true;
           this.cardsActive = 2;
 
@@ -176,6 +178,7 @@ export default {
       }
       if (newTime >= 100) {
         clearInterval(this.interval);
+        this.game = false;
       }
     }
   }
@@ -190,5 +193,8 @@ export default {
   max-width: 150px;
   min-width: 130px;
   min-height: 210px;
+}
+.btn-game{
+  margin: 0 10px;
 }
 </style>
