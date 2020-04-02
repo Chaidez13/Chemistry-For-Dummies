@@ -4,13 +4,13 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
 window.Vue = require('vue');
 import Vuex, { Store } from 'vuex';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router'
 import router from './components/ui/src/router';
 import store from './components/ui/src/store';
+import '@mdi/font/css/materialdesignicons.css'
 Vue.use(Vuetify);
 Vue.use(Vuex);
 Vue.use(VueRouter)
