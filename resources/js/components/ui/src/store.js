@@ -11,11 +11,6 @@ export default new Vuex.Store({
     gameTetris: false,
     gameMemoria: false,
     gameTrivia: false,
-    loading: {
-      nombre: "",
-      estado: false,
-      color: "primary"
-    }
   },
   mutations: {
     fillData(state, payload) {

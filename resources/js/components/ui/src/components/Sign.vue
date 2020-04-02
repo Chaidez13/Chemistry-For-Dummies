@@ -108,6 +108,11 @@ import { mapState } from "vuex";
 export default {
   data: () => ({
     dialog: true,
+    email: null,
+    pass: null,
+    nombre: null,
+    primerApellido: null,
+    segundoApellido: null,
     registro: false,
     error: false,
     date: "",
