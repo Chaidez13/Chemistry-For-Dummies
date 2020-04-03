@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/','RespuestaController@index');
+Route::get('/respuestas','RespuestaController@index');
 
 Auth::routes();
 

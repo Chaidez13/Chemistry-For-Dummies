@@ -37,7 +37,7 @@ class PreguntaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+   
     }
 
     /**
@@ -48,7 +48,7 @@ class PreguntaController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

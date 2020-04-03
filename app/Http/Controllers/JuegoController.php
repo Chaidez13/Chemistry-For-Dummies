@@ -13,7 +13,8 @@ class JuegoController extends Controller
      */
     public function index()
     {
-        //
+        $juego = Juego::all();
+        return $juego;
     }
 
     /**
@@ -45,7 +46,7 @@ class JuegoController extends Controller
      */
     public function show($id)
     {
-        //
+        Juego::find($id):
     }
 
     /**
@@ -56,7 +57,8 @@ class JuegoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $juego = Juego::find($id):
+        return $juego;
     }
 
     /**

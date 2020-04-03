@@ -13,7 +13,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $usuario = User::all();
+        return $usuario;
     }
 
     /**
@@ -34,7 +35,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate([
+            'nombre' => 'required',
+            'apellidoPaterno' => 'required', 
+            'apellidoMaterno' => 'required',
+            'email' => 'required',
+            'password' => 'required', 
+            'fecha' => 'required'=> 'required', 
+            'tipo' => 'required',
+        ]);
+        User::create($request->all());
     }
 
     /**
@@ -45,7 +55,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $usuario = User::find($id);
+        return $usuario;
     }
 
     /**
@@ -68,7 +79,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate([
+            'nombre' => 'required',
+            'apellidoPaterno' => 'required', 
+            'apellidoMaterno' => 'required',
+            'email' => 'required',
+            'password' => 'required', 
+            'fecha' => 'required'=> 'required', 
+            'tipo' => 'required',
+        ]);
+        $usuario = User::find($id)->update($request->all());
     }
 
     /**
@@ -79,6 +99,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
     }
 }

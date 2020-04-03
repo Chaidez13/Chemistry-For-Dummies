@@ -13,7 +13,8 @@ class ReporteoController extends Controller
      */
     public function index()
     {
-        //
+        $reportes = Reporte::all();
+        return $reportes;
     }
 
     /**
@@ -34,7 +35,12 @@ class ReporteoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this-> validate([
+            'idUsuario'=> 'required',
+            'idJuego' => 'required',
+            'mensaje'=> 'required',
+        ]);
+        Reporte::create($request->all());
     }
 
     /**
@@ -79,6 +85,6 @@ class ReporteoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }
