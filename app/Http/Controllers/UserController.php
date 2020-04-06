@@ -41,7 +41,7 @@ class UserController extends Controller
             'apellidoMaterno' => 'required',
             'email' => 'required',
             'password' => 'required', 
-            'fecha' => 'required'=> 'required', 
+            'fecha' => 'required', 
             'tipo' => 'required',
         ]);
         User::create($request->all());
@@ -67,7 +67,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
