@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Pregunta;
-
-class PreguntaController extends Controller
+use App\Respuesta;
+use App\Http\Controllers\Controller;
+class RespuestaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,8 @@ class PreguntaController extends Controller
      */
     public function index()
     {
-        $preguntas = Pregunta::orderBy('id','ASC')->get();
-        //dd($preguntas);
-        return view('welcome', compact('preguntas'));
+        $respuestas = Respuesta::with('pregunta')->get();
+        return $respuestas;
     }
 
     /**
@@ -37,7 +36,7 @@ class PreguntaController extends Controller
      */
     public function store(Request $request)
     {
-   
+        //
     }
 
     /**
@@ -48,7 +47,8 @@ class PreguntaController extends Controller
      */
     public function show($id)
     {
-        
+        $respuesta = Respuesta::find($id);
+        return $respuesta;
     }
 
     /**
@@ -59,7 +59,7 @@ class PreguntaController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**

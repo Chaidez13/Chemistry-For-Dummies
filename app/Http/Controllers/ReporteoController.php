@@ -35,12 +35,12 @@ class ReporteoController extends Controller
      */
     public function store(Request $request)
     {
-        $this-> validate([
+        $datos = $request->validate([
             'idUsuario'=> 'required',
             'idJuego' => 'required',
             'mensaje'=> 'required',
         ]);
-        Reporte::create($request->all());
+        
     }
 
     /**

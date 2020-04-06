@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Respuesta;
-class RespuestaController extends Controller
+use App\Pregunta;
+use App\Http\Controllers\Controller;
+
+class PreguntaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +15,7 @@ class RespuestaController extends Controller
      */
     public function index()
     {
-        $respuestas = Respuesta::with('pregunta')->get();
-        return view('welcome',compact('respuestas'));
+        $preguntas = Pregunta::orderBy('id','ASC')->get();
     }
 
     /**
@@ -35,7 +36,13 @@ class RespuestaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos= $request->validate([
+            'pregunta'=>'required',
+            'nivel' => 'required',
+        ]);
+
+        Pregunta::create($datos);
+        return response()->json(['message' => 'Reprote enviado correctamente']);
     }
 
     /**
@@ -46,7 +53,7 @@ class RespuestaController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

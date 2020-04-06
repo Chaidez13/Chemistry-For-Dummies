@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('duolingo/respuestas' , 'Api\RespuestaController@index');
+Route::get('duolingo/respuestas/{id}' , 'Api\RespuestaController@show');
+Route::POST('duolingo/pregunta/store' , 'Api\PreguntaController@store');
