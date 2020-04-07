@@ -7,16 +7,12 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     sesion: false,
-    elementsData: {},
     gameTetris: false,
     gameMemoria: false,
     gameTrivia: false,
     reportDialog: false,
   },
   mutations: {
-    fillData(state, payload) {
-      state.elementsData = payload;
-    },
     setGameMemoriaOff(state) {
       state.gameMemoria = false;
     },
@@ -39,13 +35,4 @@ export default new Vuex.Store({
       state.reportDialog = !state.reportDialog
     }
   },
-  actions: {
-    loadData: async function({ commit }) {
-      await axios
-        .get(
-          "https://raw.githubusercontent.com/neelpatel05/periodic-table-api/master/home/neelpatel05/data.json"
-        )
-        .then(response => commit("fillData", response));
-    }
-  }
 });

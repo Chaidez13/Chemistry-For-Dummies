@@ -121,10 +121,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _components_CartaMemoria__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/CartaMemoria */ "./resources/js/components/ui/src/components/CartaMemoria.vue");
-/* harmony import */ var _components_Vidas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Vidas */ "./resources/js/components/ui/src/components/Vidas.vue");
-/* harmony import */ var _components_TimeBar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/TimeBar */ "./resources/js/components/ui/src/components/TimeBar.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_CartaMemoria__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/CartaMemoria */ "./resources/js/components/ui/src/components/CartaMemoria.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_Vidas__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Vidas */ "./resources/js/components/ui/src/components/Vidas.vue");
+/* harmony import */ var _components_TimeBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/TimeBar */ "./resources/js/components/ui/src/components/TimeBar.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -166,19 +176,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["cantCartas", "dificultad"],
   data: function data() {
     return {
-      elemento: {
-        name: "Hydrogen",
-        atomicNumber: "1",
-        symbol: "H",
-        atomicMass: "1.00794",
-        groupBlock: "gas",
-        cpkHexColor: "D9FFFF",
-        state: false
-      },
+      elemets: [],
       cartas: [],
       datosTabla: {},
       time: 0,
@@ -192,40 +195,80 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   components: {
-    CartaMemoria: _components_CartaMemoria__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Vidas: _components_Vidas__WEBPACK_IMPORTED_MODULE_2__["default"],
-    TimeBar: _components_TimeBar__WEBPACK_IMPORTED_MODULE_3__["default"]
+    CartaMemoria: _components_CartaMemoria__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Vidas: _components_Vidas__WEBPACK_IMPORTED_MODULE_4__["default"],
+    TimeBar: _components_TimeBar__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   created: function created() {
-    this.loadData();
-    this.begin();
+    this.getCards();
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["loadData"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(["setGameMemoriaOn", "setGameMemoriaOff"]), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["loadData"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(["setGameMemoriaOn", "setGameMemoriaOff"]), {
+    getCards: function () {
+      var _getCards = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/api/memorama/elementos').then(function (response) {
+                  _this.elemets = _this.chargeNElements(10, response.data);
+
+                  _this.elemets.forEach(function (e) {
+                    return e.state = false;
+                  });
+
+                  _this.begin();
+                })["catch"](function (error) {
+                  return console.log(error);
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function getCards() {
+        return _getCards.apply(this, arguments);
+      }
+
+      return getCards;
+    }(),
+    chargeNElements: function chargeNElements(n, arr) {
+      var result = [];
+
+      while (n > 0) {
+        var x = Math.floor(Math.random() * arr.length);
+
+        if (result.indexOf(arr[x]) == -1) {
+          result.push(arr[x]);
+          n--;
+        }
+      }
+
+      return result;
+    },
     //Se cargan los elementos traidos desde el BACK y se crea un arreglo con cada dato dos veces
     begin: function begin() {
       try {
         this.cartas = [];
 
-        for (var i = 0; i < this.cantCartas; i++) {
+        for (var i = 0; i < this.elemets.length; i++) {
           this.cartas.push({
-            info: this.elemento,
+            info: this.elemets[i],
             activa: false,
             id: i
           });
           this.cartas.push({
-            info: this.elemento,
+            info: this.elemets[i],
             activa: false,
             id: i + this.cantCartas
           });
         }
-        /*
-        for (let i = 0; i < this.cantCartas; i++) {
-          let el = Math.trunc(Math.random() * 90);
-          this.cartas.push({ info: this.elementsData.data[el], activa: false });
-          this.cartas.push({ info: this.elementsData.data[el], activa: false });
-        }
-        this.shuffle(this.cartas); */
-
       } catch (error) {
         console.log(error);
       }
@@ -245,7 +288,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     coverAllCards: function coverAllCards() {
       this.cartas.forEach(function (e) {
-        if (!e.state) e.activa = false;
+        if (!e.info.state) e.activa = false;
       });
     },
     enableGame: function enableGame() {
@@ -264,9 +307,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return a;
     },*/
     flipCard: function flipCard(item) {
-      console.log(this.cardsActive);
-
-      if (this.game && !item.state && this.cardsActive != 2) {
+      if (this.game && !item.info.state && this.cardsActive != 2) {
         if (this.cardsActive == 0 && this.anterior != item) {
           this.anterior = item;
           item.activa = true;
@@ -275,13 +316,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           item.activa = true;
           this.cardsActive = 2;
 
-          if (this.anterior.symbol == item.symbol) {// SI SI
-          } else {} // SI NO
-            //ESTO VA AL SINO -------------------
-
-
-          setTimeout(this.coverAllCards, 1000);
-          setTimeout(this.resetCards, 1000); // ----------------------------------
+          if (this.anterior.info.symbol == item.info.symbol) {
+            // SI SI
+            item.info.state = true;
+            this.anterior.info.state = true;
+            this.resetCards();
+          } else {
+            // SI NO
+            setTimeout(this.coverAllCards, 1000);
+            setTimeout(this.resetCards, 1000);
+          }
 
           setTimeout(this.enableGame, 1000);
         }
@@ -295,7 +339,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.time += this.difTime;
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["elementsData", "gameMemoria"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["elementsData", "gameMemoria"])),
   watch: {
     time: function time(newTime) {
       if (newTime > 60) {
@@ -662,7 +706,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('http://127.0.0.1:8000/api/duolingo/respuestas').then(function (response) {
+                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/api/duolingo/respuestas').then(function (response) {
                   _this.questions = _this.shuffle(response.data);
                   _this.actual = 0;
 
