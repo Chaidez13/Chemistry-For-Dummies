@@ -30,23 +30,16 @@
 </template>
 
 <script>
-import { mapState, mapActions, Store, mapMutations } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import CartaMemoria from "../components/CartaMemoria";
+import axios from "axios";
 import Vidas from "../components/Vidas";
 import TimeBar from "../components/TimeBar";
 export default {
   props: ["cantCartas", "dificultad"],
   data() {
     return {
-      elemento: {
-        name: "Hydrogen",
-        atomicNumber: "1",
-        symbol: "H",
-        atomicMass: "1.00794",
-        groupBlock: "gas",
-        cpkHexColor: "D9FFFF",
-        state: false
-      },
+      elemets: [],
       cartas: [],
       datosTabla: {},
       time: 0,
@@ -65,33 +58,42 @@ export default {
     TimeBar
   },
   created() {
-    this.loadData();
-    this.begin();
+    this.getCards()
   },
   methods: {
     ...mapActions(["loadData"]),
     ...mapMutations(["setGameMemoriaOn", "setGameMemoriaOff"]),
 
+    getCards: async function(){
+      await axios.get('/api/memorama/elementos').then(response => {
+          this.elemets = this.chargeNElements(10, response.data)
+          this.elemets.forEach(e => e.state = false)
+          this.begin()
+        }).catch(error => console.log(error))
+    },
+    chargeNElements(n, arr){
+      var result = []
+      while(n > 0){
+         var x = Math.floor(Math.random() * arr.length);
+         if(result.indexOf(arr[x])==-1){
+           result.push(arr[x])
+           n--
+         }
+      }
+      return result;
+    },
     //Se cargan los elementos traidos desde el BACK y se crea un arreglo con cada dato dos veces
     begin() {
       try {
         this.cartas = [];
-
-        for (let i = 0; i < this.cantCartas; i++) {
-          this.cartas.push({ info: this.elemento, activa: false, id: i });
+        for (let i = 0; i < this.elemets.length; i++) {
+          this.cartas.push({ info: this.elemets[i], activa: false, id: i });
           this.cartas.push({
-            info: this.elemento,
+            info:  this.elemets[i],
             activa: false,
             id: i + this.cantCartas
           });
         }
-        /*
-        for (let i = 0; i < this.cantCartas; i++) {
-          let el = Math.trunc(Math.random() * 90);
-          this.cartas.push({ info: this.elementsData.data[el], activa: false });
-          this.cartas.push({ info: this.elementsData.data[el], activa: false });
-        }
-        this.shuffle(this.cartas); */
       } catch (error) {
         console.log(error);
       }
@@ -113,7 +115,7 @@ export default {
     },
     coverAllCards() {
       this.cartas.forEach(e => {
-        if (!e.state) e.activa = false;
+        if (!e.info.state) e.activa = false;
       });
     },
     enableGame() {
@@ -133,8 +135,7 @@ export default {
     },*/
 
     flipCard(item) {
-      console.log(this.cardsActive);
-      if (this.game && !item.state && this.cardsActive != 2) {
+      if (this.game && !item.info.state && this.cardsActive != 2) {
         if (this.cardsActive == 0 && this.anterior != item) {
           this.anterior = item;
           item.activa = true;
@@ -143,15 +144,16 @@ export default {
           item.activa = true;
           this.cardsActive = 2;
 
-          if (this.anterior.symbol == item.symbol) {
+          if (this.anterior.info.symbol == item.info.symbol) {
             // SI SI
+            item.info.state = true;
+            this.anterior.info.state = true;
+            this.resetCards()
           } else {
             // SI NO
+            setTimeout(this.coverAllCards, 1000);
+            setTimeout(this.resetCards, 1000);
           }
-          //ESTO VA AL SINO -------------------
-          setTimeout(this.coverAllCards, 1000);
-          setTimeout(this.resetCards, 1000);
-          // ----------------------------------
           setTimeout(this.enableGame, 1000);
         }
       }

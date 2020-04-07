@@ -57,7 +57,7 @@ export default {
   methods: {
     ...mapMutations(["setGameTriviaOn", "setGameTriviaOff"]),
     getQuestion: async function(){
-      await axios.get('http://127.0.0.1:8000/api/duolingo/respuestas').then(response => {
+      await axios.get('/api/duolingo/respuestas').then(response => {
           this.questions = this.shuffle(response.data)
           this.actual = 0
           this.newQuestion()

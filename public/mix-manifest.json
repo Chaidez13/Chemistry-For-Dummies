@@ -8,5 +8,6 @@
     "/Options.js": "/Options.js",
     "/Report.js": "/Report.js",
     "/Usuario.js": "/Usuario.js",
-    "/GameID.js": "/GameID.js"
+    "/GameID.js": "/GameID.js",
+    "/vendors~GameID.js": "/vendors~GameID.js"
 }
