@@ -11,7 +11,7 @@ export default new Router({
       path: "/",
       name: "home",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Games.vue")
+        import(/* webpackChunkName: "Home" */ "./views/Games.vue")
     },
     {
       path: "/about",
@@ -23,31 +23,37 @@ export default new Router({
       path: "/games",
       name: "games",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Games.vue")
+        import(/* webpackChunkName: "Games" */ "./views/Games.vue")
     },
     {
       path: "/usuario",
       name: "usuario",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Usuario.vue")
+        import(/* webpackChunkName: "Usuario" */ "./views/Usuario.vue")
     },
     {
       path: "/options",
       name: "options",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Options.vue")
+        import(/* webpackChunkName: "Options" */ "./views/Options.vue")
     },
     {
       path: "/game/:id",
       name: "game",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Game.vue")
+        import(/* webpackChunkName: "GameID" */ "./views/Game.vue")
     },
     {
       path: "/dashboard",
       name: "dashboard",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Dashboard.vue")
+        import(/* webpackChunkName: "Dashboard" */ "./views/Dashboard.vue")
+    },
+    {
+      path: "/report",
+      name: "report",
+      component: () =>
+        import(/* webpackChunkName: "Report" */ "./views/Report.vue")
     }
   ]
 });

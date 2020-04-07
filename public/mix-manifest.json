@@ -1,5 +1,12 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/about.js": "/about.js"
+    "/about.js": "/about.js",
+    "/Dashboard.js": "/Dashboard.js",
+    "/Game:ID.js": "/Game:ID.js",
+    "/Home.js": "/Home.js",
+    "/Options.js": "/Options.js",
+    "/Report.js": "/Report.js",
+    "/Usuario.js": "/Usuario.js",
+    "/GameID.js": "/GameID.js"
 }

@@ -70,24 +70,38 @@
 
     <v-divider></v-divider>
     <v-list flat subheader two-line>
-      <v-list-item @click>
+      <v-list-item @click="changeReport()">
         <v-list-item-content>
           <v-list-item-title>Reportar Error</v-list-item-title>
           <v-list-item-subtitle>Reportar alguna anomalia en el sistema.</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
     </v-list>
+    <Report v-if="reportDialog"/>
   </v-container>
 </template>
 
 <script>
+import Report from '../components/Report'
+import { mapState, mapMutations } from "vuex";
+
+
 export default {
+  components: {
+    Report
+  },
   data() {
     return {
       settings: [],
-      dialog: false
+      dialog: false,
+      addReport: false,
     };
   },
-  methods: {}
+  methods: {
+    ...mapMutations(['changeReport'])
+  },
+  computed:{
+    ...mapState(['reportDialog'])
+  }
 };
 </script>

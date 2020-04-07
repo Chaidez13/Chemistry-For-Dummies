@@ -2,7 +2,7 @@
   <v-container>
     <vidas :cantVidas="lifes" />
     <v-row align="center" justify="center">
-      <h2>{{pregunta.pregunta}}</h2>
+      <h2>{{pregunta.pregunta.pregunta}}</h2>
     </v-row>
     <v-row align="center" justify="center" style="margin: 50px 0">
       <v-col
@@ -12,7 +12,7 @@
         class="answer-option"
         @click="responder(pregunta, item)"
       >
-        <p class="text-center" style="margin-top: 70px">{{item}}</p>
+        <p class="text-center" style="margin-top: 70px">{{item.respuesta}}</p>
       </v-col>
     </v-row>
     <time-bar :time="time" />
@@ -32,27 +32,16 @@
 import { mapMutations } from "vuex";
 import Vidas from "../components/Vidas";
 import TimeBar from "../components/TimeBar";
+import axios from "axios";
 export default {
   data() {
     return {
-      pregunta: {
-        pregunta: "¿Qué elemento corresponde a este simbolo 'H'?",
-        respuestaC: "Hidrogeno",
-        dificultad: 1
-      },
-      respuestaI: [
-        "Hidrogeno",
-        "Ben 10",
-        "Hierro",
-        "Cobre",
-        "Tungsteno",
-        "Iodo",
-        "Boro"
-      ],
+      questions: [],
+      pregunta: {},
       answerOp: [],
       message: "",
       progreso: 0,
-      correctState: true,
+      actual: null,
       lifes: 3,
       time: 0,
       interval: null
@@ -63,34 +52,50 @@ export default {
     TimeBar
   },
   created() {
-    var i = 0;
-    console.log(this.time);
-    this.oneSecond();
-    this.answerOp.push(this.pregunta.respuestaC);
-
-    do {
-      let othrAnswer = Math.trunc(Math.random() * this.respuestaI.length);
-      if (this.answerOp.indexOf(this.respuestaI[othrAnswer]) == -1) {
-        this.answerOp.push(this.respuestaI[othrAnswer]);
-        i++;
-      }
-    } while (i < 3);
-    this.shuffle(this.answerOp);
+    this.getQuestion()
   },
   methods: {
     ...mapMutations(["setGameTriviaOn", "setGameTriviaOff"]),
+    getQuestion: async function(){
+      await axios.get('http://127.0.0.1:8000/api/duolingo/respuestas').then(response => {
+          this.questions = this.shuffle(response.data)
+          this.actual = 0
+          this.newQuestion()
+        }).catch(error => console.log(error))
+    },
+    newQuestion(){
+      var i = 0;
+      this.answerOp = []
+      this.pregunta = this.questions[this.actual]
+      this.answerOp.push({
+        id: this.pregunta.pregunta.id,
+        respuesta: this.pregunta.respuesta
+      })
+      do {
+        let aux = Math.trunc(Math.random() * this.questions.length);
+        let othrAnswer = {
+          id: this.questions[aux].idPregunta,
+          respuesta: this.questions[aux].respuesta,
+        }
+        if (this.answerOp.indexOf(othrAnswer) == -1) {
+          this.answerOp.push(othrAnswer);
+          i++;
+          console.log(i)
+        }
+     }while (i < 3);
+     this.shuffle(this.answerOp);
+    },
     resetGame() {
       this.lifes = 3;
       this.progreso = 0;
       this.time = 0;
     },
     responder(question, answer) {
-      if (question.respuestaC == answer) {
+      if (question.idPregunta == answer.id) {
         this.next();
       } else {
         this.lifes--;
         this.message = "INCORRECTO";
-        console.log(this.lifes);
       }
     },
     shuffle(a) {
@@ -104,13 +109,13 @@ export default {
     reset() {
       this.progreso = 0;
       this.message = "";
-      this.correctState = false;
     },
     next() {
       this.progreso += 10;
       this.time = 0;
+      this.actual ++;
       this.message = "CORRECTO";
-      this.correctState = true;
+      this.newQuestion()
     },
     oneSecond: function() {
       this.interval = setInterval(this.timer, 1000);

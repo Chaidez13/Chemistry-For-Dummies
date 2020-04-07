@@ -11,6 +11,7 @@ export default new Vuex.Store({
     gameTetris: false,
     gameMemoria: false,
     gameTrivia: false,
+    reportDialog: false,
   },
   mutations: {
     fillData(state, payload) {
@@ -33,6 +34,9 @@ export default new Vuex.Store({
     },
     setGameTetrisOn(state) {
       state.gameTetris = true;
+    },
+    changeReport(state){
+      state.reportDialog = !state.reportDialog
     }
   },
   actions: {

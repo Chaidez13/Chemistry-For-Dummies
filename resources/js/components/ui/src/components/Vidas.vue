@@ -1,7 +1,7 @@
 <template>
   <v-content>
     <v-row justify="end">
-      <v-col cols="10" md="3" lg="2">
+      <v-col cols="10" md="3" lg="3">
         <v-row>
           <h4 class="text-center">Vidas</h4>
         </v-row>
