@@ -65,12 +65,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('pregunta')->insert([
-            'pregunta' => '¿Cuál es el número atómico del Helio?',
+            'pregunta' => '¿Cuál es el número atómico del Oro?',
             'nivel' => 2,
         ]);
 
         DB::table('pregunta')->insert([
-            'pregunta' => 'Cuál es el número atómico del Berilio?',
+            'pregunta' => 'Cuál es el número atómico de la Plata?',
             'nivel' => 2,
         ]);
         DB::table('pregunta')->insert([
@@ -94,11 +94,11 @@ class DatabaseSeeder extends Seeder
             'nivel' => 2,
         ]);
         DB::table('pregunta')->insert([
-            'pregunta' => 'Cuál es el número atómico del ?',
+            'pregunta' => 'Cuál es el número atómico del Radio?',
             'nivel' => 2,
         ]);
         DB::table('pregunta')->insert([
-            'pregunta' => '¿Cuál es el número atómico del ?',
+            'pregunta' => '¿Cuál es el número atómico del Uranio?',
             'nivel' => 2,
         ]);
 
@@ -143,5 +143,49 @@ class DatabaseSeeder extends Seeder
             'idPregunta' => 10,
             'respuesta' => 'Kripton',
         ]);
+
+             //Nivel 2
+
+         /*DB::table('respuesta')->insert([
+            'idPregunta' => 11,
+            'respuesta' => 'Hidrógeno',
+        ]);
+         DB::table('respuesta')->insert([
+            'idPregunta' => 12,
+            'respuesta' => 'Helio',
+        ]);
+          DB::table('respuesta')->insert([
+            'idPregunta' => 13,
+            'respuesta' => 'Nitrógeno',
+        ]);
+           DB::table('respuesta')->insert([
+            'idPregunta' => 14,
+            'respuesta' => 'Cloro',
+        ]);
+            DB::table('respuesta')->insert([
+            'idPregunta' => 15,
+            'respuesta' => 'Litio',
+        ]);
+             DB::table('respuesta')->insert([
+            'idPregunta' => 16,
+            'respuesta' => 'Potasio',
+        ]);
+              DB::table('respuesta')->insert([
+            'idPregunta' => 17,
+            'respuesta' => 'Carbono',
+        ]);
+            DB::table('respuesta')->insert([
+            'idPregunta' => 18,
+            'respuesta' => 'Oxígeno',
+        ]);
+             DB::table('respuesta')->insert([
+            'idPregunta' => 19,
+            'respuesta' => 'Fósforo',
+        ]);
+             DB::table('respuesta')->insert([
+            'idPregunta' => 20,
+            'respuesta' => 'Kripton',
+        ]);*/
+
     }
 }

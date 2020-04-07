@@ -1,10 +1,9 @@
 <?php
-
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Api;
+use App\Reporte;
 use Illuminate\Http\Request;
-
-class ReporteoController extends Controller
+use App\Http\Controllers\Controller;
+class ReporteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -40,6 +39,7 @@ class ReporteoController extends Controller
             'idJuego' => 'required',
             'mensaje'=> 'required',
         ]);
+        Reporte::create($datos);
         
     }
 

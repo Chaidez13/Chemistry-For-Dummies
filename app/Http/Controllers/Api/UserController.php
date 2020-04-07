@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
+use App\User;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -35,16 +36,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate([
+        $user = $request->validate([
             'nombre' => 'required',
             'apellidoPaterno' => 'required', 
             'apellidoMaterno' => 'required',
             'email' => 'required',
             'password' => 'required', 
             'fecha' => 'required', 
-            'tipo' => 'required',
         ]);
-        User::create($request->all());
+
+        User::create($user->all());
     }
 
     /**
@@ -79,16 +80,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate([
+        /*$this->validate([
             'nombre' => 'required',
             'apellidoPaterno' => 'required', 
             'apellidoMaterno' => 'required',
             'email' => 'required',
             'password' => 'required', 
-            'fecha' => 'required'=> 'required', 
+            'fecha' => 'required', 
             'tipo' => 'required',
         ]);
-        $usuario = User::find($id)->update($request->all());
+        $usuario = User::find($id)->update($request->all());*/
     }
 
     /**

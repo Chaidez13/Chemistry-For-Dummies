@@ -42,7 +42,6 @@ class PreguntaController extends Controller
         ]);
 
         Pregunta::create($datos);
-        return response()->json(['message' => 'Reprote enviado correctamente']);
     }
 
     /**

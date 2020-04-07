@@ -15,7 +15,7 @@ class ElementoController extends Controller
      */
     public function index()
     {
-               $elementos = Storage::disk('local')->get('data.json');
+        $elementos = Storage::disk('local')->get('data.json');
         return $elementos;
     }
 

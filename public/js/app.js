@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"Dashboard":"Dashboard","GameID":"GameID","Home":"Home","Options":"Options","Report":"Report","Usuario":"Usuario","about":"about"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"Dashboard":"Dashboard","GameID":"GameID","Home":"Home","Options":"Options","Usuario":"Usuario","about":"about"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -61976,12 +61976,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     component: function component() {
       return __webpack_require__.e(/*! import() | Dashboard */ "Dashboard").then(__webpack_require__.bind(null, /*! ./views/Dashboard.vue */ "./resources/js/components/ui/src/views/Dashboard.vue"));
     }
-  }, {
-    path: "/report",
-    name: "report",
-    component: function component() {
-      return __webpack_require__.e(/*! import() | Report */ "Report").then(__webpack_require__.bind(null, /*! ./views/Report.vue */ "./resources/js/components/ui/src/views/Report.vue"));
-    }
   }]
 }));
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
@@ -62100,8 +62094,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\Workspaces\IdS2-Proyect\Chemistry-For-Dummies\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\Workspaces\IdS2-Proyect\Chemistry-For-Dummies\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Chemistry-For-Dummies\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Chemistry-For-Dummies\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -49,11 +49,5 @@ export default new Router({
       component: () =>
         import(/* webpackChunkName: "Dashboard" */ "./views/Dashboard.vue")
     },
-    {
-      path: "/report",
-      name: "report",
-      component: () =>
-        import(/* webpackChunkName: "Report" */ "./views/Report.vue")
-    }
   ]
 });
