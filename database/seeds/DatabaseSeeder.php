@@ -58,6 +58,51 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        //NIVEL 2
+         DB::table('pregunta')->insert([
+            'pregunta' => 'Cuál es el número atómico del Hidrógeno?',
+            'nivel' => 2,
+        ]);
+
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Cuál es el número atómico del Helio?',
+            'nivel' => 2,
+        ]);
+
+        DB::table('pregunta')->insert([
+            'pregunta' => 'Cuál es el número atómico del Berilio?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Cuál es el número atómico del Magnesio?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Cuál es el número atómico del Calcio?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => 'Cuál es el número atómico del Neón?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => 'Cuál es el número atómico del Cloro?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => 'Cuál es el número atómico del Mercurio?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => 'Cuál es el número atómico del ?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Cuál es el número atómico del ?',
+            'nivel' => 2,
+        ]);
+
+
         DB::table('respuesta')->insert([
             'idPregunta' => 1,
             'respuesta' => 'Hidrógeno',
