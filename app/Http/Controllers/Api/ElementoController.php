@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use Illuminate\Http\Request;
-use App\Respuesta;
+use App\Elemento;
+use Storage;
 use App\Http\Controllers\Controller;
-class RespuestaController extends Controller
+class ElementoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +15,8 @@ class RespuestaController extends Controller
      */
     public function index()
     {
-        $respuestas = Respuesta::with('pregunta')->get();
-        return $respuestas;
+               $elementos = Storage::disk('local')->get('data.json');
+        return $elementos;
     }
 
     /**
@@ -46,8 +48,7 @@ class RespuestaController extends Controller
      */
     public function show($id)
     {
-        $respuesta = Respuesta::find($id);
-        return $respuesta;
+        //
     }
 
     /**
@@ -58,7 +59,7 @@ class RespuestaController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
