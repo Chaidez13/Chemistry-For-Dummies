@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
 
         //NIVEL 2
          DB::table('pregunta')->insert([
-            'pregunta' => 'Cuál es el número atómico del Hidrógeno?',
+            'pregunta' => '¿Cuál es el número atómico del Hidrógeno?',
             'nivel' => 2,
         ]);
 
@@ -70,7 +70,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('pregunta')->insert([
-            'pregunta' => 'Cuál es el número atómico de la Plata?',
+            'pregunta' => '¿Cuál es el número atómico de la Plata?',
             'nivel' => 2,
         ]);
         DB::table('pregunta')->insert([
@@ -82,19 +82,19 @@ class DatabaseSeeder extends Seeder
             'nivel' => 2,
         ]);
         DB::table('pregunta')->insert([
-            'pregunta' => 'Cuál es el número atómico del Neón?',
+            'pregunta' => '¿Cuál es el número atómico del Neón?',
             'nivel' => 2,
         ]);
         DB::table('pregunta')->insert([
-            'pregunta' => 'Cuál es el número atómico del Cloro?',
+            'pregunta' => '¿Cuál es el número atómico del Cloro?',
             'nivel' => 2,
         ]);
         DB::table('pregunta')->insert([
-            'pregunta' => 'Cuál es el número atómico del Mercurio?',
+            'pregunta' => '¿Cuál es el número atómico del Mercurio?',
             'nivel' => 2,
         ]);
         DB::table('pregunta')->insert([
-            'pregunta' => 'Cuál es el número atómico del Radio?',
+            'pregunta' => '¿Cuál es el número atómico del Radio?',
             'nivel' => 2,
         ]);
         DB::table('pregunta')->insert([
@@ -146,46 +146,135 @@ class DatabaseSeeder extends Seeder
 
              //Nivel 2
 
-         /*DB::table('respuesta')->insert([
+         DB::table('respuesta')->insert([
             'idPregunta' => 11,
-            'respuesta' => 'Hidrógeno',
+            'respuesta' => '1',
         ]);
          DB::table('respuesta')->insert([
             'idPregunta' => 12,
-            'respuesta' => 'Helio',
+            'respuesta' => '79',
         ]);
           DB::table('respuesta')->insert([
             'idPregunta' => 13,
-            'respuesta' => 'Nitrógeno',
+            'respuesta' => '47',
         ]);
            DB::table('respuesta')->insert([
             'idPregunta' => 14,
-            'respuesta' => 'Cloro',
+            'respuesta' => '12',
         ]);
             DB::table('respuesta')->insert([
             'idPregunta' => 15,
-            'respuesta' => 'Litio',
+            'respuesta' => '20',
         ]);
              DB::table('respuesta')->insert([
             'idPregunta' => 16,
-            'respuesta' => 'Potasio',
+            'respuesta' => '10',
         ]);
               DB::table('respuesta')->insert([
             'idPregunta' => 17,
-            'respuesta' => 'Carbono',
+            'respuesta' => '17',
         ]);
             DB::table('respuesta')->insert([
             'idPregunta' => 18,
-            'respuesta' => 'Oxígeno',
+            'respuesta' => '80',
         ]);
              DB::table('respuesta')->insert([
             'idPregunta' => 19,
-            'respuesta' => 'Fósforo',
+            'respuesta' => '88',
         ]);
-             DB::table('respuesta')->insert([
+         DB::table('respuesta')->insert([
             'idPregunta' => 20,
-            'respuesta' => 'Kripton',
-        ]);*/
+            'respuesta' => '92',
+        ]);
 
+
+        //Nivel 3
+
+
+        //Elementos
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué bloque pertenece el Potasio?',
+            'nivel' => 3,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué bloque pertenece el Arsénico?',
+            'nivel' => 3,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué bloque pertenece el Galio?',
+            'nivel' => 3,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué bloque pertenece el Yodo?',
+            'nivel' => 3,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué bloque pertenece el Oxígeno?',
+            'nivel' => 3,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué bloque pertenece el Selenio?',
+            'nivel' => 3,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué bloque pertenece el Cesio?',
+            'nivel' => 3,
+        ]); 
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué bloque pertenece el Silicio?',
+            'nivel' =>3,
+        ]);
+         DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué bloque pertenece el Xenon?',
+            'nivel' => 3,
+        ]);
+    
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué bloque pertenece el Plutonio?',
+            'nivel' => 3,
+        ]);
+
+        DB::table('respuesta')->insert([
+            'idPregunta' => 21,
+            'respuesta' => 'Metales Alcalinos',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 22,
+            'respuesta' => 'Metaloides',
+        ]);
+
+        DB::table('respuesta')->insert([
+            'idPregunta' => 23,
+            'respuesta' => 'Metales (Otros metales)',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 24,
+            'respuesta' => 'Halógenos',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 25,
+            'respuesta' => 'No metales (Otros no metales)',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 26,
+            'respuesta' => 'No metales (Otros no metales)',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 27,
+            'respuesta' => 'Metales Alcalinos',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 28,
+            'respuesta' => 'Metaloiodes',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 29,
+            'respuesta' => 'No metales (Gases nobles)',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 30,
+            'respuesta' => 'Metales Actínidos',
+        ]);
+     
     }
 }
