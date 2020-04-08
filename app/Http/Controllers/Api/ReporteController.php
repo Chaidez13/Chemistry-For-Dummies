@@ -12,8 +12,8 @@ class ReporteController extends Controller
      */
     public function index()
     {
-        $reportes = Reporte::all();
-        return $reportes;
+        $reporte = Reporte::all();
+        return $reporte;
     }
 
     /**
