@@ -19,7 +19,7 @@ class CreatePartidaTable extends Migration
             $table->foreign('idJuego')->references('id')->on('juego');
             $table->unsignedBigInteger('idUsuario');
             $table->foreign('idUsuario')->references('id')->on('user');
-            $table->string('nombre');
+            $table->integer('nivel');
             $table->integer('puntos');
             $table->timestamps();
         });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Http\Controllers\Controller;
 
