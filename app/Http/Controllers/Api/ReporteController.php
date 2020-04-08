@@ -36,7 +36,7 @@ class ReporteController extends Controller
     {
         $datos = $request->validate([
             'idUsuario'=> 'required',
-            'idJuego' => 'required',
+            'juego' => 'required',
             'mensaje'=> 'required',
         ]);
         Reporte::create($datos);

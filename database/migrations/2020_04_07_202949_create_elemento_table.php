@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReporteTable extends Migration
+class CreateElementoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateReporteTable extends Migration
      */
     public function up()
     {
-        Schema::create('reporte', function (Blueprint $table) {
-             $table->bigIncrements('id');
-            $table->unsignedBigInteger('idUsuario');
-            $table->foreign('idUsuario')->references('id')->on('user');
-            $table->string('juego');
-            $table->string('mensaje');
+        Schema::create('elemento', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('symbol');
+            $table->string('atomicNumber');
+            $table->string('atomicMass');
+            $table->string('category');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateReporteTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reporte');
+        Schema::dropIfExists('elemento');
     }
 }
