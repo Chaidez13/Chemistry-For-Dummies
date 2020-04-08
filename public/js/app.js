@@ -61251,30 +61251,42 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     sesion: false,
+    //States del Tetris
     gameTetris: false,
+    //States de la Memoria
     gameMemoria: false,
+    levelMemoria: null,
+    //States de la trivia
     gameTrivia: false,
+    //States extra
     reportDialog: false
   },
   mutations: {
-    setGameMemoriaOff: function setGameMemoriaOff(state) {
-      state.gameMemoria = false;
-    },
-    setGameMemoriaOn: function setGameMemoriaOn(state) {
-      state.gameMemoria = true;
-    },
-    setGameTriviaOff: function setGameTriviaOff(state) {
-      state.gameTrivia = false;
-    },
-    setGameTriviaOn: function setGameTriviaOn(state) {
-      state.gameTrivia = true;
-    },
+    //Mutaciones del tetris
     setGameTetrisOff: function setGameTetrisOff(state) {
       state.gameTetris = false;
     },
     setGameTetrisOn: function setGameTetrisOn(state) {
       state.gameTetris = true;
     },
+    //Mutaciones de la memoria
+    setGameMemoriaOff: function setGameMemoriaOff(state) {
+      state.gameMemoria = false;
+    },
+    setGameMemoriaOn: function setGameMemoriaOn(state) {
+      state.gameMemoria = true;
+    },
+    setLevelMemoria: function setLevelMemoria(state, payload) {
+      state.levelMemoria = payload;
+    },
+    //Mutaciones de la trivia
+    setGameTriviaOff: function setGameTriviaOff(state) {
+      state.gameTrivia = false;
+    },
+    setGameTriviaOn: function setGameTriviaOn(state) {
+      state.gameTrivia = true;
+    },
+    //Mutaciones extra
     changeReport: function changeReport(state) {
       state.reportDialog = !state.reportDialog;
     }

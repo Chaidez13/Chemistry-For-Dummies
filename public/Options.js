@@ -73,7 +73,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      dialog: true,
       games: ["Memoría", "Tetris", "Trivia"],
       selectedGame: null,
       message: null
@@ -88,7 +87,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/');
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/reporte/store', {
+                  //Usuario probicional equisde
+                  idUsuario: 1,
+                  juego: this.selectedGame,
+                  mensaje: this.message
+                });
 
               case 3:
                 _context.next = 7;
@@ -103,7 +107,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 5]]);
+        }, _callee, this, [[0, 5]]);
       }));
 
       function sentReport() {
@@ -381,7 +385,7 @@ var render = function() {
                             "v-btn",
                             {
                               attrs: { color: "blue darken-1", text: "" },
-                              on: { click: function($event) {} }
+                              on: { click: _vm.sentReport }
                             },
                             [_vm._v("Enviar")]
                           )

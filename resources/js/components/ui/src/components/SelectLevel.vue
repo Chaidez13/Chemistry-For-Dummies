@@ -32,11 +32,12 @@ export default {
     return {};
   },
   methods: {
-    ...mapMutations(["setGameMemoriaOn", "setGameTriviaOn", "setGameTetrisOn"]),
-    beginGame(cantidad) {
+    ...mapMutations(["setGameMemoriaOn", "setGameTriviaOn", "setGameTetrisOn", "setLevelMemoria"]),
+    beginGame(dificultad) {
       switch (this.game) {
         case "1":
           this.setGameMemoriaOn();
+          this.setLevelMemoria(dificultad)
           break;
         case "2":
           this.setGameTriviaOn();

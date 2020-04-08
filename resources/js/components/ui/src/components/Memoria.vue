@@ -24,7 +24,7 @@ export default {
           nombre: "Nuevo ingreso",
           icon: "mdi-account-tie",
           color: "blue-grey lighten-3",
-          dificultad: 4,
+          dificultad: 1,
           status: true
         },
         {
@@ -32,7 +32,7 @@ export default {
           nombre: "Limpiador de tubos de ensayo",
           icon: "mdi-test-tube",
           color: "blue-grey lighten-2",
-          dificultad: 8,
+          dificultad: 2,
           status: true
         },
         {
@@ -40,7 +40,7 @@ export default {
           nombre: "Titulador profesional",
           icon: "mdi-beaker",
           color: "blue-grey lighten-1",
-          dificultad: 12,
+          dificultad: 3,
           status: false
         },
         {
@@ -48,7 +48,7 @@ export default {
           nombre: "Louis Pasteur",
           icon: "mdi-atom",
           color: "blue-grey darken-1",
-          dificultad: 16,
+          dificultad: 4,
           status: false
         },
         {
@@ -56,7 +56,7 @@ export default {
           nombre: "Marie Curie",
           icon: "mdi-radioactive",
           color: "blue-grey darken-2",
-          dificultad: 20,
+          dificultad: 5,
           status: false
         }
       ]

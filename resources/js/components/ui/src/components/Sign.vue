@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" persistent max-width="600px">
-      <v-card>
+    <v-dialog v-model="dialog" persistent max-width="620">
+      <v-card max-width="616">
         <v-form ref="form">
           <v-card-title>
             <span v-if="registro" class="headline">Registrarse</span>
@@ -113,7 +113,7 @@ export default {
     pass: null,
     nombre: null,
     primerApellido: null,
-    segundoApellido: null,
+    segundoApellido: "",
     registro: false,
     error: false,
     date: "",

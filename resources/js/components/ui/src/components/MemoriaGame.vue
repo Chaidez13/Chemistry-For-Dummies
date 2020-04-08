@@ -26,15 +26,18 @@
         <carta-memoria :item="item" />
       </v-col>
     </v-row>
+    <GameOver v-if="!gameOv"/>
   </v-container>
 </template>
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
+import GameOver from "../components/GameOver";
 import CartaMemoria from "../components/CartaMemoria";
 import axios from "axios";
 import Vidas from "../components/Vidas";
 import TimeBar from "../components/TimeBar";
+
 export default {
   props: ["cantCartas", "dificultad"],
   data() {
@@ -49,13 +52,15 @@ export default {
       cardsActive: 0,
       cardsFliped: [],
       anterior: null,
-      difTime: 1.666
+      difTime: 10, //1.6666
+      gameOv: false,
     };
   },
   components: {
     CartaMemoria,
     Vidas,
-    TimeBar
+    TimeBar,
+    GameOver,
   },
   created() {
     this.getCards()
@@ -94,6 +99,7 @@ export default {
             id: i + this.cantCartas
           });
         }
+        this.shuffle(this.cartas)
       } catch (error) {
         console.log(error);
       }
@@ -125,14 +131,14 @@ export default {
       this.cardsActive = 0;
     },
 
-    /*
+    
     shuffle(a) {
       for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [a[i], a[j]] = [a[j], a[i]];
       }
       return a;
-    },*/
+    },
 
     flipCard(item) {
       if (this.game && !item.info.state && this.cardsActive != 2) {
@@ -165,10 +171,16 @@ export default {
     },
     timer: function() {
       this.time += this.difTime;
+    },
+
+    gameOver(){
+      if(this.time >= 100){
+        this.gameOv = true;
+      }
     }
   },
   computed: {
-    ...mapState(["elementsData", "gameMemoria"])
+    ...mapState(["gameMemoria", "levelMemoria"])
   },
   watch: {
     time: function(newTime) {
@@ -179,7 +191,7 @@ export default {
         this.timeColor = "red darken-3";
       }
       if (newTime >= 100) {
-        clearInterval(this.interval);
+        this.gameOver()
         this.game = false;
       }
     }

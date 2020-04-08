@@ -140,7 +140,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       pass: null,
       nombre: null,
       primerApellido: null,
-      segundoApellido: null,
+      segundoApellido: "",
       registro: false,
       error: false,
       date: "",
@@ -259,7 +259,7 @@ var render = function() {
       _c(
         "v-dialog",
         {
-          attrs: { persistent: "", "max-width": "600px" },
+          attrs: { persistent: "", "max-width": "620" },
           model: {
             value: _vm.dialog,
             callback: function($$v) {
@@ -271,6 +271,7 @@ var render = function() {
         [
           _c(
             "v-card",
+            { attrs: { "max-width": "616" } },
             [
               _c(
                 "v-form",

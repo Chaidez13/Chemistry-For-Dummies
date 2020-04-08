@@ -31,7 +31,7 @@
               <v-col cols="12" sm="6">
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="changeReport()">Cancelar</v-btn>
-                <v-btn color="blue darken-1" text @click="">Enviar</v-btn>
+                <v-btn color="blue darken-1" text @click="sentReport">Enviar</v-btn>
               </v-col>
             </v-row>
           </v-card-actions>
@@ -46,7 +46,6 @@ import axios from "axios";
 
 export default {
   data: () => ({
-    dialog: true,
     games: ["Memoría","Tetris","Trivia"],
     selectedGame: null,
     message: null,
@@ -55,7 +54,12 @@ export default {
     ...mapMutations(['changeReport']),
     sentReport: async function(){
       try {
-        await axios.post('/')
+        await axios.post('/api/reporte/store',{
+          //Usuario probicional equisde
+          idUsuario: 1,
+          juego: this.selectedGame,
+          mensaje: this.message,
+        })
       } catch (error) {
         
       }
