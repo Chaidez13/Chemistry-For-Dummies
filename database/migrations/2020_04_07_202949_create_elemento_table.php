@@ -20,8 +20,6 @@ class CreateElementoTable extends Migration
             $table->string('atomicNumber');
             $table->string('atomicMass');
             $table->string('category');
-            $table->string('category');
-
             $table->timestamps();
         });
     }

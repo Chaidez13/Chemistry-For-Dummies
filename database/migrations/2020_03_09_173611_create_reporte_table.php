@@ -17,8 +17,7 @@ class CreateReporteTable extends Migration
              $table->bigIncrements('id');
             $table->unsignedBigInteger('idUsuario');
             $table->foreign('idUsuario')->references('id')->on('user');
-            $table->unsignedBigInteger('idJuego');
-            $table->foreign('idJuego')->references('id')->on('juego');
+            $table->string('juego');
             $table->string('mensaje');
             $table->timestamps();
         });
