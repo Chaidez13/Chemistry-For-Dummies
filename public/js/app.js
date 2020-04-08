@@ -43,8 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"Dashboard":"Dashboard","Home":"Home","Options":"Options","Usuario":"Usuario","about":"about","vendors~GameID":"vendors~GameID","GameID":"GameID"}[chunkId]||chunkId) + ".js"
-
+/******/ 		return __webpack_require__.p + "" + ({"Dashboard":"Dashboard","Home":"Home","about":"about","vendors~GameID~Options~Usuario":"vendors~GameID~Options~Usuario","GameID":"GameID","Options":"Options","Usuario":"Usuario"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -61205,19 +61204,19 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     path: "/usuario",
     name: "usuario",
     component: function component() {
-      return __webpack_require__.e(/*! import() | Usuario */ "Usuario").then(__webpack_require__.bind(null, /*! ./views/Usuario.vue */ "./resources/js/components/ui/src/views/Usuario.vue"));
+      return Promise.all(/*! import() | Usuario */[__webpack_require__.e("vendors~GameID~Options~Usuario"), __webpack_require__.e("Usuario")]).then(__webpack_require__.bind(null, /*! ./views/Usuario.vue */ "./resources/js/components/ui/src/views/Usuario.vue"));
     }
   }, {
     path: "/options",
     name: "options",
     component: function component() {
-      return __webpack_require__.e(/*! import() | Options */ "Options").then(__webpack_require__.bind(null, /*! ./views/Options.vue */ "./resources/js/components/ui/src/views/Options.vue"));
+      return Promise.all(/*! import() | Options */[__webpack_require__.e("vendors~GameID~Options~Usuario"), __webpack_require__.e("Options")]).then(__webpack_require__.bind(null, /*! ./views/Options.vue */ "./resources/js/components/ui/src/views/Options.vue"));
     }
   }, {
     path: "/game/:id",
     name: "game",
     component: function component() {
-      return Promise.all(/*! import() | GameID */[__webpack_require__.e("vendors~GameID"), __webpack_require__.e("GameID")]).then(__webpack_require__.bind(null, /*! ./views/Game.vue */ "./resources/js/components/ui/src/views/Game.vue"));
+      return Promise.all(/*! import() | GameID */[__webpack_require__.e("vendors~GameID~Options~Usuario"), __webpack_require__.e("GameID")]).then(__webpack_require__.bind(null, /*! ./views/Game.vue */ "./resources/js/components/ui/src/views/Game.vue"));
     }
   }, {
     path: "/dashboard",
@@ -61302,8 +61301,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Chemistry-For-Dummies\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Chemistry-For-Dummies\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Workspaces\IdS2-Proyect\Chemistry-For-Dummies\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Workspaces\IdS2-Proyect\Chemistry-For-Dummies\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

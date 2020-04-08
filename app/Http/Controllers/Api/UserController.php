@@ -45,7 +45,7 @@ class UserController extends Controller
             'fecha' => 'required', 
         ]);
 
-        User::create($user->all());
+        User::create($user);
     }
 
     /**

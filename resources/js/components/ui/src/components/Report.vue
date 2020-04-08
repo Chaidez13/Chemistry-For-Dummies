@@ -42,6 +42,7 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
+import axios from "axios";
 
 export default {
   data: () => ({
@@ -52,6 +53,13 @@ export default {
   }),
   methods:{
     ...mapMutations(['changeReport']),
+    sentReport: async function(){
+      try {
+        await axios.post('/')
+      } catch (error) {
+        
+      }
+    }
   },
   computed:{
     ...mapState(['reportDialog'])

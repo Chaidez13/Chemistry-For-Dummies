@@ -91,7 +91,7 @@
               <v-col cols="12" sm="6">
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="$router.go(-1)">Cancelar</v-btn>
-                <v-btn v-if="registro" color="blue darken-1" text @click="submit()">Registrarse</v-btn>
+                <v-btn v-if="registro" color="blue darken-1" text @click="registrarse">Registrarse</v-btn>
                 <v-btn v-if="!registro" color="blue darken-1" text @click="submit()">Inicar Sesión</v-btn>
               </v-col>
             </v-row>
@@ -104,6 +104,7 @@
 
 <script>
 import { mapState } from "vuex";
+import axios from 'axios';
 
 export default {
   data: () => ({
@@ -120,8 +121,15 @@ export default {
     modal: ""
   }),
   methods: {
-    registrarse() {
-      this.sesion = true;
+    registrarse: async function() {
+      await axios.post('api/registro/user',{
+        nombre: this.nombre,
+        apellidoPaterno: this.primerApellido,
+        apellidoMaterno: this.segundoApellido,
+        email: this.email,
+        password: this.pass,
+        fecha: this.date,
+      }).then(() => console.log('Registro Exitoso')).catch(()=> console.log(error))
       this.$router.push({ name: "home" });
     },
     submit() {
