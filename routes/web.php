@@ -22,6 +22,10 @@ Route::get('/options', function () {
 Route::get('/dashboard', function () {	
   return view('welcome');
 });
+
+Route::get('/tetris', function () {	
+  return view('tetris.index');
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
