@@ -18,7 +18,7 @@ function crearPartida(point, level, created){
   if(!created){
     url = "/api/duolingo/partida/store"
   }else{
-    = "/api/duolingo/partida/update"
+   url = "/api/duolingo/partida/update"
   }
         $.ajax({                        
            type: "POST",                 
@@ -27,7 +27,7 @@ function crearPartida(point, level, created){
            		'idJuego': 1,
            		'idUsuario': 1,
               'nivel': level,
-              'puntos': point;
+              'puntos': point,
            }, 
            success: function(data)             
            {           
