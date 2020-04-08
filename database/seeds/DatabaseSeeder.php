@@ -3,8 +3,9 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-
+use Carbon\Carbon;
 use App\Pregunta;
+use App\User;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,6 +15,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+         DB::table('user')->insert([
+            'nombre' => 'John',
+            'apellidoPaterno' => '117',
+            'apellidoMaterno' => '',
+            'email' => 'Spartan117@UNCS.cov',
+            'password' => 'arbiter',
+            'fecha' => Carbon::parse('2552-07-03'),
+
+        ]);
+
         DB::table('pregunta')->insert([
             'pregunta' => '¿A qué elemento pertenece el símbolo H?',
             'nivel' => 1,

@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Partida extends Model
 {
     protected $fillable = [
-        'idJuego','idUsuario','nombre','puntos'
+        'idJuego','idUsuario','nivel','puntos'
     ];
 }
