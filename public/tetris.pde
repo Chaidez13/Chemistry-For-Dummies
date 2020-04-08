@@ -6,7 +6,8 @@ var salud = 200,damage=20;
 PImage vidaIcono;
 Elemento actual;
 var created = false;
-var actualIndex = 1,nivel=1;
+var nivel=1;
+var confirmar;
 var tablero = [["0","","","","","","","","","","","","","","","","","1"],
 ["2","3","","","","","","","","","","","4","5","6","7","8","9"],
 ["10","11","","","","","","","","","","","12","13","14","15","16","17"],
@@ -16,7 +17,7 @@ var tablero = [["0","","","","","","","","","","","","","","","","","1"],
 ["86","87","","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117"]];
 
 void setup(){
-  size(1500,1000);
+  size(1261,1000);
   crearMatriz();
   vidaIcono = loadImage("src/vida.png");
   frameRate(20);
@@ -24,13 +25,22 @@ void setup(){
   }
 
 void draw(){
-  background(0);
+  background(255);
   if(!created){
     llenarMatriz();
-    //actual = piezas.shift();
     actual = elementoNivel(nivel);
     created = true;
   }
+
+  if(salud<=10){
+    let gameOver = confirm("Ha perdido, ¿Desea continuar :D?");
+    if(gameOver)
+    this.reset();
+    else
+      window.location.href = "/";
+
+  }
+
   if(actual.y>=1000 && salud>0){
     salud-=damage;
     if(puntos>0)
@@ -43,18 +53,11 @@ void draw(){
   textSize(16);
   vidas(60 ,30,salud); 
   marcador(puntos,1028,0);
-  if(salud<=3){
-    noLoop();
-  }
-  //text("X: " + actual.x + "" + " y: " + actual.y, 1000,100)
-  //text("W: " + width + "" + " H: " + height, 1000,100)
 }
-
-//FUNCIONES
-
 
 
 void keyPressed(){
+
   if(keyCode==LEFT)
     if((actual.x-actual.h)>=0) 
       actual.x-=actual.h;  
@@ -84,6 +87,13 @@ void keyPressed(){
 
 
   } 
+
+void reset(){
+  salud = 200;
+  puntos = 0;
+  this.llenarMatriz();
+  this.actual = elementoNivel(nivel);
+}
 
 void crearMatriz(){
   for(var i =0;i<7;i++){
@@ -155,26 +165,27 @@ function marcador(points,x,y){
   fill(13, 137, 229 );
   textSize(22);
   text(points,x+50,y+72);
-
 }
 
 
 
 function elementoNivel(nivel){
   switch(nivel){
-    case 1:
+    case 1: frameRate(20);
       return piezas.shift();
-      case 2: 
-      case 3: 
-      case 4: 
-      case 5:
+      case 2: frameRate(30);
+      case 3: frameRate(40);
+      case 4: frameRate(50);
+      case 5: frameRate(60);
       return elementoRandom();
       default:
       break;
   }
 }
 
+void nextLevel(){
 
+}
 
 function encontrado(x,y,simbolo){
   for(var i=0;i<7;i++){

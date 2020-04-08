@@ -23,3 +23,6 @@ Route::POST('duolingo/pregunta/store' , 'Api\PreguntaController@store');
 Route::get('memorama/elementos','Api\ElementoController@index');
 Route::POST('/reporte/store','Api\ReporteController@store');
 Route::POST('/registro/user','Api\UserController@store');
+Route::get('/partida' , 'Api\PartidaController@index');
+Route::POST('/partida/save','Api\PartidaController@store');
+Route::POST('/partida/update','Api\PartidaController@update');

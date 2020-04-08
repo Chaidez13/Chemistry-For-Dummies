@@ -11,8 +11,6 @@
 |
 */
 
-//Route::get('/respuestas','RespuestaController@index');
-
 Route::get('/', function () {	
   return view('welcome');
 });

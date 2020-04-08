@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Api;
+use App\Partida;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 class PartidaController extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class PartidaController extends Controller
      */
     public function index()
     {
-        //
+        $partida = Partida::all();
+        return $partida;
     }
 
     /**
@@ -34,7 +35,15 @@ class PartidaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //'idJuego','idUsuario','nivel','puntos'
+        $partida = $request->validate([
+            'idJuego' => 'required',
+            'idUsuario' => 'required',
+            'nivel' => 'required',
+            'puntos' => 'required',
+        ]);
+
+        Partida::create($partida);
     }
 
     /**
@@ -56,7 +65,7 @@ class PartidaController extends Controller
      */
     public function edit($id)
     {
-        //
+    
     }
 
     /**
@@ -68,7 +77,11 @@ class PartidaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $puntos = $request->validate([
+            'puntos' => 'required',
+        ]);
+        Partida::where('nivel',id)->update($puntos);
     }
 
     /**

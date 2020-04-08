@@ -10,17 +10,24 @@ function gets(){
      			});
      		}
       });
-
 }
 
-function sendData(point, level){
-	var url = "/api/duolingo/pregunta/store";
+function crearPartida(point, level, created){
+	var url;
+
+  if(!created){
+    url = "/api/duolingo/partida/store"
+  }else{
+    = "/api/duolingo/partida/update"
+  }
         $.ajax({                        
            type: "POST",                 
            url: url,                     
            data:{
-           		'pregunta': point,
-           		'nivel': level
+           		'idJuego': 1,
+           		'idUsuario': 1,
+              'nivel': level,
+              'puntos': point;
            }, 
            success: function(data)             
            {           

@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Pregunta;
 use App\User;
+use App\Juego;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -15,6 +16,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+         DB::table('juego')->insert([
+            'juego' => 'tetris',
+
+         ]);
+        DB::table('juego')->insert([
+            'juego' => 'memorama',
+
+         ]);
+        DB::table('juego')->insert([
+            'juego' => 'trivia',
+
+         ]);
+
          DB::table('user')->insert([
             'nombre' => 'John',
             'apellidoPaterno' => '117',
