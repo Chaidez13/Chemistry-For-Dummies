@@ -61,21 +61,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['points', 'status', 'game'],
   data: function data() {
     return {
       dialog: true
     };
   },
-  methods: {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['setGameMemoriaOff', 'setGameTetrisOff', 'setGameTriviaOff']), {
     getOut: function getOut() {
-      this.$router.push({
-        name: "games"
-      });
+      switch (this.game) {
+        case '1':
+          break;
+
+        case '2':
+          this.setGameMemoriaOff();
+          break;
+      }
     }
-  },
+  }),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['reportDialog']))
 });
 
@@ -238,22 +246,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["cantCartas", "dificultad"],
   data: function data() {
     return {
       elemets: [],
       cartas: [],
-      datosTabla: {},
       time: 0,
       timeColor: "green darken-2",
-      intervall: null,
       game: false,
       cardsActive: 0,
-      cardsFliped: [],
       anterior: null,
-      difTime: 10,
-      //1.6666
-      gameOv: false
+      difTime: 30,
+      //1.6666,
+      gameOv: false,
+      puntos: 0,
+      status: false,
+      cantCartas: 10
     };
   },
   components: {
@@ -387,13 +394,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             item.info.state = true;
             this.anterior.info.state = true;
             this.resetCards();
+            this.puntos += 10;
           } else {
             // SI NO
-            setTimeout(this.coverAllCards, 1000);
-            setTimeout(this.resetCards, 1000);
+            setTimeout(this.coverAllCards, 500);
+            setTimeout(this.resetCards, 500);
           }
 
-          setTimeout(this.enableGame, 1000);
+          setTimeout(this.enableGame, 500);
         }
       }
     },
@@ -403,11 +411,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     timer: function timer() {
       this.time += this.difTime;
-    },
-    gameOver: function gameOver() {
-      if (this.time >= 100) {
-        this.gameOv = true;
-      }
     }
   }),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["gameMemoria", "levelMemoria"])),
@@ -422,8 +425,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       if (newTime >= 100) {
-        this.gameOver();
+        this.gameOv = true;
         this.game = false;
+      }
+    },
+    puntos: function puntos(_puntos) {
+      if (_puntos >= 10 * this.cantCartas) {
+        this.gameOv = true;
+        this.game = false;
+        this.status = true;
       }
     }
   }
@@ -699,8 +709,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _components_Vidas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Vidas */ "./resources/js/components/ui/src/components/Vidas.vue");
 /* harmony import */ var _components_TimeBar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/TimeBar */ "./resources/js/components/ui/src/components/TimeBar.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_GameOver__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/GameOver */ "./resources/js/components/ui/src/components/GameOver.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -743,6 +754,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+
 
 
 
@@ -758,12 +771,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       actual: null,
       lifes: 3,
       time: 0,
-      interval: null
+      interval: null,
+      gameO: false
     };
   },
   components: {
     Vidas: _components_Vidas__WEBPACK_IMPORTED_MODULE_2__["default"],
-    TimeBar: _components_TimeBar__WEBPACK_IMPORTED_MODULE_3__["default"]
+    TimeBar: _components_TimeBar__WEBPACK_IMPORTED_MODULE_3__["default"],
+    GameOver: _components_GameOver__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   created: function created() {
     this.getQuestion();
@@ -778,7 +793,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/api/duolingo/respuestas').then(function (response) {
+                return axios__WEBPACK_IMPORTED_MODULE_5___default.a.get('/api/duolingo/respuestas').then(function (response) {
                   _this.questions = _this.shuffle(response.data);
                   _this.actual = 0;
 
@@ -872,13 +887,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     progreso: function progreso(newProgress) {
       if (newProgress >= 100) {
         clearInterval(this.interval);
-        this.message = "FELICIDADES, HA GANADO";
+        this.gameO = true;
       }
     },
     time: function time(newTime) {
       if (newTime >= 100) {
         clearInterval(this.interval);
-        this.message = "GAME OVER";
+        this.gameO = true;
       }
     }
   }
@@ -1141,13 +1156,34 @@ var render = function() {
             "v-img",
             {
               staticClass: "white--text align-end",
-              attrs: { height: "200px", src: __webpack_require__(/*! ../assets/gameOver.jpg */ "./resources/js/components/ui/src/assets/gameOver.jpg") }
+              attrs: {
+                height: "200px",
+                src: _vm.status
+                  ? __webpack_require__(/*! ../assets/win.jpg */ "./resources/js/components/ui/src/assets/win.jpg")
+                  : __webpack_require__(/*! ../assets/gameOver.jpg */ "./resources/js/components/ui/src/assets/gameOver.jpg")
+              }
             },
             [_c("v-card-title", [_vm._v("\n            GAME OVER\n        ")])],
             1
           ),
           _vm._v(" "),
-          _c("v-card-text", [_vm._v("\n          Puntuación:\n      ")]),
+          _vm.status
+            ? _c("v-card-subtitle", [
+                _vm._v("Felicidades! Has superado este nivel.")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.status
+            ? _c("v-card-subtitle", [
+                _vm._v(
+                  "Salsa tartara! Has fracasado este nivel 😢 intentalo de nuevo."
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("v-card-text", [
+            _vm._v("\n          Puntuación: " + _vm._s(_vm.points) + "\n      ")
+          ]),
           _vm._v(" "),
           _c(
             "v-card-actions",
@@ -1162,9 +1198,11 @@ var render = function() {
                 [_vm._v("Salir")]
               ),
               _vm._v(" "),
-              _c("v-btn", { attrs: { color: "blue darken-1", text: "" } }, [
-                _vm._v("Reintentar")
-              ])
+              !_vm.status
+                ? _c("v-btn", { attrs: { color: "blue darken-1", text: "" } }, [
+                    _vm._v("Reintentar")
+                  ])
+                : _vm._e()
             ],
             1
           )
@@ -1212,9 +1250,7 @@ var render = function() {
         ? _c("select-level", { attrs: { levels: _vm.niveles, game: "1" } })
         : _vm._e(),
       _vm._v(" "),
-      _vm.gameMemoria
-        ? _c("memoria-game", { attrs: { cantCartas: "10" } })
-        : _vm._e()
+      _vm.gameMemoria ? _c("memoria-game") : _vm._e()
     ],
     1
   )
@@ -1308,7 +1344,11 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      !_vm.gameOv ? _c("GameOver") : _vm._e()
+      _vm.gameOv
+        ? _c("GameOver", {
+            attrs: { points: _vm.puntos, status: _vm.status, game: "2" }
+          })
+        : _vm._e()
     ],
     1
   )
@@ -1644,7 +1684,13 @@ var render = function() {
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _vm.gameO
+        ? _c("GameOver", {
+            attrs: { points: _vm.puntos, status: _vm.status, game: "2" }
+          })
+        : _vm._e()
     ],
     1
   )
@@ -1776,6 +1822,17 @@ render._withStripped = true
 /***/ (function(module, exports) {
 
 module.exports = "/images/gameOver.jpg?54209937894bffe00bd2d8df16d492a7";
+
+/***/ }),
+
+/***/ "./resources/js/components/ui/src/assets/win.jpg":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/ui/src/assets/win.jpg ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/win.jpg?d069dc2f698441bcb54bed88301a0361";
 
 /***/ }),
 

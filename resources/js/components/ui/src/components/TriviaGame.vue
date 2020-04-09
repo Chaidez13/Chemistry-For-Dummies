@@ -25,6 +25,7 @@
     <v-row align="center" justify="center" style="margin-top: 4%">
       <v-btn @click="setGameTriviaOff" color="danger">Salir</v-btn>
     </v-row>
+     <GameOver v-if="gameO" :points="puntos" :status="status" game="2"/>
   </v-container>
 </template>
 
@@ -32,6 +33,8 @@
 import { mapMutations } from "vuex";
 import Vidas from "../components/Vidas";
 import TimeBar from "../components/TimeBar";
+import GameOver from "../components/GameOver";
+
 import axios from "axios";
 export default {
   data() {
@@ -44,12 +47,14 @@ export default {
       actual: null,
       lifes: 3,
       time: 0,
-      interval: null
+      interval: null,
+      gameO: false,
     };
   },
   components: {
     Vidas,
-    TimeBar
+    TimeBar,
+    GameOver,
   },
   created() {
     this.getQuestion()
@@ -128,13 +133,13 @@ export default {
     progreso: function(newProgress) {
       if (newProgress >= 100) {
         clearInterval(this.interval);
-        this.message = "FELICIDADES, HA GANADO";
+        this.gameO = true;
       }
     },
     time: function(newTime) {
       if (newTime >= 100) {
         clearInterval(this.interval);
-        this.message = "GAME OVER";
+        this.gameO = true;
       }
     }
   }

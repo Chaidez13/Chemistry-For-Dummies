@@ -5,7 +5,7 @@
     </v-row>
 
     <select-level :levels="niveles" v-if="!gameMemoria" game="1" />
-    <memoria-game cantCartas="10" v-if="gameMemoria" />
+    <memoria-game v-if="gameMemoria" />
   </v-container>
 </template>
 

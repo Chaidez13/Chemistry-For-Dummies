@@ -26,7 +26,7 @@
         <carta-memoria :item="item" />
       </v-col>
     </v-row>
-    <GameOver v-if="!gameOv"/>
+    <GameOver v-if="gameOv" :points="puntos" :status="status" game="2"/>
   </v-container>
 </template>
 
@@ -39,21 +39,20 @@ import Vidas from "../components/Vidas";
 import TimeBar from "../components/TimeBar";
 
 export default {
-  props: ["cantCartas", "dificultad"],
   data() {
     return {
       elemets: [],
       cartas: [],
-      datosTabla: {},
       time: 0,
       timeColor: "green darken-2",
-      intervall: null,
       game: false,
       cardsActive: 0,
-      cardsFliped: [],
       anterior: null,
-      difTime: 10, //1.6666
+      difTime: 30,  //1.6666,
       gameOv: false,
+      puntos: 0,
+      status: false,
+      cantCartas: 10,
     };
   },
   components: {
@@ -131,7 +130,6 @@ export default {
       this.cardsActive = 0;
     },
 
-    
     shuffle(a) {
       for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -155,12 +153,13 @@ export default {
             item.info.state = true;
             this.anterior.info.state = true;
             this.resetCards()
+            this.puntos += 10;
           } else {
             // SI NO
-            setTimeout(this.coverAllCards, 1000);
-            setTimeout(this.resetCards, 1000);
+            setTimeout(this.coverAllCards, 500);
+            setTimeout(this.resetCards, 500);
           }
-          setTimeout(this.enableGame, 1000);
+          setTimeout(this.enableGame, 500);
         }
       }
     },
@@ -172,12 +171,6 @@ export default {
     timer: function() {
       this.time += this.difTime;
     },
-
-    gameOver(){
-      if(this.time >= 100){
-        this.gameOv = true;
-      }
-    }
   },
   computed: {
     ...mapState(["gameMemoria", "levelMemoria"])
@@ -191,8 +184,15 @@ export default {
         this.timeColor = "red darken-3";
       }
       if (newTime >= 100) {
-        this.gameOver()
+        this.gameOv = true;
         this.game = false;
+      }
+    },
+    puntos: function(puntos){
+      if(puntos >= 10*this.cantCartas){
+        this.gameOv = true;
+        this.game = false;
+        this.status = true;
       }
     }
   }
