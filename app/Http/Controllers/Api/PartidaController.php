@@ -81,7 +81,7 @@ class PartidaController extends Controller
         $puntos = $request->validate([
             'puntos' => 'required',
         ]);
-        Partida::where('nivel',id)->update($puntos);
+        Partida::find($id)->update(['puntos' => $puntos['puntos']]);
     }
 
     /**

@@ -25,4 +25,4 @@ Route::POST('/reporte/store','Api\ReporteController@store');
 Route::POST('/registro/user','Api\UserController@store');
 Route::get('/partida' , 'Api\PartidaController@index');
 Route::POST('/partida/store','Api\PartidaController@store');
-Route::POST('/partida/update','Api\PartidaController@update');
+Route::POST('/partida/update/{id}','Api\PartidaController@update');
