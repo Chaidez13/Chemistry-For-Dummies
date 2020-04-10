@@ -35,7 +35,7 @@ class PartidaController extends Controller
      */
     public function store(Request $request)
     {
-        //'idJuego','idUsuario','nivel','puntos'
+        
         $partida = $request->validate([
             'idJuego' => 'required',
             'idUsuario' => 'required',
@@ -43,7 +43,9 @@ class PartidaController extends Controller
             'puntos' => 'required',
         ]);
 
-        Partida::create($partida);
+       
+        if(Partida::where('idJuego', $partida['idJuego'])->where('nivel',$partida['nivel'])->count()==0)
+            Partida::create($partida);
     }
 
     /**
@@ -54,7 +56,18 @@ class PartidaController extends Controller
      */
     public function show($id)
     {
-        //
+
+
+    }
+
+
+    public function search(Request $request, $id){
+    $datos = $request->validate([
+            'nivel' => 'required',
+        ]);
+        $partida = Partida::where('idJuego', $id)->where('nivel',$datos['nivel']);
+
+        return partida;
     }
 
     /**
@@ -78,10 +91,11 @@ class PartidaController extends Controller
     public function update(Request $request, $id)
     {
         
-        $puntos = $request->validate([
+        $datos = $request->validate([
             'puntos' => 'required',
+            'nivel' => 'required',
         ]);
-        Partida::find($id)->update(['puntos' => $puntos['puntos']]);
+        Partida::where('idJuego',$id)->where('nivel',$datos['nivel'])->update(['puntos' => $datos['puntos']]);
     }
 
     /**

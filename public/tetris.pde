@@ -1,12 +1,14 @@
 var tabla = [];
 var data = getData();
 var piezas = [];
-var puntos = 0;
+var puntos = 0,
+    puntosGuardados=0;
 var salud = 200,
     damage = 20;
 PImage vidaIcono, fondo;
 Elemento actual;
 Menu menu;
+PFont fuente;
 var opcion = -1;
 var created = false;
 var nivel = 1;
@@ -31,6 +33,8 @@ void setup() {
     menu = new Menu();
     fondo = loadImage("src/fondo.png");
     vidaIcono = loadImage("src/vida.png");
+    fuente = createFont("font.TTF",48);
+    guardarPartida(puntos, nivel);
     frameRate(20);
 }
 
@@ -41,6 +45,7 @@ void draw() {
         llenarMatriz();
         actual = elementoNivel(nivel);
         created = true;
+        puntosGuardados = cargarPuntos(nivel);
     }
     if (actual.y >= 1000 && salud > 0) {
         salud -= damage;
@@ -54,7 +59,8 @@ void draw() {
     actual.setVisible();
     textSize(16);
     vidas(60, 30, salud);
-    marcador(puntos, 1028, 0);
+    marcador(puntos,1130, 130);
+    marcador(puntosGuardados,1130,230);
     if (!continuar) {
         menu.activo = true;
         menu.mostrar(mouseX, mouseY, "pause");
@@ -63,8 +69,15 @@ void draw() {
     if (perder) {
         menu.mostrar(mouseX, mouseY, "perder");
         if (opcion != -1) {
+            actualizarPuntos(puntos,puntosGuardados,nivel);
             reset();
         }
+    }
+}
+
+void actualizarPuntos(puntos, puntosGuardados,nivel){
+    if(puntos>puntosGuardados){
+        actualizarPartida(puntos,nivel);
     }
 }
 
@@ -139,7 +152,9 @@ void reset() {
     crearMatriz();
     llenarMatriz();
     actual = elementoNivel(nivel);
+    puntosGuardados = cargarPuntos(nivel);
 }
+
 
 void crearMatriz() {
     for (var i = 0; i < 7; i++) {
@@ -193,7 +208,6 @@ function elementoRandom() {
 }
 
 function vidas(x, y, vida) {
-    //vida = 200
     image(vidaIcono, x - 55, y - 9, 45, 45);
     stroke(3);
     fill(255);
@@ -205,15 +219,16 @@ function vidas(x, y, vida) {
     } else
         fill(59, 229, 13);
     rect(x, y, vida, 30);
+    fill(0);
+    textSize(18);
+    textFont(createFont("Comic sans ms", 18));
+    text("Nivel  " + nivel,x+34,y+20);
 }
 
 function marcador(points, x, y) {
-    textSize(16);
     fill(0);
-    text("Puntos", x + 50, y + 50)
-    fill(13, 137, 229);
-    textSize(22);
-    text(points, x + 50, y + 72);
+    textFont(fuente);
+    text(points, x, y);
 }
 
 
@@ -222,13 +237,10 @@ function elementoNivel(nivel) {
     switch (nivel) {
         case 1:
             frameRate(20);
-            if (piezas.length < 1) {
-                ganar = true;
-            }
             return piezas.shift();
         case 2:
             frameRate(30);
-            return elementoRandom();
+            return piezas.shift();
         case 3:
             frameRate(40);
             return elementoRandom();

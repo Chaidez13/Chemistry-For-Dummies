@@ -12,22 +12,40 @@ function gets(){
       });
 }
 
-function crearPartida(point, level, created){
-	var url;
-
-  if(!created){
-    url = "/api/duolingo/partida/store"
-  }else{
-   url = "/api/duolingo/partida/update"
-  }
-        $.ajax({                        
+function cargarPuntos(nivel){
+  var datos;
+       $.getJSON({url: 'api/partida', async: false}, (data) => {
+         for(var i = 0;i<data.length;i++){
+                if(nivel == data[i].nivel)
+                    datos = data[i].puntos;
+            }
+      });
+       return datos;
+ }
+function guardarPartida(point, level){
+	var  url = "api/partida/store";
+    $.ajax({                        
            type: "POST",                 
            url: url,                     
            data:{
-           		'idJuego': 1,
-           		'idUsuario': 1,
+              'idJuego': 1,
+              'idUsuario': 1,
               'nivel': level,
               'puntos': point,
+           }, 
+           success: function(data)             
+           {       
+           }
+       });
+}
+function actualizarPartida(point, level){
+    var url = "api/partida/update/1";
+    $.ajax({                        
+           type: "POST",                 
+           url: url,                     
+           data:{
+              'puntos': point,
+              'nivel': level,
            }, 
            success: function(data)             
            {           
