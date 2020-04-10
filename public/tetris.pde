@@ -2,16 +2,15 @@ var tabla = [];
 var data = getData();
 var piezas = [];
 var puntos = 0,
-    puntosGuardados=0;
+    puntosGuardados = 0;
 var salud = 200,
     damage = 20;
 PImage vidaIcono, fondo;
 Elemento actual;
 Menu menu;
-PFont fuente;
 var opcion = -1;
 var created = false;
-var nivel = 1;
+var nivel = 3;
 var confirmar;
 var continuar = true,
     activarMenu = false,
@@ -33,8 +32,6 @@ void setup() {
     menu = new Menu();
     fondo = loadImage("src/fondo.png");
     vidaIcono = loadImage("src/vida.png");
-    fuente = createFont("font.TTF",48);
-    guardarPartida(puntos, nivel);
     frameRate(20);
 }
 
@@ -42,42 +39,60 @@ void draw() {
     background(0);
     image(fondo, 0, 0);
     if (!created) {
+        guardarPartida(puntos, nivel);
         llenarMatriz();
         actual = elementoNivel(nivel);
         created = true;
         puntosGuardados = cargarPuntos(nivel);
     }
-    if (actual.y >= 1000 && salud > 0) {
-        salud -= damage;
-        if (puntos > 0)
-            puntos -= 5;
+
+
+    if(actual!=null){
+        if (actual.y >= 1000 && salud > 0) {
+            salud -= damage;
+            if (puntos > 0)
+                puntos -= 5;
+        }
+        pintarTabla();
+        actual.paint();
+        if (!menu.activo)
+            actual.move();
+        actual.setVisible();
+    }else{
+        menu.activo = true;
+        ganar = true;
     }
-    pintarTabla();
-    actual.paint();
-    if (!menu.activo)
-        actual.move();
-    actual.setVisible();
+
+
+
     textSize(16);
     vidas(60, 30, salud);
-    marcador(puntos,1130, 130);
-    marcador(puntosGuardados,1130,230);
+    marcador(puntos, 1130, 130);
+    marcador(puntosGuardados, 1130, 230);
     if (!continuar) {
         menu.activo = true;
         menu.mostrar(mouseX, mouseY, "pause");
     }
-
+    if(ganar){
+        menu.mostrar(mouseX, mouseY, "ganar");
+        if (opcion != -1) {
+            actualizarPuntos(puntos, puntosGuardados, nivel);
+            nextLevel();
+        }
+    }
     if (perder) {
         menu.mostrar(mouseX, mouseY, "perder");
         if (opcion != -1) {
-            actualizarPuntos(puntos,puntosGuardados,nivel);
+            actualizarPuntos(puntos, puntosGuardados, nivel);
+            puntosGuardados = cargarPuntos(nivel);
             reset();
         }
     }
 }
 
-void actualizarPuntos(puntos, puntosGuardados,nivel){
-    if(puntos>puntosGuardados){
-        actualizarPartida(puntos,nivel);
+void actualizarPuntos(puntos, puntosGuardados, nivel) {
+    if (puntos > puntosGuardados) {
+        actualizarPartida(puntos, nivel);
     }
 }
 
@@ -100,6 +115,7 @@ void mouseClicked() {
     }
 
 }
+
 void keyPressed() {
 
     if ((key == 'p' || key == 'P') && (!perder || !ganar)) {
@@ -107,7 +123,7 @@ void keyPressed() {
         continuar = !continuar;
     }
 
-    if (!menu.activo) {
+    if (!menu.activo && actual!=null) {
         if (keyCode == LEFT)
             if ((actual.x - actual.h) >= 0)
                 actual.x -= actual.h;
@@ -147,12 +163,11 @@ void reset() {
     puntos = 0;
     ganar = false;
     perder = false;
+    created = false;
     continuar = true;
     opcion = -1;
     crearMatriz();
-    llenarMatriz();
-    actual = elementoNivel(nivel);
-    puntosGuardados = cargarPuntos(nivel);
+    //llenarMatriz();
 }
 
 
@@ -203,8 +218,7 @@ function elementoRandom() {
         else
             continue;
     }
-    ganar = true;
-    return piezas[0];
+    return null;
 }
 
 function vidas(x, y, vida) {
@@ -222,12 +236,12 @@ function vidas(x, y, vida) {
     fill(0);
     textSize(18);
     textFont(createFont("Comic sans ms", 18));
-    text("Nivel  " + nivel,x+34,y+20);
+    text("Nivel  " + nivel, x + 34, y + 20);
 }
 
 function marcador(points, x, y) {
     fill(0);
-    textFont(fuente);
+    textFont(createFont("Comic sans ms", 48));
     text(points, x, y);
 }
 
@@ -255,9 +269,9 @@ function elementoNivel(nivel) {
     }
 }
 void nextLevel() {
-    if (nivel <= 5) {
+    if (nivel < 5) {
         nivel++;
-        this.reset();
+        reset();
     }
 }
 
