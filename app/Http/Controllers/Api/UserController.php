@@ -46,7 +46,14 @@ class UserController extends Controller
             'fecha' => 'required', 
         ]);
 
-        User::create($user);
+        User::create([
+            'nombre' => $user['nombre'],
+            'apellidoPaterno' => $user['apellidoPaterno'], 
+            'apellidoMaterno' => $user['apellidoMaterno'],
+            'email' => $user['email'],
+            'password' =>  Hash::make($user['password']), 
+            'fecha' => $user['fecha'], 
+        ]);
     }
 
     /**

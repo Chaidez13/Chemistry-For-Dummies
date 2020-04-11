@@ -17,9 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('duolingo/respuestas' , 'Api\RespuestaController@index');
-Route::get('duolingo/respuestas/{id}' , 'Api\RespuestaController@show');
-Route::POST('duolingo/pregunta/store' , 'Api\PreguntaController@store');
+Route::get('trivia/respuestas' , 'Api\RespuestaController@index');
+Route::get('trivia/respuestas/{id}' , 'Api\RespuestaController@show');
+Route::POST('trivia/pregunta/store' , 'Api\PreguntaController@store');
 Route::get('memorama/elementos','Api\ElementoController@index');
 Route::POST('/reporte/store','Api\ReporteController@store');
 Route::POST('/registro/user','Api\UserController@store');
