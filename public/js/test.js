@@ -2,7 +2,7 @@ var datos = [];
 
 function gets() {
     $.getJSON({
-        url: 'data.json',
+        url: 'api/memorama/elementos',
         async: false
     }, (data) => {
         for (var i = 0; i < 118; i++) {

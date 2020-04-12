@@ -8,6 +8,7 @@ var salud = 200,
 PImage vidaIcono, fondo;
 Elemento actual;
 Menu menu;
+var altoTabla = 9;
 var opcion = -1;
 var created = false;
 var nivel = 3;
@@ -23,7 +24,9 @@ var tablero = [
     ["18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35"],
     ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53"],
     ["54", "55", "", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85"],
-    ["86", "87", "", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114", "115", "116", "117"]
+    ["86", "87", "", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114", "115", "116", "117"],
+    ["", "", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "",""],
+    ["", "", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100", "101", "102", "",""],
 ];
 
 void setup() {
@@ -47,7 +50,7 @@ void draw() {
     }
 
 
-    if(actual!=null){
+   if(actual!=null){
         if (actual.y >= 1000 && salud > 0) {
             salud -= damage;
             if (puntos > 0)
@@ -167,19 +170,18 @@ void reset() {
     continuar = true;
     opcion = -1;
     crearMatriz();
-    //llenarMatriz();
 }
 
 
 void crearMatriz() {
-    for (var i = 0; i < 7; i++) {
+    for (var i = 0; i < altoTabla; i++) {
         tabla[i] = new Array(18);
     }
 
 }
 
 void pintarTabla() {
-    for (var i = 0; i < 7; i++) {
+    for (var i = 0; i < altoTabla; i++) {
         for (var j = 0; j < 18; j++) {
             if (tablero[i][j] != "") {
                 tabla[i][j].paint();
@@ -191,16 +193,18 @@ void pintarTabla() {
 void llenarMatriz() {
     var desfaseX = 0,
         desfaseY = 0,
-        espacio = 505,
+        espacio = 369,
         h = 70;
     let x = 350,
         y = 0;
-    for (var i = 0; i < 7; i++) {
+    for (var i = 0; i < altoTabla; i++) {
         desfaseY = (i * h);
         for (var j = 0; j < 18; j++) {
             if (tablero[i][j] != "") {
-                piezas.push(new Elemento(parseInt(tablero[i][j]) + 1, data[tablero[i][j]].simbolo, data[tablero[i][j]].nombre, data[tablero[i][j]].bloque, x, y, h, 0, 1, true, nivel));
-                tabla[i][j] = new Elemento(parseInt(tablero[i][j]) + 1, data[tablero[i][j]].simbolo, data[tablero[i][j]].nombre, data[tablero[i][j]].bloque, (j * h), desfaseY + espacio, h, 0, 0, nivel);
+                piezas.push(new Elemento(parseInt(tablero[i][j]) + 1, data[tablero[i][j]].simbolo, data[tablero[i][j]].nombre,
+                 data[tablero[i][j]].bloque, x, y, h, 0, 1, true, nivel));
+                tabla[i][j] = new Elemento(parseInt(tablero[i][j]) + 1, data[tablero[i][j]].simbolo, data[tablero[i][j]].nombre, 
+                data[tablero[i][j]].bloque, (j * h), desfaseY + espacio, h, 0, 0, nivel);
                 if (nivel == 3)
                     tabla[i][j].setVisible();
             }
@@ -276,7 +280,7 @@ void nextLevel() {
 }
 
 function encontrado(x, y, simbolo) {
-    for (var i = 0; i < 7; i++) {
+    for (var i = 0; i < altoTabla; i++) {
         for (var j = 0; j < 18; j++) {
             if (tablero[i][j] != "") {
                 Elemento elemento = tabla[i][j];

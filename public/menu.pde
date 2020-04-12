@@ -22,23 +22,23 @@ class Menu{
 
 	void mostrar(x,y,tipo){
 		if(tipo=='pause'){
-			if((x>=400 && x<=800)&&(y>350 && y<440))	
+			if((x>418 && x<901)&&(y>386 && y<459))	
 				image(img[0],0,0);
-			else if((x>=531 && x<=738)&&(y>484 && y<552))	
+			else if((x>418 && x<773)&&(y>528 && y<602))	
 				image(img[1],0,0);
 			else
 				image(img[2],0,0);
 		}else if(tipo=='ganar'){
-			if((x>=400 && x<=800)&&(y>350 && y<440))	
+			if((x>418 && x<901)&&(y>386 && y<459))	
 				image(img[4],0,0);
-			else if((x>=531 && x<=738)&&(y>484 && y<552))	
+			else if((x>418 && x<773)&&(y>528 && y<602))	
 				image(img[5],0,0);
 			else
 				image(img[3],0,0);
 		}else{
-			if((x>=400 && x<=800)&&(y>350 && y<440))	
+			if((x>418 && x<901)&&(y>386 && y<459))	
 				image(img[7],0,0);
-			else if((x>=531 && x<=738)&&(y>484 && y<552))	
+			else if((x>418 && x<773)&&(y>528 && y<602))	
 				image(img[8],0,0);
 			else
 				image(img[6],0,0);
@@ -46,9 +46,9 @@ class Menu{
 	}
 
 	int opcion(x,y){
-		if((x>=400 && x<=800)&&(y>350 && y<440))	
+		if((x>418 && x<901)&&(y>386 && y<459))	
 			return 0;
-		else if((x>=531 && x<=738)&&(y>484 && y<552))	
+		else if((x>418 && x<773)&&(y>528 && y<602))	
 			return 1;
 		else
 			return -1;
