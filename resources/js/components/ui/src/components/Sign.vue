@@ -121,6 +121,12 @@ export default {
     modal: ""
   }),
   methods: {
+    login: async function(){
+      await axios.post('/login',{
+        email: this.email,
+        password: this.pass,
+      })
+    },
     registrarse: async function() {
       await axios.post('api/registro/user',{
         nombre: this.nombre,
