@@ -3,7 +3,6 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Pregunta;
@@ -36,7 +35,7 @@ class DatabaseSeeder extends Seeder
             'apellidoPaterno' => '117',
             'apellidoMaterno' => '',
             'email' => 'Spartan117@UNCS.cov',
-            'password' => 'arbiter',
+            'password' => bcrypt('123456789'),
             'fecha' => Carbon::parse('2552-07-03'),
 
         ]);

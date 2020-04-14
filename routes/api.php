@@ -16,13 +16,4 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('trivia/respuestas' , 'Api\RespuestaController@index');
-Route::get('trivia/respuestas/{id}' , 'Api\RespuestaController@show');
-Route::POST('trivia/pregunta/store' , 'Api\PreguntaController@store');
-Route::get('memorama/elementos','Api\ElementoController@index');
-Route::POST('/reporte/store','Api\ReporteController@store');
-Route::POST('/registro/user','Api\UserController@store');
-Route::get('/partida' , 'Api\PartidaController@index');
-Route::POST('/partida/store','Api\PartidaController@store');
-Route::POST('/partida/update/{id}','Api\PartidaController@update');
+ 

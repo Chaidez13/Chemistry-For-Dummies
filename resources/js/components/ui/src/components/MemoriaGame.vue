@@ -69,7 +69,7 @@ export default {
     ...mapMutations(["setGameMemoriaOn", "setGameMemoriaOff"]),
 
     getCards: async function(){
-      await axios.get('/api/memorama/elementos').then(response => {
+      await axios.get('/memorama/elementos').then(response => {
           this.elemets = this.chargeNElements(10, response.data)
           this.elemets.forEach(e => e.state = false)
           this.begin()
