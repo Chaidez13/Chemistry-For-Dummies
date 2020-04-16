@@ -11,7 +11,7 @@ Menu menu;
 var altoTabla = 9;
 var opcion = -1;
 var created = false;
-var nivel = 3;
+var nivel = 4;
 var confirmar;
 var continuar = true,
     activarMenu = false,
@@ -25,8 +25,8 @@ var tablero = [
     ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53"],
     ["54", "55", "", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85"],
     ["86", "87", "", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114", "115", "116", "117"],
-    ["", "", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "",""],
-    ["", "", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100", "101", "102", "",""],
+    ["", "", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "", ""],
+    ["", "", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100", "101", "102", "", ""],
 ];
 
 void setup() {
@@ -50,7 +50,7 @@ void draw() {
     }
 
 
-   if(actual!=null){
+    if (actual != null) {
         if (actual.y >= 1000 && salud > 0) {
             salud -= damage;
             if (puntos > 0)
@@ -61,7 +61,7 @@ void draw() {
         if (!menu.activo)
             actual.move();
         actual.setVisible();
-    }else{
+    } else {
         menu.activo = true;
         ganar = true;
     }
@@ -76,7 +76,7 @@ void draw() {
         menu.activo = true;
         menu.mostrar(mouseX, mouseY, "pause");
     }
-    if(ganar){
+    if (ganar) {
         menu.mostrar(mouseX, mouseY, "ganar");
         if (opcion != -1) {
             actualizarPuntos(puntos, puntosGuardados, nivel);
@@ -126,7 +126,7 @@ void keyPressed() {
         continuar = !continuar;
     }
 
-    if (!menu.activo && actual!=null) {
+    if (!menu.activo && actual != null) {
         if (keyCode == LEFT)
             if ((actual.x - actual.h) >= 0)
                 actual.x -= actual.h;
@@ -202,9 +202,9 @@ void llenarMatriz() {
         for (var j = 0; j < 18; j++) {
             if (tablero[i][j] != "") {
                 piezas.push(new Elemento(parseInt(tablero[i][j]) + 1, data[tablero[i][j]].simbolo, data[tablero[i][j]].nombre,
-                 data[tablero[i][j]].bloque, x, y, h, 0, 1, true, nivel));
-                tabla[i][j] = new Elemento(parseInt(tablero[i][j]) + 1, data[tablero[i][j]].simbolo, data[tablero[i][j]].nombre, 
-                data[tablero[i][j]].bloque, (j * h), desfaseY + espacio, h, 0, 0, nivel);
+                    data[tablero[i][j]].bloque, x, y, h, 0, 1, true, nivel));
+                tabla[i][j] = new Elemento(parseInt(tablero[i][j]) + 1, data[tablero[i][j]].simbolo, data[tablero[i][j]].nombre,
+                    data[tablero[i][j]].bloque, (j * h), desfaseY + espacio, h, 0, 0, nivel);
                 if (nivel == 3)
                     tabla[i][j].setVisible();
             }
@@ -284,7 +284,8 @@ function encontrado(x, y, simbolo) {
         for (var j = 0; j < 18; j++) {
             if (tablero[i][j] != "") {
                 Elemento elemento = tabla[i][j];
-                if ((x > elemento.x && x <= (elemento.x + elemento.h)) && (y > elemento.y && y <= (elemento.y + elemento.h)) && (elemento.simbolo == simbolo)) {
+                if ((x >= elemento.x && x <= (elemento.x + elemento.h)) && ((y >= elemento.y && y <= (elemento.y + elemento.h)) ||
+                        (y + elemento.h >= elemento.y && y + elemento.h <= (elemento.y + elemento.h))) && (elemento.simbolo == simbolo)) {
                     elemento.nivel = 1;
                     elemento.setVisible();
                     return true;
