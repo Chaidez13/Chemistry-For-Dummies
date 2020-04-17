@@ -1,8 +1,13 @@
 var datos = [];
 
 function gets() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $.getJSON({
-        url: 'api/memorama/elementos',
+        url: '/memorama/elementos',
         async: false
     }, (data) => {
         for (var i = 0; i < 118; i++) {
@@ -16,9 +21,15 @@ function gets() {
 }
 
 function cargarPuntos(nivel) {
+
     var datos;
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $.getJSON({
-        url: 'api/partida',
+        url: '/partida',
         async: false
     }, (data) => {
         for (var i = 0; i < data.length; i++) {
@@ -30,7 +41,12 @@ function cargarPuntos(nivel) {
 }
 
 function guardarPartida(point, level) {
-    var url = "api/partida/store";
+    var url = "/partida/store";
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $.ajax({
         type: "POST",
         url: url,
@@ -45,7 +61,12 @@ function guardarPartida(point, level) {
 }
 
 function actualizarPartida(point, level) {
-    var url = "api/partida/update/1";
+    var url = "/partida/update/1";
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $.ajax({
         type: "POST",
         url: url,

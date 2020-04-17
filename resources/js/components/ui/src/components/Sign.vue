@@ -122,7 +122,7 @@ export default {
     modal: ""
   }),
   methods: {
-    login: async function(){
+   login: async function(){
       await axios.post('/login',{
         email: this.email,
         password: this.pass,
@@ -134,7 +134,7 @@ export default {
       })
     },
     registrarse: async function() {
-      await axios.post('api/registro/user',{
+      await axios.post('/registro/user',{
         nombre: this.nombre,
         apellidoPaterno: this.primerApellido,
         apellidoMaterno: this.segundoApellido,

@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
@@ -15,8 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $usuario = User::all();
-        return $usuario;
+      // $usuario = User::Where('email',Auth::user()->email);
+       dd(Auth::user());
+        //return $usuario;
     }
 
     /**
@@ -45,13 +46,12 @@ class UserController extends Controller
             'password' => 'required', 
             'fecha' => 'required', 
         ]);
-
         User::create([
             'nombre' => $user['nombre'],
             'apellidoPaterno' => $user['apellidoPaterno'], 
             'apellidoMaterno' => $user['apellidoMaterno'],
             'email' => $user['email'],
-            'password' =>  Hash::make($user['password']), 
+            'password' => Hash::make($user['password']), 
             'fecha' => $user['fecha'], 
         ]);
     }

@@ -282,7 +282,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/api/memorama/elementos').then(function (response) {
+                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/memorama/elementos').then(function (response) {
                   _this.elemets = _this.chargeNElements(10, response.data);
 
                   _this.elemets.forEach(function (e) {
@@ -793,7 +793,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_5___default.a.get('/api/duolingo/respuestas').then(function (response) {
+                return axios__WEBPACK_IMPORTED_MODULE_5___default.a.get('/trivia/respuestas').then(function (response) {
                   _this.questions = _this.shuffle(response.data);
                   _this.actual = 0;
 
