@@ -149,13 +149,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    registrarse: function () {
-      var _registrarse = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    login: function () {
+      var _login = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/login', {
+                  email: this.email,
+                  password: this.pass
+                }, {
+                  headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                  }
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function login() {
+        return _login.apply(this, arguments);
+      }
+
+      return login;
+    }(),
+    registrarse: function () {
+      var _registrarse = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('api/registro/user', {
                   nombre: this.nombre,
                   apellidoPaterno: this.primerApellido,
@@ -176,10 +207,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this);
+        }, _callee2, this);
       }));
 
       function registrarse() {
@@ -686,11 +717,7 @@ var render = function() {
                                         color: "blue darken-1",
                                         text: ""
                                       },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.submit()
-                                        }
-                                      }
+                                      on: { click: _vm.login }
                                     },
                                     [_vm._v("Inicar Sesión")]
                                   )

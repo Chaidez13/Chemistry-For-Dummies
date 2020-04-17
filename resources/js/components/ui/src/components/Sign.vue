@@ -92,7 +92,7 @@
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="$router.go(-1)">Cancelar</v-btn>
                 <v-btn v-if="registro" color="blue darken-1" text @click="registrarse">Registrarse</v-btn>
-                <v-btn v-if="!registro" color="blue darken-1" text @click="submit()">Inicar Sesión</v-btn>
+                <v-btn v-if="!registro" color="blue darken-1" text @click="login">Inicar Sesión</v-btn>
               </v-col>
             </v-row>
           </v-card-actions>
@@ -105,6 +105,7 @@
 <script>
 import { mapState } from "vuex";
 import axios from 'axios';
+
 
 export default {
   data: () => ({
@@ -125,6 +126,11 @@ export default {
       await axios.post('/login',{
         email: this.email,
         password: this.pass,
+      },{
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        }
       })
     },
     registrarse: async function() {
