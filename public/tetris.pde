@@ -1,5 +1,5 @@
 var tabla = [];
-var data = getData();
+var data = obtenerElementos();
 var piezas = [];
 var puntos = 0,
     puntosGuardados = 0;
@@ -11,7 +11,7 @@ Menu menu;
 var altoTabla = 9;
 var opcion = -1;
 var created = false;
-var nivel = 2;
+var nivel = 1;
 var confirmar;
 var continuar = true,
     activarMenu = false,

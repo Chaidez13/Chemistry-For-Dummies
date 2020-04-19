@@ -47,6 +47,8 @@ class PartidaController extends Controller
        $partida['idUsuario'] = $idUsuario;
        if(Partida::where('idJuego', $partida['idJuego'])->where('nivel',$partida['nivel'])->where('idUsuario',$idUsuario)->count()==0)
             Partida::create($partida);
+        else
+            return 'La partida existe';
     }
 
     /**
@@ -101,14 +103,13 @@ class PartidaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         $datos = $request->validate([
             'puntos' => 'required',
             'nivel' => 'required',
         ]);
-        $id = Auth::user()->id;
-        Partida::where('idJuego',$id)->where('nivel',$datos['nivel'])->where('idUsuario',$id)->update(['puntos' => $datos['puntos']]);
-    }
+        $idUser = Auth::user()->id;
+        Partida::where('idJuego',$id)->where('nivel',$datos['nivel'])->where('idUsuario',$idUser)->update(['puntos' => $datos['puntos']]);
+    }   
 
     /**
      * Remove the specified resource from storage.

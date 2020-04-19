@@ -1,6 +1,7 @@
-var datos = [];
 
-function gets() {
+
+function obtenerElementos() {
+    var datos = [];
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -18,6 +19,7 @@ function gets() {
             });
         }
     });
+    return datos;
 }
 
 function cargarPuntos(nivel) {
@@ -61,7 +63,6 @@ function guardarPartida(point, level) {
 }
 
 function actualizarPartida(point, level) {
-    var url = "/partida/update/1";
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -69,18 +70,13 @@ function actualizarPartida(point, level) {
     });
     $.ajax({
         type: "POST",
-        url: url,
+        url: "/partida/update/1",
         data: {
             'puntos': point,
             'nivel': level,
         },
         success: function(data) {
-
+            console.log(data);
         }
     });
-}
-
-function getData() {
-    gets();
-    return datos;
 }

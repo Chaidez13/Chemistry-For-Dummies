@@ -21,6 +21,7 @@ class CreatePartidaTable extends Migration
             $table->foreign('idUsuario')->references('id')->on('user');
             $table->integer('nivel');
             $table->integer('puntos');
+            $table->boolean('estado')->nullable()->default(false);
             $table->timestamps();
         });
     }
