@@ -11,7 +11,7 @@ Menu menu;
 var altoTabla = 9;
 var opcion = -1;
 var created = false;
-var nivel = 4;
+var nivel = 2;
 var confirmar;
 var continuar = true,
     activarMenu = false,

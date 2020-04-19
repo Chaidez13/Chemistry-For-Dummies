@@ -14,10 +14,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-      // $usuario = User::Where('email',Auth::user()->email);
-       dd(Auth::user());
-        //return $usuario;
+    {      
+        return Auth::user();
     }
 
     /**
@@ -54,6 +52,7 @@ class UserController extends Controller
             'password' => Hash::make($user['password']), 
             'fecha' => $user['fecha'], 
         ]);
+        
     }
 
     /**
@@ -77,6 +76,13 @@ class UserController extends Controller
     public function edit($id)
     {
         
+    }
+
+    public function checkEmail($email)
+    {
+        $user = User::all()->where('email', $email)->first();
+        if ($user) 
+            return 'El correo electrónico ya existe';
     }
 
     /**

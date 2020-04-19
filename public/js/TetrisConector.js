@@ -21,27 +21,27 @@ function gets() {
 }
 
 function cargarPuntos(nivel) {
-
-    var datos;
+    var datos = 0;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     $.getJSON({
-        url: '/partida',
-        async: false
+        url: '/partida/datos',
+        async: false,
+        data: {
+            'idJuego': 1,
+            'nivel': nivel,
+        } 
     }, (data) => {
-        for (var i = 0; i < data.length; i++) {
-            if (nivel == data[i].nivel)
-                datos = data[i].puntos;
-        }
+        datos = data[0].puntos;
     });
+
     return datos;
 }
 
 function guardarPartida(point, level) {
-    var url = "/partida/store";
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -49,10 +49,10 @@ function guardarPartida(point, level) {
     });
     $.ajax({
         type: "POST",
-        url: url,
+        url: "/partida/store",
         data: {
             'idJuego': 1,
-            'idUsuario': 1,
+            'idUsuario': -1,
             'nivel': level,
             'puntos': point,
         },
