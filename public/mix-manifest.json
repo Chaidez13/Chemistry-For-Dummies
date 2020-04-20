@@ -7,5 +7,6 @@
     "/Options.js": "/Options.js",
     "/Usuario.js": "/Usuario.js",
     "/about.js": "/about.js",
-    "/vendors~GameID~Options~Usuario.js": "/vendors~GameID~Options~Usuario.js"
+    "/vendors~GameID~Options~Usuario.js": "/vendors~GameID~Options~Usuario.js",
+    "/vendors~GameID~Options~Usuario~about.js": "/vendors~GameID~Options~Usuario~about.js"
 }

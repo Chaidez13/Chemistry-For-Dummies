@@ -1,9 +1,10 @@
 import Vue from "vue";
 import Router from "vue-router";
+import store from "./store";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -14,10 +15,10 @@ export default new Router({
         import(/* webpackChunkName: "Home" */ "./views/Games.vue")
     },
     {
-      path: "/about",
-      name: "about",
+      path: "/logout",
+      name: "logout",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
+        import(/* webpackChunkName: "about" */ "./views/UserLogout.vue")
     },
     {
       path: "/games",
@@ -49,5 +50,13 @@ export default new Router({
       component: () =>
         import(/* webpackChunkName: "Dashboard" */ "./views/Dashboard.vue")
     }
-  ]
+  ],
 });
+
+router.beforeEach((to, from, next) => {
+  //necessary logic to resolve the hook
+  if(to.name !== 'home' && to.name !== 'usuario' && !store.getters.auth) next({name: 'usuario'})
+  else next()
+ })
+
+export default router

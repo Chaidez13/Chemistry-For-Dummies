@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     sesion: false,
+    name: null,
     //States del Tetris
     gameTetris: false,
     //States de la Memoria
@@ -45,6 +46,17 @@ export default new Vuex.Store({
     //Mutaciones extra
     changeReport(state){
       state.reportDialog = !state.reportDialog
+    },
+    changeSesion(state){
+      state.sesion = !state.sesion
+    },
+    changeName(state, payload){
+      state.name = payload;
+    }
+  },
+  getters: {
+    auth(state){
+      return state.sesion;
     }
   },
 });

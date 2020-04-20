@@ -39,8 +39,16 @@
                     label="Contraseña*"
                     type="password"
                     v-model="pass"
-                    :rules="[() => !!pass || 'Este campo es obligatorio.']"
-                    hint="Lonitud mínima de 8 caracteres"
+                    v-if="registro"
+                    :rules="[() => !!pass && pass.length > 8 || 'Este campo es obligatorio y de 8 caracteres mínimo.']"
+                    hint="Longitud mínima de 8 caracteres"
+                  ></v-text-field>
+                  <v-text-field
+                    label="Contraseña*"
+                    type="password"
+                    v-model="pass"
+                    v-if="!registro"
+                    :rules="[() => !!pass  || 'Este campo es obligatorio.']"
                   ></v-text-field>
                 </v-col>
                 <v-col v-if="registro" cols="12">
@@ -103,7 +111,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import axios from 'axios';
 
 
@@ -122,32 +130,42 @@ export default {
     modal: ""
   }),
   methods: {
+    ...mapMutations(["changeSesion"]),
    login: async function(){
-      await axios.post('/login',{
-        email: this.email,
-        password: this.pass,
-      },{
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        }
-      })
+     if (this.$refs.form.validate()) {
+       await axios.post('/login',{
+         email: this.email,
+         password: this.pass,
+       },{
+         headers: {
+           'X-Requested-With': 'XMLHttpRequest',
+           'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+         }
+       }).then(() => {
+         this.changeSesion()
+         this.$router.push({ name: "home" });
+       }).catch((e) => console.error(e))
+     }
     },
     registrarse: async function() {
-      await axios.post('/registro/user',{
-        nombre: this.nombre,
-        apellidoPaterno: this.primerApellido,
-        apellidoMaterno: this.segundoApellido,
-        email: this.email,
-        password: this.pass,
-        fecha: this.date,
-      }).then(() => console.log('Registro Exitoso')).catch(()=> console.log(error))
-      this.$router.push({ name: "home" });
-    },
-    submit() {
       if (this.$refs.form.validate()) {
-        this.dialog = false;
+        await axios.post('/registro/user',{
+          nombre: this.nombre,
+          apellidoPaterno: this.primerApellido,
+          apellidoMaterno: this.segundoApellido,
+          email: this.email,
+          password: this.pass,
+          fecha: this.date,
+        }).then(() => {
+          console.log('Registro Exitoso')
+          this.registro = false
+        }).catch((e)=> console.log(e))
       }
+    },
+  },
+  created(){
+    if(this.sesion){
+      this.$router.push({ name: "home" });
     }
   },
   computed: {

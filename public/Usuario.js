@@ -16,16 +16,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -148,14 +156,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       modal: ""
     };
   },
-  methods: {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(["changeSesion"]), {
     login: function () {
       var _login = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this = this;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                if (!this.$refs.form.validate()) {
+                  _context.next = 3;
+                  break;
+                }
+
+                _context.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/login', {
                   email: this.email,
                   password: this.pass
@@ -164,9 +179,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     'X-Requested-With': 'XMLHttpRequest',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                   }
+                }).then(function () {
+                  _this.changeSesion();
+
+                  _this.$router.push({
+                    name: "home"
+                  });
+                })["catch"](function (e) {
+                  return console.error(e);
                 });
 
-              case 2:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -182,12 +205,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }(),
     registrarse: function () {
       var _registrarse = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _this2 = this;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('api/registro/user', {
+                if (!this.$refs.form.validate()) {
+                  _context2.next = 3;
+                  break;
+                }
+
+                _context2.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/registro/user', {
                   nombre: this.nombre,
                   apellidoPaterno: this.primerApellido,
                   apellidoMaterno: this.segundoApellido,
@@ -195,14 +225,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   password: this.pass,
                   fecha: this.date
                 }).then(function () {
-                  return console.log('Registro Exitoso');
-                })["catch"](function () {
-                  return console.log(error);
-                });
-
-              case 2:
-                this.$router.push({
-                  name: "home"
+                  console.log('Registro Exitoso');
+                  _this2.registro = false;
+                })["catch"](function (e) {
+                  return console.log(e);
                 });
 
               case 3:
@@ -218,11 +244,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return registrarse;
-    }(),
-    submit: function submit() {
-      if (this.$refs.form.validate()) {
-        this.dialog = false;
-      }
+    }()
+  }),
+  created: function created() {
+    if (this.sesion) {
+      this.$router.push({
+        name: "home"
+      });
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["sesion"]))
@@ -443,28 +471,56 @@ var render = function() {
                                 "v-col",
                                 { attrs: { cols: "12" } },
                                 [
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      label: "Contraseña*",
-                                      type: "password",
-                                      rules: [
-                                        function() {
-                                          return (
-                                            !!_vm.pass ||
-                                            "Este campo es obligatorio."
-                                          )
+                                  _vm.registro
+                                    ? _c("v-text-field", {
+                                        attrs: {
+                                          label: "Contraseña*",
+                                          type: "password",
+                                          rules: [
+                                            function() {
+                                              return (
+                                                (!!_vm.pass &&
+                                                  _vm.pass.length > 8) ||
+                                                "Este campo es obligatorio y de 8 caracteres mínimo."
+                                              )
+                                            }
+                                          ],
+                                          hint:
+                                            "Longitud mínima de 8 caracteres"
+                                        },
+                                        model: {
+                                          value: _vm.pass,
+                                          callback: function($$v) {
+                                            _vm.pass = $$v
+                                          },
+                                          expression: "pass"
                                         }
-                                      ],
-                                      hint: "Lonitud mínima de 8 caracteres"
-                                    },
-                                    model: {
-                                      value: _vm.pass,
-                                      callback: function($$v) {
-                                        _vm.pass = $$v
-                                      },
-                                      expression: "pass"
-                                    }
-                                  })
+                                      })
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  !_vm.registro
+                                    ? _c("v-text-field", {
+                                        attrs: {
+                                          label: "Contraseña*",
+                                          type: "password",
+                                          rules: [
+                                            function() {
+                                              return (
+                                                !!_vm.pass ||
+                                                "Este campo es obligatorio."
+                                              )
+                                            }
+                                          ]
+                                        },
+                                        model: {
+                                          value: _vm.pass,
+                                          callback: function($$v) {
+                                            _vm.pass = $$v
+                                          },
+                                          expression: "pass"
+                                        }
+                                      })
+                                    : _vm._e()
                                 ],
                                 1
                               ),
