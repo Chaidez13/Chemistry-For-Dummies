@@ -36,7 +36,7 @@ function nowMusic() {
 }
 function soviet(){
     stopAll()
-	sov.volume = 0.3;
+	sov.volume = 0.15;
 	sov.play();
 }
 

@@ -96,21 +96,21 @@ void draw() {
 	}
 	if (!logoOtorgado && (puntos > puntosGuardados) && puntosGuardados > 0) {
 		var h = 900;
-		if (logros.length > 0){}
+		if (logros.length > 0)
 			h = 800;
 		logros.push(new Logro(2, 910, h, 683, 171, 25, width,0));
 		actualizarPuntos(puntos, puntosGuardados, nivel, 0);
 		puntosGuardados = puntos;
 		logoOtorgado = !logoOtorgado;
 	}
-	if (logros.length > 0)
 		for (var i = 0; i < logros.length; i++) {
 			if (logros[i] != null) {
 				logros[i].show();
 				if (logros[i].end()){
 					logros[i] = null;
                 }
-			}
+			}else
+                logros.shift();
 		}
 }
 
@@ -194,14 +194,14 @@ void keyTyped() {
 			if (!oldLogro) {    
                 puntos += 100;
 				logros.push(new Logro(1, 910, 900, 683, 171, 25, width,40));
-				oldLogro = !oldLogro;
+				//oldLogro = !oldLogro;
 			}
 		} else if (match == 'now') {
 			nowMusic();
 			if (!nowLogro) {
                 puntos += 100;
 				logros.push(new Logro(0, 910, 900, 683, 171, 25, width,40));
-				nowLogro = !nowLogro;
+				//nowLogro = !nowLogro;
 			}
 		}else if(match == 'soviet'){
             soviet();
