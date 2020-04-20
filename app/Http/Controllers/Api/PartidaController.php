@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 use App\Partida;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 class PartidaController extends Controller
 {
     /**
@@ -13,7 +14,8 @@ class PartidaController extends Controller
      */
     public function index()
     {
-        $partida = Partida::all();
+        $id = Auth::user()->id;
+        $partida = Partida::where('idUsuario', $id)->get();
         return $partida;
     }
 
@@ -35,17 +37,18 @@ class PartidaController extends Controller
      */
     public function store(Request $request)
     {
-        
         $partida = $request->validate([
             'idJuego' => 'required',
             'idUsuario' => 'required',
             'nivel' => 'required',
             'puntos' => 'required',
         ]);
-
-       
-        if(Partida::where('idJuego', $partida['idJuego'])->where('nivel',$partida['nivel'])->count()==0)
+       $idUsuario = Auth::user()->id;
+       $partida['idUsuario'] = $idUsuario;
+       if(Partida::where('idJuego', $partida['idJuego'])->where('nivel',$partida['nivel'])->where('idUsuario',$idUsuario)->count()==0)
             Partida::create($partida);
+        else
+            return 'La partida existe';
     }
 
     /**
@@ -60,6 +63,16 @@ class PartidaController extends Controller
 
     }
 
+    public function obtenerDatosPartida(Request $request){
+        $partida = $request->validate([
+            'idJuego' => 'required',
+            'nivel' => 'required',
+        ]);
+        $id = Auth::user()->id;
+        $datos = Partida::where('idJuego', $partida['idJuego'])->where('nivel',$partida['nivel'])->where('idUsuario',$id)->get();
+
+        return $datos;
+    }
 
     public function search(Request $request, $id){
     $datos = $request->validate([
@@ -90,13 +103,17 @@ class PartidaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         $datos = $request->validate([
             'puntos' => 'required',
             'nivel' => 'required',
+            'estado' => 'required'
         ]);
-        Partida::where('idJuego',$id)->where('nivel',$datos['nivel'])->update(['puntos' => $datos['puntos']]);
-    }
+        $idUser = Auth::user()->id;
+        Partida::where('idJuego',$id)->where('nivel',$datos['nivel'])->where('idUsuario',$idUser)
+        ->update(['puntos' => $datos['puntos'],
+                  'estado' => $datos['estado']
+                  ]);
+    }   
 
     /**
      * Remove the specified resource from storage.
