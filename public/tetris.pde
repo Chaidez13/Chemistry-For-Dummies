@@ -22,7 +22,9 @@ var continuar = true,
 	perder = false,
 	logoOtorgado = false,
 	oldLogro = false,
-	nowLogro = false;
+	nowLogro = false,
+	sovLogro = false,
+	pumpLogro = false;
 var tablero = [
 	["0", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "1"],
 	["2", "3", "", "", "", "", "", "", "", "", "", "", "4", "5", "6", "7", "8", "9"],
@@ -96,22 +98,26 @@ void draw() {
 	}
 	if (!logoOtorgado && (puntos > puntosGuardados) && puntosGuardados > 0) {
 		var h = 900;
-		if (logros.length > 0)
+		if (logros.length > 0) {
 			h = 800;
-		logros.push(new Logro(2, 910, h, 683, 171, 25, width,0));
+			logros.push(new Logro(2, 910, h, 683, 171, 25, width, 0));
+		} else {
+			logros.push(new Logro(2, 910, 900, 683, 171, 25, width, 40));
+		}
+
 		actualizarPuntos(puntos, puntosGuardados, nivel, 0);
 		puntosGuardados = puntos;
 		logoOtorgado = !logoOtorgado;
 	}
-		for (var i = 0; i < logros.length; i++) {
-			if (logros[i] != null) {
-				logros[i].show();
-				if (logros[i].end()){
-					logros[i] = null;
-                }
-			}else
-                logros.shift();
-		}
+	for (var i = 0; i < logros.length; i++) {
+		if (logros[i] != null) {
+			logros[i].show();
+			if (logros[i].end()) {
+				logros[i] = null;
+			}
+		} else
+			logros.shift();
+	}
 }
 
 void actualizarPuntos(puntos, puntosGuardados, nivel, estado) {
@@ -188,30 +194,36 @@ void keyPressed() {
 void keyTyped() {
 	typed += String.fromCharCode(key);
 	var match = typed.match(/old|now|end|soviet|foster/g);
-	if (match == 'old' || match == 'now'||match == 'soviet'||match=='foster') {
+	if (match == 'old' || match == 'now' || match == 'soviet' || match == 'foster') {
 		if (match == 'old') {
 			oldMusic();
-			if (!oldLogro) {    
-                puntos += 100;
-				logros.push(new Logro(1, 910, 900, 683, 171, 25, width,40));
-				//oldLogro = !oldLogro;
+			if (!oldLogro) {
+				puntos += 100;
+				logros.push(new Logro(1, 910, 900, 683, 171, 25, width, 40));
+				oldLogro = !oldLogro;
 			}
 		} else if (match == 'now') {
 			nowMusic();
 			if (!nowLogro) {
-                puntos += 100;
-				logros.push(new Logro(0, 910, 900, 683, 171, 25, width,40));
-				//nowLogro = !nowLogro;
+				puntos += 100;
+				logros.push(new Logro(0, 910, 900, 683, 171, 25, width, 40));
+				nowLogro = !nowLogro;
 			}
-		}else if(match == 'soviet'){
-            soviet();
-            puntos += 100;
-			logros.push(new Logro(3, 910, 900, 683, 171, 25, width,40));
-        }else{
-            pumped();
-            puntos += 100;
-			logros.push(new Logro(4, 910, 900, 683, 171, 25, width,40));
-        }
+		} else if (match == 'soviet') {
+			soviet();
+			if (!sovLogro) {
+				puntos += 100;
+				logros.push(new Logro(3, 910, 900, 683, 171, 25, width, 40));
+				sovLogro = !sovLogro;
+			}
+		} else {
+			pumped();
+			if (!pumpLogro) {
+				puntos += 100;
+				logros.push(new Logro(4, 910, 900, 683, 171, 25, width, 40));
+				pumpLogro = !pumpLogro;
+			}
+		}
 		typed = '';
 	} else if (match == 'end') {
 		stopAll();
