@@ -36,29 +36,33 @@ class Elemento {
         textSize(this.h / 2.75);
         if (nivel != 5 || this.jugable) {
             if (this.bloque == "nonmetal") {
-                fill(141, 185, 136)
+                fill(58, 193, 248);
             } else if (this.bloque == "noble gas") {
-                fill(168, 201, 236)
+                fill(143, 119, 181)
             } else if (this.bloque == "alkali metal") {
-                fill(191, 161, 197)
+                fill(243, 55, 132)
             } else if (this.bloque == "alkaline earth metal") {
-                fill(232, 149, 193)
+                fill(245, 109, 71)
             } else if (this.bloque == "metalloid") {
-                fill(214, 218, 98)
+                fill(91, 193, 171)
             } else if (this.bloque == "halogen") {
-                fill(122, 204, 200)
-            } else if (this.bloque == "metal" || this.bloque == "post-transition metal") {
-                fill(255, 214, 44)
+                fill(122, 132, 191)
+            } else if (this.bloque == "metal" || this.bloque == "post-transition metal") { 
+                fill(103, 191, 71);
             } else if (this.bloque == "transition metal") {
-                fill(252, 181, 77)
-            } else {
-                fill(255);
+                 fill(253, 197, 40);
+            } else if(this.numero>=57 && this.numero<=71){
+                fill(235,233,71);
+            }else{
+                 fill(151, 203, 66)
             }
         } else {
             fill(255)
         }
-
-        rect(this.x + this.dx, this.y, this.h, this.h);
+        stroke(255);
+        strokeWeight(2.0);
+        strokeCap(ROUND);
+        rect(this.x + this.dx, this.y, this.h, this.h,3);
         if (!this.jugable) {
             if (this.visible) {
                 fill(0)
@@ -81,7 +85,7 @@ class Elemento {
             if (this.nivel < 3) {
                 if (this.nivel != 2)
                     text(this.numero, this.x + 13 + this.dx, this.y + 15);
-                textSize(this.h / 6.55);
+                textSize(this.h / 6.50);
                 text(this.nombre, (this.h / 2) + this.dx + this.x, (this.y) + this.h - 10);
             }
         }

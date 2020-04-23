@@ -22,6 +22,7 @@ class CreatePartidaTable extends Migration
             $table->integer('nivel');
             $table->integer('puntos');
             $table->boolean('estado')->nullable()->default(false);
+            $table->integer('progreso')->nullable()->default(0);
             $table->timestamps();
         });
     }
