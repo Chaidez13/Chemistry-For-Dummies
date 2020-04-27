@@ -105,12 +105,14 @@ class PartidaController extends Controller
         $datos = $request->validate([
             'puntos' => 'required',
             'nivel' => 'required',
-            'estado' => 'required'
+            'estado' => 'required',
+            'progreso' => 'required',
         ]);
         $idUser = Auth::user()->id;
         Partida::where('idJuego',$id)->where('nivel',$datos['nivel'])->where('idUsuario',$idUser)
         ->update(['puntos' => $datos['puntos'],
-                  'estado' => $datos['estado']
+                  'estado' => $datos['estado'],
+                  'progreso' => $datos['progreso']
                   ]);
     }   
 

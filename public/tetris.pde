@@ -1,6 +1,7 @@
 var tabla = [];
 var logros = [];
 var data = obtenerElementos();
+var progreso;
 var piezas = [];
 var puntos = 0,
 	puntosGuardados = 0;
@@ -58,6 +59,7 @@ void draw() {
 	}
 
 	if (actual != null) {
+		progreso = 100-((piezas.length/118)*100);
 		if (actual.y >= 1000 && salud > 0) {
 			salud -= damage;
 			if (puntos > 0)
@@ -84,14 +86,14 @@ void draw() {
 	if (ganar) {
 		menu.mostrar(mouseX, mouseY, "ganar");
 		if (opcion != -1) {
-			actualizarPuntos(puntos, puntosGuardados, nivel, 1);
+			actualizarPuntos(puntos, progreso ,puntosGuardados, nivel, 1);
 			nextLevel();
 		}
 	}
 	if (perder) {
 		menu.mostrar(mouseX, mouseY, "perder");
 		if (opcion != -1) {
-			actualizarPuntos(puntos, puntosGuardados, nivel, 0);
+			actualizarPuntos(puntos, progreso,puntosGuardados, nivel, 0);
 			puntosGuardados = cargarPuntos(nivel);
 			reset();
 		}
@@ -105,7 +107,7 @@ void draw() {
 			logros.push(new Logro(2, 910, 900, 683, 171, 25, width, 40));
 		}
 
-		actualizarPuntos(puntos, puntosGuardados, nivel, 0);
+		actualizarPuntos(puntos,progreso ,puntosGuardados, nivel, 0);
 		puntosGuardados = puntos;
 		logoOtorgado = !logoOtorgado;
 	}
@@ -120,9 +122,9 @@ void draw() {
 	}
 }
 
-void actualizarPuntos(puntos, puntosGuardados, nivel, estado) {
+void actualizarPuntos(puntos,progreso, puntosGuardados, nivel, estado) {
 	if (puntos > puntosGuardados) {
-		actualizarPartida(puntos, nivel, estado);
+		actualizarPartida(puntos,progreso ,nivel, estado);
 	}
 }
 
