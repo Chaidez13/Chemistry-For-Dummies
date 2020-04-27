@@ -156,7 +156,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       modal: ""
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(["changeSesion"]), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["validarSesion"]), {
     login: function () {
       var _login = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var _this = this;
@@ -180,7 +180,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                   }
                 }).then(function () {
-                  _this.changeSesion();
+                  _this.validarSesion();
 
                   _this.$router.push({
                     name: "home"
@@ -246,13 +246,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return registrarse;
     }()
   }),
-  created: function created() {
-    if (this.sesion) {
-      this.$router.push({
-        name: "home"
-      });
-    }
-  },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["sesion"]))
 });
 
@@ -287,8 +280,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     Sign: _components_Sign__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["sesion"])),
-  beforeCreate: function beforeCreate() {
-    if (this.sesion) this.$router.push({
+  created: function created() {
+    if (this.sesion.status) this.$router.push({
       name: "home"
     });
   }
@@ -822,7 +815,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return !_vm.sesion ? _c("sign") : _vm._e()
+  return !_vm.sesion.status ? _c("sign") : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true

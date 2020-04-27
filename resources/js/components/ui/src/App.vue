@@ -8,12 +8,9 @@
 
     <v-navigation-drawer app>
       <v-list-item class="px-2" @click="userValidation">
-        <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
-        </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title v-if="sesion">{{name}}</v-list-item-title>
-          <v-list-item-title v-if="!sesion">Iniciar Sesión</v-list-item-title>
+          <v-list-item-title v-if="sesion.status">{{sesion.name}}</v-list-item-title>
+          <v-list-item-title v-if="!sesion.status">Iniciar Sesión</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -29,7 +26,7 @@
             <v-list-item-title>{{ item.opcion }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item @click="changeOption('/logout')" v-if="sesion">
+        <v-list-item @click="changeOption('/logout')" v-if="sesion.status">
           <v-list-item-icon>
             <v-icon>mdi-logout</v-icon>
           </v-list-item-icon>
@@ -43,7 +40,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 import axios from 'axios';
 
 export default {
@@ -63,27 +60,20 @@ export default {
     ]
   }),
   computed: {
-    ...mapState(['sesion','name'])
+    ...mapState(['sesion'])
   },
   methods: {
-    ...mapMutations(['changeSesion','changeName']),
+    ...mapActions(['validarSesion']),
     userValidation() {
-      if (!this.sesion) this.$router.push({ name: "usuario" });
+      if (!this.sesion.status) this.$router.push({ name: "usuario" });
     },
     changeOption(ruta) {
       const actual = this.$route.path;
       if (ruta != actual) this.$router.push({ path: ruta });
     },
-    init: async function(){
-      await axios.get('/user/datos').then(e => {
-        this.changeSesion()
-        console.log(e)
-        this.changeName('RAUL')
-      }).catch();
-    }
   },
   created(){
-    this.init()
+    this.validarSesion()
   },
 };
 

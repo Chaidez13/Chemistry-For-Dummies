@@ -1,5 +1,5 @@
 <template>
-  <sign v-if="!sesion" />
+  <sign v-if="!sesion.status" />
 </template>
 
 <script>
@@ -12,10 +12,10 @@ export default {
     Sign
   },
   computed: {
-    ...mapState(["sesion"])
+    ...mapState(["sesion"]),
   },
-  beforeCreate() {
-    if(this.sesion)
+  created() {
+    if(this.sesion.status)
       this.$router.push({ name: "home" });
   }
 };

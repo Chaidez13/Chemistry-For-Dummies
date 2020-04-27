@@ -55,7 +55,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   //necessary logic to resolve the hook
-  if(to.name !== 'home' && to.name !== 'usuario' && !store.getters.auth) next({name: 'usuario'})
+  if(to.name !== 'home' && to.name !== 'usuario' && !store.getters.auth.status) next({name: 'usuario'})
   else next()
  })
 

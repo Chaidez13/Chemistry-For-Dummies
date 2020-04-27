@@ -72,7 +72,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       dialog: true
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['setGameMemoriaOff', 'setGameTetrisOff', 'setGameTriviaOff']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['setGameTriviaOff', 'setGameTetrisOff']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('memoria', ['setGameMemoriaOff']), {
     getOut: function getOut() {
       switch (this.game) {
         case '1':
@@ -125,51 +125,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       game: false,
-      cantidad: 0,
-      niveles: [{
-        progreso: 100,
-        nombre: "Nuevo ingreso",
-        icon: "mdi-account-tie",
-        color: "blue-grey lighten-3",
-        dificultad: 1,
-        status: true
-      }, {
-        progreso: 0,
-        nombre: "Limpiador de tubos de ensayo",
-        icon: "mdi-test-tube",
-        color: "blue-grey lighten-2",
-        dificultad: 2,
-        status: true
-      }, {
-        progreso: 0,
-        nombre: "Titulador profesional",
-        icon: "mdi-beaker",
-        color: "blue-grey lighten-1",
-        dificultad: 3,
-        status: false
-      }, {
-        progreso: 0,
-        nombre: "Louis Pasteur",
-        icon: "mdi-atom",
-        color: "blue-grey darken-1",
-        dificultad: 4,
-        status: false
-      }, {
-        progreso: 0,
-        nombre: "Marie Curie",
-        icon: "mdi-radioactive",
-        color: "blue-grey darken-2",
-        dificultad: 5,
-        status: false
-      }]
+      cantidad: 0
     };
   },
   components: {
     MemoriaGame: _components_MemoriaGame__WEBPACK_IMPORTED_MODULE_1__["default"],
     SelectLevel: _components_SelectLevel__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(["setGameMemoriaOn", "setGameMemoriaOff"])),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["gameMemoria"])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('memoria', ["setGameMemoriaOn", "setGameMemoriaOff"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('memoria', ["gameMemoria"])),
   beforeMount: function beforeMount() {
     this.setGameMemoriaOff;
   }
@@ -245,6 +209,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.headers.common = {
+  'X-Requested-With': 'XMLHttpRequest',
+  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+};
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -255,12 +223,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       game: false,
       cardsActive: 0,
       anterior: null,
-      difTime: 30,
-      //1.6666,
+      difTime: 1.6666,
       gameOv: false,
       puntos: 0,
       status: false,
-      cantCartas: 10
+      cantCartas: 10,
+      contadorCartas: 0
     };
   },
   components: {
@@ -272,7 +240,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.getCards();
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["loadData"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(["setGameMemoriaOn", "setGameMemoriaOff"]), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])('memoria', ["setGameMemoriaOn", "setGameMemoriaOff"]), {
     getCards: function () {
       var _getCards = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var _this = this;
@@ -282,8 +250,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/partida/store', {
+                  idJuego: 2,
+                  idUsuario: -1,
+                  nivel: this.levelMemoria,
+                  puntos: 0
+                });
+
+              case 2:
+                _context.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/memorama/elementos').then(function (response) {
-                  _this.elemets = _this.chargeNElements(10, response.data);
+                  console.log(response.data);
+                  _this.elemets = _this.chargeNElements(response.data);
 
                   _this.elemets.forEach(function (e) {
                     return e.state = false;
@@ -294,12 +272,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   return console.log(error);
                 });
 
-              case 2:
+              case 4:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, this);
       }));
 
       function getCards() {
@@ -308,19 +286,70 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return getCards;
     }(),
-    chargeNElements: function chargeNElements(n, arr) {
+    chargeNElements: function chargeNElements(arr) {
       var result = [];
+      var l = this.levelMemoria - 1;
 
-      while (n > 0) {
-        var x = Math.floor(Math.random() * arr.length);
+      switch (l) {
+        case 0:
+        case 1:
+          result = arr.filter(function (d) {
+            return d.groupBlock == 'noble gas';
+          });
+          this.cantCartas = 6;
+          return result;
+          break;
 
-        if (result.indexOf(arr[x]) == -1) {
-          result.push(arr[x]);
-          n--;
-        }
+        case 1:
+          result = arr.filter(function (d) {
+            return d.groupBlock == 'metalloid';
+          });
+          this.cantCartas = 7;
+          return result;
+          break;
+
+        case 2:
+          result = arr.filter(function (d) {
+            return d.groupBlock == 'alkaline earth metal' || d.groupBlock == 'alkali metal';
+          });
+          this.cantCartas = 12;
+          return result;
+
+        case 3:
+          var mel = arr.filter(function (d) {
+            return d.groupBlock == 'transition metal';
+          });
+          var n = 0;
+
+          while (n < 15) {
+            var x = Math.floor(Math.random() * arr.length);
+
+            if (result.indexOf(mel[x]) == -1) {
+              result.push(mel[x]);
+              n--;
+            }
+          }
+
+          this.cantCartas = 15;
+          return result;
+          break;
+
+        case 4:
+          var n = 0;
+
+          while (n < 20) {
+            var x = Math.floor(Math.random() * arr.length);
+
+            if (result.indexOf(arr[x]) == -1) {
+              result.push(arr[x]);
+              n--;
+            }
+          }
+
+          this.cantCartas = 20;
+          return result;
+          break;
       }
-
-      return result;
     },
     //Se cargan los elementos traidos desde el BACK y se crea un arreglo con cada dato dos veces
     begin: function begin() {
@@ -394,7 +423,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             item.info.state = true;
             this.anterior.info.state = true;
             this.resetCards();
-            this.puntos += 10;
+            this.contadorCartas++;
+            this.puntos += Math.trunc(100 - this.time);
           } else {
             // SI NO
             setTimeout(this.coverAllCards, 500);
@@ -405,6 +435,41 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       }
     },
+    gameEnded: function () {
+      var _gameEnded = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                this.game = false;
+                this.gameOv = true;
+                clearInterval(this.interval);
+                _context2.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('partida/update/2', {
+                  puntos: this.puntos,
+                  nivel: this.levelMemoria,
+                  estado: this.status,
+                  progreso: Math.trunc(this.contadorCartas * this.elemets.length / 2)
+                }).then(function (e) {
+                  return console.log('SUCCESS');
+                })["catch"](function (e) {
+                  console.log('ERROR');
+                });
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function gameEnded() {
+        return _gameEnded.apply(this, arguments);
+      }
+
+      return gameEnded;
+    }(),
     //Funciones que llevan el tiempo
     oneSecond: function oneSecond() {
       this.interval = setInterval(this.timer, 1000);
@@ -413,7 +478,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.time += this.difTime;
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["gameMemoria", "levelMemoria"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('memoria', ["gameMemoria", "levelMemoria"])),
   watch: {
     time: function time(newTime) {
       if (newTime > 60) {
@@ -425,15 +490,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       if (newTime >= 100) {
-        this.gameOv = true;
-        this.game = false;
+        this.gameEnded();
       }
     },
-    puntos: function puntos(_puntos) {
-      if (_puntos >= 10 * this.cantCartas) {
-        this.gameOv = true;
-        this.game = false;
+    contadorCartas: function contadorCartas(cc) {
+      if (cc >= this.elemets.length) {
         this.status = true;
+        this.gameEnded();
       }
     }
   }
@@ -451,6 +514,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -484,30 +549,65 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["levels", "game"],
+  props: ["game"],
   data: function data() {
-    return {};
+    return {
+      levels: []
+    };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(["setGameMemoriaOn", "setGameTriviaOn", "setGameTetrisOn", "setLevelMemoria"]), {
+  created: function created() {
+    switch (this.game) {
+      case "2":
+        this.updateLevelDataMM();
+        this.levels = this.nivelesMM;
+        console.log(this.levels);
+        break;
+
+      case "3":
+        this.setGameTriviaOn();
+        break;
+
+      case "1":
+        this.setGameTetrisOn();
+        break;
+    }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('memoria', ['nivelesMM'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(["setGameTriviaOn", "setGameTetrisOn"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('memoria', ['setGameMemoriaOn', 'setLevelMemoria']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('memoria', ['updateLevelDataMM']), {
+    /*     getProgress: async function(){
+          await axios.get('/partida/all',{
+             headers: {
+               'X-Requested-With': 'XMLHttpRequest',
+               'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+             }
+            }).then(d => {
+              const progress = d.data.filter(e => e.idJuego == this.game)
+              for (let i = 0; i < progress.length; i++) {
+                this.datosNivel[i].progreso = progress[i].puntos;
+                this.datosNivel[i+1].status = progress[i].estado;
+              }
+              console.log(this.datosNivel)
+            })
+        }, */
     beginGame: function beginGame(dificultad) {
       switch (this.game) {
-        case "1":
+        case "2":
           this.setGameMemoriaOn();
           this.setLevelMemoria(dificultad);
           break;
 
-        case "2":
+        case "3":
           this.setGameTriviaOn();
           break;
 
-        case "3":
+        case "1":
           this.setGameTetrisOn();
           break;
       }
     }
-  }),
-  beforeMount: function beforeMount() {}
+  })
 });
 
 /***/ }),
@@ -665,7 +765,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         icon: "mdi-test-tube",
         color: "amber lighten-2",
         dificultad: 8,
-        status: true
+        status: false
       }, {
         progreso: 0,
         nombre: "Al' Matraz",
@@ -760,6 +860,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.headers.common = {
+  'X-Requested-With': 'XMLHttpRequest',
+  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+};
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1247,7 +1351,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       !_vm.gameMemoria
-        ? _c("select-level", { attrs: { levels: _vm.niveles, game: "1" } })
+        ? _c("select-level", { attrs: { game: "2" } })
         : _vm._e(),
       _vm._v(" "),
       _vm.gameMemoria ? _c("memoria-game") : _vm._e()
@@ -1496,7 +1600,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("select-level", { attrs: { levels: _vm.niveles, game: "3" } })
+      _c("select-level", { attrs: { levels: _vm.niveles, game: "1" } })
     ],
     1
   )
@@ -1577,7 +1681,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       !_vm.gameTrivia
-        ? _c("select-level", { attrs: { levels: _vm.niveles, game: "2" } })
+        ? _c("select-level", { attrs: { levels: _vm.niveles, game: "3" } })
         : _vm._e(),
       _vm._v(" "),
       _vm.gameTrivia ? _c("trivia-game") : _vm._e()

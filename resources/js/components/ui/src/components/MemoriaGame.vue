@@ -38,6 +38,11 @@ import axios from "axios";
 import Vidas from "../components/Vidas";
 import TimeBar from "../components/TimeBar";
 
+axios.defaults.headers.common = {
+  'X-Requested-With': 'XMLHttpRequest',
+  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+};
+
 export default {
   data() {
     return {
@@ -48,11 +53,12 @@ export default {
       game: false,
       cardsActive: 0,
       anterior: null,
-      difTime: 30,  //1.6666,
+      difTime: 1.6666,
       gameOv: false,
       puntos: 0,
       status: false,
       cantCartas: 10,
+      contadorCartas: 0,
     };
   },
   components: {
@@ -65,26 +71,66 @@ export default {
     this.getCards()
   },
   methods: {
-    ...mapActions(["loadData"]),
-    ...mapMutations(["setGameMemoriaOn", "setGameMemoriaOff"]),
+    ...mapMutations('memoria', ["setGameMemoriaOn", "setGameMemoriaOff"]),
 
     getCards: async function(){
+      await axios.post('/partida/store',{
+        idJuego: 2,
+        idUsuario: -1,
+        nivel: this.levelMemoria,
+        puntos: 0,
+      })
       await axios.get('/memorama/elementos').then(response => {
-          this.elemets = this.chargeNElements(10, response.data)
+          console.log(response.data)
+          this.elemets = this.chargeNElements(response.data)
           this.elemets.forEach(e => e.state = false)
           this.begin()
         }).catch(error => console.log(error))
     },
-    chargeNElements(n, arr){
+    chargeNElements(arr){
       var result = []
-      while(n > 0){
-         var x = Math.floor(Math.random() * arr.length);
-         if(result.indexOf(arr[x])==-1){
-           result.push(arr[x])
-           n--
-         }
+      const l = this.levelMemoria-1
+      switch(l){
+        case 0: case 1:
+          result = arr.filter(d => d.groupBlock == 'noble gas')
+          this.cantCartas = 6;
+          return result;
+        break;
+        case 1:
+          result = arr.filter(d => d.groupBlock == 'metalloid')
+          this.cantCartas = 7;
+          return result;
+        break;
+        case 2:
+          result = arr.filter(d => d.groupBlock == 'alkaline earth metal' || d.groupBlock == 'alkali metal')
+          this.cantCartas = 12;
+          return result;
+        case 3:
+          const mel = arr.filter(d => d.groupBlock == 'transition metal')
+          var n = 0;
+          while(n < 15){
+            var x = Math.floor(Math.random() * arr.length);
+            if(result.indexOf(mel[x])==-1){
+              result.push(mel[x])
+              n--
+            }
+          } 
+          this.cantCartas = 15;
+          return result;
+        break;
+        case 4:
+          var n = 0;
+          while(n < 20){
+            var x = Math.floor(Math.random() * arr.length);
+            if(result.indexOf(arr[x])==-1){
+              result.push(arr[x])
+              n--
+            }
+          }
+          this.cantCartas = 20;
+          return result;
+        break;
       }
-      return result;
     },
     //Se cargan los elementos traidos desde el BACK y se crea un arreglo con cada dato dos veces
     begin() {
@@ -95,7 +141,7 @@ export default {
           this.cartas.push({
             info:  this.elemets[i],
             activa: false,
-            id: i + this.cantCartas
+            id: i + this.cantCartas,
           });
         }
         this.shuffle(this.cartas)
@@ -153,7 +199,8 @@ export default {
             item.info.state = true;
             this.anterior.info.state = true;
             this.resetCards()
-            this.puntos += 10;
+            this.contadorCartas++;
+            this.puntos += Math.trunc(100-this.time);
           } else {
             // SI NO
             setTimeout(this.coverAllCards, 500);
@@ -164,6 +211,20 @@ export default {
       }
     },
 
+    gameEnded: async function(){
+      this.game = false;
+      this.gameOv = true;
+      clearInterval(this.interval)
+      await axios.post('partida/update/2',{
+        puntos: this.puntos,
+        nivel: this.levelMemoria,
+        estado: this.status,
+        progreso: Math.trunc((this.contadorCartas * this.elemets.length)/2),
+      }).then(e => console.log('SUCCESS'))
+      .catch(e => {
+        console.log('ERROR')
+      })
+    },
     //Funciones que llevan el tiempo
     oneSecond: function() {
       this.interval = setInterval(this.timer, 1000);
@@ -173,7 +234,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["gameMemoria", "levelMemoria"])
+    ...mapState('memoria', ["gameMemoria", "levelMemoria"])
   },
   watch: {
     time: function(newTime) {
@@ -184,19 +245,18 @@ export default {
         this.timeColor = "red darken-3";
       }
       if (newTime >= 100) {
-        this.gameOv = true;
-        this.game = false;
+        this.gameEnded();
       }
     },
-    puntos: function(puntos){
-      if(puntos >= 10*this.cantCartas){
-        this.gameOv = true;
-        this.game = false;
+    contadorCartas: function(cc){
+      if(cc >= this.elemets.length){
         this.status = true;
+        this.gameEnded();
       }
     }
   }
 };
+
 </script>
 
 <style scoped>

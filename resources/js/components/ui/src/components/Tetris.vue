@@ -3,7 +3,7 @@
     <v-row align="center" justify="center">
       <h1 class="display-2" style="color: #90A4AE;">TETRIS</h1>
     </v-row>
-    <select-level :levels="niveles" game="3" />
+    <select-level :levels="niveles" game="1" />
   </v-container>
 </template>
 

@@ -25,29 +25,67 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions, mapState } from "vuex";
+import axios from 'axios';
+
 export default {
-  props: ["levels", "game"],
+  props: ["game"],
   data() {
-    return {};
+    return {
+      levels: [],
+    };
+  },
+  created(){
+    switch (this.game) {
+        case "2":
+          this.updateLevelDataMM();
+          this.levels = this.nivelesMM;
+          console.log(this.levels)
+          break;
+        case "3":
+          this.setGameTriviaOn();
+          break;
+        case "1":
+          this.setGameTetrisOn();
+          break;
+      }
+  },
+  computed: {
+    ...mapState('memoria', ['nivelesMM'])
   },
   methods: {
-    ...mapMutations(["setGameMemoriaOn", "setGameTriviaOn", "setGameTetrisOn", "setLevelMemoria"]),
+    ...mapMutations(["setGameTriviaOn", "setGameTetrisOn"]),
+    ...mapMutations('memoria', ['setGameMemoriaOn', 'setLevelMemoria']),
+    ...mapActions('memoria', ['updateLevelDataMM']),
+/*     getProgress: async function(){
+      await axios.get('/partida/all',{
+         headers: {
+           'X-Requested-With': 'XMLHttpRequest',
+           'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+         }
+        }).then(d => {
+          const progress = d.data.filter(e => e.idJuego == this.game)
+          for (let i = 0; i < progress.length; i++) {
+            this.datosNivel[i].progreso = progress[i].puntos;
+            this.datosNivel[i+1].status = progress[i].estado;
+          }
+          console.log(this.datosNivel)
+        })
+    }, */
     beginGame(dificultad) {
       switch (this.game) {
-        case "1":
+        case "2":
           this.setGameMemoriaOn();
           this.setLevelMemoria(dificultad)
           break;
-        case "2":
+        case "3":
           this.setGameTriviaOn();
           break;
-        case "3":
+        case "1":
           this.setGameTetrisOn();
           break;
       }
     }
   },
-  beforeMount() {}
 };
 </script>

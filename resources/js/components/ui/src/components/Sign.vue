@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 import axios from 'axios';
 
 
@@ -130,7 +130,7 @@ export default {
     modal: ""
   }),
   methods: {
-    ...mapMutations(["changeSesion"]),
+    ...mapActions(["validarSesion"]),
    login: async function(){
      if (this.$refs.form.validate()) {
        await axios.post('/login',{
@@ -142,7 +142,7 @@ export default {
            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
          }
        }).then(() => {
-         this.changeSesion()
+         this.validarSesion()
          this.$router.push({ name: "home" });
        }).catch((e) => console.error(e))
      }
@@ -162,11 +162,6 @@ export default {
         }).catch((e)=> console.log(e))
       }
     },
-  },
-  created(){
-    if(this.sesion){
-      this.$router.push({ name: "home" });
-    }
   },
   computed: {
     ...mapState(["sesion"])

@@ -2120,26 +2120,15 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
 //
 //
 //
@@ -2204,10 +2193,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }]
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(['sesion', 'name'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(['changeSesion', 'changeName']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['sesion'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['validarSesion']), {
     userValidation: function userValidation() {
-      if (!this.sesion) this.$router.push({
+      if (!this.sesion.status) this.$router.push({
         name: "usuario"
       });
     },
@@ -2216,41 +2205,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (ruta != actual) this.$router.push({
         path: ruta
       });
-    },
-    init: function () {
-      var _init = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this = this;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/user/datos').then(function (e) {
-                  _this.changeSesion();
-
-                  console.log(e);
-
-                  _this.changeName('RAUL');
-                })["catch"]();
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      function init() {
-        return _init.apply(this, arguments);
-      }
-
-      return init;
-    }()
+    }
   }),
   created: function created() {
-    this.init();
+    this.validarSesion();
   }
 }); //https://github.com/neelpatel05/periodic-table-api
 
@@ -4147,25 +4105,13 @@ var render = function() {
             { staticClass: "px-2", on: { click: _vm.userValidation } },
             [
               _c(
-                "v-list-item-avatar",
-                [
-                  _c("v-img", {
-                    attrs: {
-                      src: "https://randomuser.me/api/portraits/men/78.jpg"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
                 "v-list-item-content",
                 [
-                  _vm.sesion
-                    ? _c("v-list-item-title", [_vm._v(_vm._s(_vm.name))])
+                  _vm.sesion.status
+                    ? _c("v-list-item-title", [_vm._v(_vm._s(_vm.sesion.name))])
                     : _vm._e(),
                   _vm._v(" "),
-                  !_vm.sesion
+                  !_vm.sesion.status
                     ? _c("v-list-item-title", [_vm._v("Iniciar Sesión")])
                     : _vm._e()
                 ],
@@ -4209,7 +4155,7 @@ var render = function() {
                 )
               }),
               _vm._v(" "),
-              _vm.sesion
+              _vm.sesion.status
                 ? _c(
                     "v-list-item",
                     {
@@ -61994,6 +61940,168 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/ui/src/modules/memoria.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/ui/src/modules/memoria.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    gameMemoria: false,
+    levelMemoria: null,
+    nivelesMM: [{
+      progreso: 0,
+      nombre: "Nuevo ingreso",
+      icon: "mdi-account-tie",
+      color: "blue-grey lighten-3",
+      dificultad: 1,
+      status: true
+    }, {
+      progreso: 0,
+      nombre: "Limpiador de tubos de ensayo",
+      icon: "mdi-test-tube",
+      color: "blue-grey lighten-2",
+      dificultad: 2,
+      status: false
+    }, {
+      progreso: 0,
+      nombre: "Titulador profesional",
+      icon: "mdi-beaker",
+      color: "blue-grey lighten-1",
+      dificultad: 3,
+      status: false
+    }, {
+      progreso: 0,
+      nombre: "Louis Pasteur",
+      icon: "mdi-atom",
+      color: "blue-grey darken-1",
+      dificultad: 4,
+      status: false
+    }, {
+      progreso: 0,
+      nombre: "Marie Curie",
+      icon: "mdi-radioactive",
+      color: "blue-grey darken-2",
+      dificultad: 5,
+      status: false
+    }]
+  },
+  mutations: {
+    setGameMemoriaOff: function setGameMemoriaOff(state) {
+      state.gameMemoria = false;
+    },
+    setGameMemoriaOn: function setGameMemoriaOn(state) {
+      state.gameMemoria = true;
+    },
+    setLevelMemoria: function setLevelMemoria(state, payload) {
+      state.levelMemoria = payload;
+    },
+    setLevelData: function setLevelData(state, payload) {
+      state.nivelesMM[payload.position].progreso = payload.progreso;
+      if (payload.position !== 5) state.nivelesMM[payload.position + 1].status = payload.estado;
+    }
+  },
+  actions: {
+    updateLevelDataMM: function () {
+      var _updateLevelDataMM = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
+        var commit;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref.commit;
+                _context.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/partida/all', {
+                  headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                  }
+                }).then(function (d) {
+                  var progress = d.data.filter(function (e) {
+                    return e.idJuego == 2;
+                  });
+
+                  for (var i = 0; i < progress.length; i++) {
+                    var payload = {
+                      position: i,
+                      progreso: progress[i].progreso,
+                      estado: progress[i].estado
+                    };
+                    commit('setLevelData', payload);
+                  }
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function updateLevelDataMM(_x) {
+        return _updateLevelDataMM.apply(this, arguments);
+      }
+
+      return updateLevelDataMM;
+    }()
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/ui/src/modules/tetris.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/ui/src/modules/tetris.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {},
+  mutations: {},
+  actions: {}
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/ui/src/modules/trivia.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/ui/src/modules/trivia.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {},
+  mutations: {},
+  actions: {}
+});
+
+/***/ }),
+
 /***/ "./resources/js/components/ui/src/router.js":
 /*!**************************************************!*\
   !*** ./resources/js/components/ui/src/router.js ***!
@@ -62060,7 +62168,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 });
 router.beforeEach(function (to, from, next) {
   //necessary logic to resolve the hook
-  if (to.name !== 'home' && to.name !== 'usuario' && !_store__WEBPACK_IMPORTED_MODULE_2__["default"].getters.auth) next({
+  if (to.name !== 'home' && to.name !== 'usuario' && !_store__WEBPACK_IMPORTED_MODULE_2__["default"].getters.auth.status) next({
     name: 'usuario'
   });else next();
 });
@@ -62078,24 +62186,38 @@ router.beforeEach(function (to, from, next) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _modules_memoria__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/memoria */ "./resources/js/components/ui/src/modules/memoria.js");
+/* harmony import */ var _modules_trivia__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/trivia */ "./resources/js/components/ui/src/modules/trivia.js");
+/* harmony import */ var _modules_tetris__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/tetris */ "./resources/js/components/ui/src/modules/tetris.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
-/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
   state: {
-    sesion: false,
-    name: null,
+    sesion: {
+      status: false,
+      name: null
+    },
     //States del Tetris
     gameTetris: false,
     //States de la Memoria
-    gameMemoria: false,
-    levelMemoria: null,
     //States de la trivia
     gameTrivia: false,
     //States extra
@@ -62110,15 +62232,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       state.gameTetris = true;
     },
     //Mutaciones de la memoria
-    setGameMemoriaOff: function setGameMemoriaOff(state) {
-      state.gameMemoria = false;
-    },
-    setGameMemoriaOn: function setGameMemoriaOn(state) {
-      state.gameMemoria = true;
-    },
-    setLevelMemoria: function setLevelMemoria(state, payload) {
-      state.levelMemoria = payload;
-    },
     //Mutaciones de la trivia
     setGameTriviaOff: function setGameTriviaOff(state) {
       state.gameTrivia = false;
@@ -62127,20 +62240,59 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       state.gameTrivia = true;
     },
     //Mutaciones extra
+    setUserData: function setUserData(state, payload) {
+      state.sesion.status = true;
+      state.sesion.name = payload;
+    },
     changeReport: function changeReport(state) {
       state.reportDialog = !state.reportDialog;
-    },
-    changeSesion: function changeSesion(state) {
-      state.sesion = !state.sesion;
-    },
-    changeName: function changeName(state, payload) {
-      state.name = payload;
     }
   },
   getters: {
     auth: function auth(state) {
       return state.sesion;
     }
+  },
+  actions: {
+    validarSesion: function () {
+      var _validarSesion = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
+        var commit;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref.commit;
+                _context.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/user/datos', {
+                  headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                  }
+                }).then(function (response) {
+                  commit('setUserData', response.data.nombre);
+                })["catch"](function (e) {
+                  return e;
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function validarSesion(_x) {
+        return _validarSesion.apply(this, arguments);
+      }
+
+      return validarSesion;
+    }()
+  },
+  modules: {
+    tetris: _modules_tetris__WEBPACK_IMPORTED_MODULE_6__["default"],
+    trivia: _modules_trivia__WEBPACK_IMPORTED_MODULE_5__["default"],
+    memoria: _modules_memoria__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 }));
 

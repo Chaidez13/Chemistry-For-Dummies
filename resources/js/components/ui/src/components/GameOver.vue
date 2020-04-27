@@ -29,7 +29,8 @@ export default {
       dialog: true,
   }),
   methods:{
-    ...mapMutations(['setGameMemoriaOff','setGameTetrisOff','setGameTriviaOff']),
+    ...mapMutations(['setGameTriviaOff','setGameTetrisOff']),
+    ...mapMutations('memoria', ['setGameMemoriaOff']),
       getOut(){
         switch(this.game){
           case '1':

@@ -4,7 +4,7 @@
       <h1 class="display-2" style="color: #E57373;">TRIVIA</h1>
     </v-row>
 
-    <select-level :levels="niveles" v-if="!gameTrivia" game="2" />
+    <select-level :levels="niveles" v-if="!gameTrivia" game="3" />
 
     <trivia-game v-if="gameTrivia" />
   </v-container>
@@ -38,7 +38,7 @@ export default {
           icon: "mdi-test-tube",
           color: "amber lighten-2",
           dificultad: 8,
-          status: true
+          status: false
         },
         {
           progreso: 0,
