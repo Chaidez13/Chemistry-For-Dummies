@@ -37,8 +37,11 @@ function cargarPuntos(nivel) {
 	}, (data) => {
 		datos = data[0].puntos;
 	});
-
-	return datos;
+	
+	if(datos!=null)
+		return  datos;
+	else
+		return 0;
 }
 
 function guardarPartida(point, level) {
@@ -140,7 +143,7 @@ function guardarPartida(point, level) {
 	});
 }
 
-function actualizarPartida(point, level, estado) {
+function actualizarPartida(point,progreso, level, estado) {
 	$.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -153,6 +156,7 @@ function actualizarPartida(point, level, estado) {
 			'puntos': point,
 			'nivel': level,
 			'estado': estado,
+			'progreso': progreso
 		},
 		success: function(data) {
 			console.log(data);
