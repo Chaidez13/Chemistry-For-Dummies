@@ -238,6 +238,7 @@ axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.headers.common = {
     GameOver: _components_GameOver__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   created: function created() {
+    console.log(this.levelMemoria - 1);
     this.getCards();
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])('memoria', ["setGameMemoriaOn", "setGameMemoriaOff"]), {
@@ -292,7 +293,6 @@ axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.headers.common = {
 
       switch (l) {
         case 0:
-        case 1:
           result = arr.filter(function (d) {
             return d.groupBlock == 'noble gas';
           });
@@ -449,7 +449,7 @@ axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.headers.common = {
                   puntos: this.puntos,
                   nivel: this.levelMemoria,
                   estado: this.status,
-                  progreso: Math.trunc(this.contadorCartas * this.elemets.length / 2)
+                  progreso: Math.trunc(this.contadorCartas * 100 / this.elemets.length)
                 }).then(function (e) {
                   return console.log('SUCCESS');
                 })["catch"](function (e) {

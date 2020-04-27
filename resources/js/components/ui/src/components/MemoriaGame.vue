@@ -68,6 +68,7 @@ export default {
     GameOver,
   },
   created() {
+    console.log(this.levelMemoria-1)
     this.getCards()
   },
   methods: {
@@ -91,7 +92,7 @@ export default {
       var result = []
       const l = this.levelMemoria-1
       switch(l){
-        case 0: case 1:
+        case 0:
           result = arr.filter(d => d.groupBlock == 'noble gas')
           this.cantCartas = 6;
           return result;
@@ -219,7 +220,7 @@ export default {
         puntos: this.puntos,
         nivel: this.levelMemoria,
         estado: this.status,
-        progreso: Math.trunc((this.contadorCartas * this.elemets.length)/2),
+        progreso: Math.trunc((this.contadorCartas * 100)/this.elemets.length),
       }).then(e => console.log('SUCCESS'))
       .catch(e => {
         console.log('ERROR')
