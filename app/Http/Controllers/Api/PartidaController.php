@@ -122,8 +122,9 @@ class PartidaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+        $id = Auth::user()->id;
+        Partida::where('idUsuario',$id)->delete();
     }
 }

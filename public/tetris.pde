@@ -1,20 +1,20 @@
 var tabla = [];
 var logros = [];
 var data = obtenerElementos();
-var progreso;
+var progreso = 0,contadorDePiezas=0;
 var piezas = [];
 var puntos = 0,
 	puntosGuardados = 0;
-var salud = 200,
-	damage = 20;
-PImage vidaIcono, fondo, im;
+var salud = 250,
+	damage = 25;
+PImage vidaIcono, fondo;
 Logro logro, logroPuntos, logroActual;
 Elemento actual;
 Menu menu;
 var altoTabla = 9;
 var opcion = -1;
 var created = false;
-var nivel = 1;
+var nivel = 5;
 var typed = '';
 var confirmar;
 var continuar = true,
@@ -42,9 +42,13 @@ void setup() {
 	size(1261, 1000);
 	crearMatriz();
 	menu = new Menu();
-	fondo = loadImage("src/fondo.png");
+	if(nivel!=5)
+		fondo = loadImage("src/fondo.jpg");
+	else
+		fondo = loadImage("src/fondo_5.jpg");
+
 	vidaIcono = loadImage("src/vida.png");
-	frameRate(20);
+	frameRate(30);
 }
 
 void draw() {
@@ -59,7 +63,8 @@ void draw() {
 	}
 
 	if (actual != null) {
-		progreso = 100-((piezas.length/118)*100);
+		if(nivel>5) nivel = 1;
+		progreso = Math.trunc((contadorDePiezas/118)*100);
 		if (actual.y >= 1000 && salud > 0) {
 			salud -= damage;
 			if (puntos > 0)
@@ -74,11 +79,10 @@ void draw() {
 		menu.activo = true;
 		ganar = true;
 	}
-
 	textSize(16);
-	vidas(60, 30, salud);
-	marcador(puntos, 1130, 130);
-	marcador(puntosGuardados, 1130, 230);
+	vidas(10, 30, salud);
+	marcador("puntos:",puntos, 1130, 130);
+	marcador("Record:",puntosGuardados, 1130, 230);
 	if (!continuar) {
 		menu.activo = true;
 		menu.mostrar(mouseX, mouseY, "pause");
@@ -86,7 +90,7 @@ void draw() {
 	if (ganar) {
 		menu.mostrar(mouseX, mouseY, "ganar");
 		if (opcion != -1) {
-			actualizarPuntos(puntos, progreso ,puntosGuardados, nivel, 1);
+			actualizarPuntos(puntos, 100 ,puntosGuardados, nivel, 1);
 			nextLevel();
 		}
 	}
@@ -171,6 +175,7 @@ void keyPressed() {
 		if (key == ' ') {
 			let simbol = actual.simbolo;
 			if (encontrado((actual.x) + actual.h, actual.y, simbol)) {
+				contadorDePiezas++;
 				matchSound();
 				actual.agregar();
 				actual = elementoNivel(nivel);
@@ -236,13 +241,15 @@ void keyTyped() {
 void reset() {
 	piezas = [];
 	tabla = [];
-	salud = 200;
+	salud = 250;
 	puntos = 0;
 	ganar = false;
 	perder = false;
 	created = false;
 	continuar = true;
+	menu.activo = false;
 	logoOtorgado = false;
+	contadorDePiezas = 0;
 	opcion = -1;
 	crearMatriz();
 }
@@ -300,48 +307,51 @@ function elementoRandom() {
 	return null;
 }
 
-function vidas(x, y, vida) {
-	image(vidaIcono, x - 55, y - 9, 45, 45);
-	stroke(3);
-	fill(255);
-	rect(x, y, 200, 30);
+function vidas(x, y, vida) {	
 	if (vida >= 50 && vida <= 100)
 		fill(229, 101, 13);
 	else if (vida <= 50) {
 		fill(229, 36, 13);
 	} else
 		fill(59, 229, 13);
-	rect(x, y, vida, 30);
+	stroke(1);
+	rect(x, y, vida, 30,8);
+	stroke(3);
+	fill(255,50);
+	rect(x, y, 250, 30,8);
 	fill(0);
 	textSize(18);
-	textFont(createFont("Comic sans ms", 18));
-	text("Nivel  " + nivel, x + 34, y + 20);
+	fill(255);
+	//Progreso
+	stroke(1);
+	fill(255,50);
+	rect(x, y+60, 250, 30,8);
+	stroke(1);
+	fill(59, 229, 13);
+	rect(x, y+60, progreso*2.5, 30,8);
+	fill(255);
+	text("Nivel  " + nivel, x + 40, y - 5);
+	text("Progreso  " + progreso + "%", x + 60,  y + 53);
+	textFont(createFont("Comic sans ms", 20));
 }
 
-function marcador(points, x, y) {
-	fill(0);
-	textFont(createFont("Comic sans ms", 48));
-	text(points, x, y);
+function marcador(title,points, x, y) {
+	fill(255);
+	textFont(createFont("Comic sans ms", 32));
+	text(title+""+points, x, y);
 }
 
 
 
 function elementoNivel(nivel) {
+	++contadorDePiezas;
 	switch (nivel) {
 		case 1:
-			frameRate(20);
-			return piezas.shift();
 		case 2:
-			frameRate(30);
 			return piezas.shift();
 		case 3:
-			frameRate(40);
-			return elementoRandom();
 		case 4:
-			frameRate(50);
-			return elementoRandom();
 		case 5:
-			frameRate(60);
 			return elementoRandom();
 		default:
 			break;

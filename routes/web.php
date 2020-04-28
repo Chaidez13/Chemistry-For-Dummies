@@ -38,7 +38,6 @@ Route::get('/tetris', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 Route::middleware('auth')->group(function () {
-  
   Route::GET('/user/datos','Api\UserController@index'); //Retorona datos del usuario
   Route::GET('/logout', '\App\Http\Controllers\Auth\LoginController@logout'); //Cierra la sesión activa
   Route::GET('/partida' , 'Api\PartidaController@index'); //Obtiene los datos de las partidas
@@ -49,6 +48,9 @@ Route::middleware('auth')->group(function () {
   Route::POST('/reporte/store','Api\ReporteController@store'); //Guarda los reportes
   Route::GET('/partida/datos','Api\PartidaController@obtenerDatosPartida');
   Route::GET('/partida/all','Api\PartidaController@index');
+  Route::POST('/user/resetPassword','Auth\ResetPasswordController@changePassword');
+  Route::GET('/user/delete',"Api\UserController@destroy");
+  Route::GET('/partida/delete',"Api\PartidaController@destroy");
 });
 Route::POST('/login','Auth\LoginController@login'); //Inicio de sesión
 Route::POST('/registro/user','Api\UserController@store'); //Registro de usuario

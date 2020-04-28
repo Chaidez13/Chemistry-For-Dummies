@@ -1,6 +1,6 @@
 class Logro {
 	PImage[] img = new PImage[5];
-	var tipo, x, y, w, h, dx, limit, time, delay, sound;
+	var tipo, x, y, w, h, dx, limit, time, delay, sound,opac;
 
 	Logro(tipo, x, y, w, h, dx, limit, delay) {
 
@@ -19,6 +19,7 @@ class Logro {
 		this.time = 0;
 		this.delay = delay;
 		this.sound = false;
+		this.opac = 255;
 	}
 
 	void show() {
@@ -29,9 +30,10 @@ class Logro {
 			}
 			if (!end()) {
 				image(img[tipo], x, y, w / 2, h / 2);
-				if (time++ > 60) {
+				if (time++ > 80) {
 					this.move();
 				}
+
 			}
 		}
 	}

@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Reporte;
+use App\Partida;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
@@ -94,16 +96,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /*$this->validate([
-            'nombre' => 'required',
-            'apellidoPaterno' => 'required', 
-            'apellidoMaterno' => 'required',
-            'email' => 'required',
-            'password' => 'required', 
-            'fecha' => 'required', 
-            'tipo' => 'required',
-        ]);
-        $usuario = User::find($id)->update($request->all());*/
+ 
     }
 
     /**
@@ -112,8 +105,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
+        $id = Auth::user()->id;
+        Partida::where('idUsuario',$id)->delete();
+        Reporte::where('idUsuario',$id)->delete();
         User::find($id)->delete();
     }
 }

@@ -62,9 +62,9 @@ class Elemento {
         stroke(255);
         strokeWeight(2.0);
         strokeCap(ROUND);
-        rect(this.x + this.dx, this.y, this.h, this.h,3);
         if (!this.jugable) {
             if (this.visible) {
+            rect(this.x + this.dx, this.y, this.h, this.h,3);
                 fill(0)
                 textAlign(CENTER);
                 if (this.nivel != 4) {
@@ -73,11 +73,15 @@ class Elemento {
                         textSize(this.h / 5.5);
                         text(this.numero, this.x + 13 + this.dx, this.y + 15);
                     }
-                    textSize(this.h / 6.50);
+                    if(this.nombre.length>=9)
+                        textSize(this.h /6.35);
+                    else
+                        textSize(this.h/4.5);
                     text(this.nombre, (this.h / 2) + this.dx + this.x, (this.y) + this.h - 10);
                 }
             }
         } else {
+            rect(this.x + this.dx, this.y, this.h, this.h,3);
             fill(0)
             textAlign(CENTER);
             text(this.simbolo, (this.h / 2) + this.dx + this.x, (this.y) + this.h / 2);
@@ -85,7 +89,11 @@ class Elemento {
             if (this.nivel < 3) {
                 if (this.nivel != 2)
                     text(this.numero, this.x + 13 + this.dx, this.y + 15);
-                textSize(this.h / 6.50);
+                if(this.nombre.length>=9)
+                    textSize(this.h /6.35);
+                else
+                    textSize(this.h/4.5);
+            
                 text(this.nombre, (this.h / 2) + this.dx + this.x, (this.y) + this.h - 10);
             }
         }
