@@ -8,6 +8,7 @@
         <v-card>
           <v-card-title class="headline">{{item.nombre}}</v-card-title>
           <v-sparkline
+            v-if="carga"
             :value="item.value"
             :gradient="gradient"
             :smooth="radius || false"
@@ -22,7 +23,7 @@
           ></v-sparkline>
           <v-list v-for="(data, j) in item.value" :key="j">
             <v-divider></v-divider>
-            <v-list-item>Estadistica: {{data}}</v-list-item>
+            <v-list-item>Nivel {{j+1}}: {{data}}</v-list-item>
           </v-list>
         </v-card>
       </v-col>
@@ -31,6 +32,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 const gradients = [
   ["#222"],
   ["#42b3f4"],
@@ -52,21 +55,40 @@ export default {
     fill: false,
     type: "trend",
     autoLineWidth: false,
+    carga: false,
     juegos: [
       {
         nombre: "Tetris",
-        value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0]
+        value: [0, 0, 0, 0, 0],
       },
       {
         nombre: "Memoria",
-        value: [0, 1, 6, 4, 3, 10, 7, 8, 2, 1, 0, 2, 3, 9, 2]
+        value: [0, 0, 0, 0, 0],
       },
       {
         nombre: "Trivia",
-        value: [1, 10, 5, 3, 3, 1, 9, 0, 8, 1, 3, 4, 6, 3, 1]
+        value: [0, 0, 0, 0, 0],
       }
     ]
-  })
+  }),
+  methods:{
+    updateData: async function(){
+      await axios.get('/partida/all',{
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        }
+      }).then(d => {
+        d.data.forEach(e => {
+          this.juegos[e.idJuego-1].value[e.nivel-1] = e.puntos;
+        });
+        this.carga=true;
+      })
+    },
+  },
+  created(){
+    this.updateData();
+  },
 };
 </script>
 

@@ -62093,11 +62093,119 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
-  state: {},
-  mutations: {},
-  actions: {}
+  state: {
+    gameTrivia: false,
+    levelTrivia: null,
+    nivelesTR: [{
+      progreso: 0,
+      nombre: "Nuevo ingreso",
+      icon: "mdi-account-tie",
+      color: "amber lighten-2",
+      dificultad: 1,
+      status: true
+    }, {
+      progreso: 0,
+      nombre: "Crisol para niños",
+      icon: "mdi-test-tube",
+      color: "amber lighten-2",
+      dificultad: 2,
+      status: false
+    }, {
+      progreso: 0,
+      nombre: "Al' Matraz",
+      icon: "mdi-beaker",
+      color: "amber lighten-1",
+      dificultad: 3,
+      status: false
+    }, {
+      progreso: 0,
+      nombre: "John Dalton",
+      icon: "mdi-atom",
+      color: "amber darken-1",
+      dificultad: 4,
+      status: false
+    }, {
+      progreso: 0,
+      nombre: "Ernest Rutherford",
+      icon: "mdi-radioactive",
+      color: "amber darken-2",
+      dificultad: 5,
+      status: false
+    }]
+  },
+  mutations: {
+    setGameTriviaOff: function setGameTriviaOff(state) {
+      state.gameTrivia = false;
+    },
+    setGameTriviaOn: function setGameTriviaOn(state) {
+      state.gameTrivia = true;
+    },
+    setLevelTrivia: function setLevelTrivia(state, payload) {
+      state.levelTrivia = payload;
+    },
+    setLevelData: function setLevelData(state, payload) {
+      state.nivelesTR[payload.position].progreso = payload.progreso;
+      if (payload.position !== 5) state.nivelesTR[payload.position + 1].status = payload.estado;
+    }
+  },
+  actions: {
+    updateLevelDataTR: function () {
+      var _updateLevelDataTR = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
+        var commit;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref.commit;
+                _context.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/partida/all', {
+                  headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                  }
+                }).then(function (d) {
+                  var progress = d.data.filter(function (e) {
+                    return e.idJuego == 3;
+                  });
+
+                  for (var i = 0; i < progress.length; i++) {
+                    var payload = {
+                      position: i,
+                      progreso: progress[i].progreso,
+                      estado: progress[i].estado
+                    };
+                    commit('setLevelData', payload);
+                  }
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function updateLevelDataTR(_x) {
+        return _updateLevelDataTR.apply(this, arguments);
+      }
+
+      return updateLevelDataTR;
+    }()
+  }
 });
 
 /***/ }),
@@ -62217,11 +62325,10 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
     },
     //States del Tetris
     gameTetris: false,
-    //States de la Memoria
-    //States de la trivia
-    gameTrivia: false,
     //States extra
-    reportDialog: false
+    reportDialog: false,
+    warningDialog: false,
+    changesDialog: false
   },
   mutations: {
     //Mutaciones del tetris
@@ -62231,21 +62338,25 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
     setGameTetrisOn: function setGameTetrisOn(state) {
       state.gameTetris = true;
     },
-    //Mutaciones de la memoria
-    //Mutaciones de la trivia
-    setGameTriviaOff: function setGameTriviaOff(state) {
-      state.gameTrivia = false;
-    },
-    setGameTriviaOn: function setGameTriviaOn(state) {
-      state.gameTrivia = true;
-    },
     //Mutaciones extra
     setUserData: function setUserData(state, payload) {
       state.sesion.status = true;
       state.sesion.name = payload;
     },
+    logOut: function logOut(state) {
+      state.sesion = {
+        status: false,
+        name: null
+      };
+    },
     changeReport: function changeReport(state) {
       state.reportDialog = !state.reportDialog;
+    },
+    changeWarning: function changeWarning(state) {
+      state.warningDialog = !state.warningDialog;
+    },
+    changeChanges: function changeChanges(state) {
+      state.changesDialog = !state.changesDialog;
     }
   },
   getters: {

@@ -40,16 +40,15 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
+        //---------------- Nivel 1 Trivia ----------------
         DB::table('pregunta')->insert([
             'pregunta' => '¿A qué elemento pertenece el símbolo H?',
             'nivel' => 1,
         ]);
-
         DB::table('pregunta')->insert([
             'pregunta' => '¿A qué elemento pertenece el símbolo He?',
             'nivel' => 1,
         ]);
-
         DB::table('pregunta')->insert([
             'pregunta' => '¿A qué elemento pertenece el símbolo N?',
             'nivel' => 1,
@@ -82,53 +81,7 @@ class DatabaseSeeder extends Seeder
             'pregunta' => '¿A qué elemento pertenece el símbolo Kr?',
             'nivel' => 1,
         ]);
-
-
-        //NIVEL 2
-         DB::table('pregunta')->insert([
-            'pregunta' => '¿Cuál es el número atómico del Hidrógeno?',
-            'nivel' => 2,
-        ]);
-
-        DB::table('pregunta')->insert([
-            'pregunta' => '¿Cuál es el número atómico del Oro?',
-            'nivel' => 2,
-        ]);
-
-        DB::table('pregunta')->insert([
-            'pregunta' => '¿Cuál es el número atómico de la Plata?',
-            'nivel' => 2,
-        ]);
-        DB::table('pregunta')->insert([
-            'pregunta' => '¿Cuál es el número atómico del Magnesio?',
-            'nivel' => 2,
-        ]);
-        DB::table('pregunta')->insert([
-            'pregunta' => '¿Cuál es el número atómico del Calcio?',
-            'nivel' => 2,
-        ]);
-        DB::table('pregunta')->insert([
-            'pregunta' => '¿Cuál es el número atómico del Neón?',
-            'nivel' => 2,
-        ]);
-        DB::table('pregunta')->insert([
-            'pregunta' => '¿Cuál es el número atómico del Cloro?',
-            'nivel' => 2,
-        ]);
-        DB::table('pregunta')->insert([
-            'pregunta' => '¿Cuál es el número atómico del Mercurio?',
-            'nivel' => 2,
-        ]);
-        DB::table('pregunta')->insert([
-            'pregunta' => '¿Cuál es el número atómico del Radio?',
-            'nivel' => 2,
-        ]);
-        DB::table('pregunta')->insert([
-            'pregunta' => '¿Cuál es el número atómico del Uranio?',
-            'nivel' => 2,
-        ]);
-
-
+        //RESPUESTAS
         DB::table('respuesta')->insert([
             'idPregunta' => 1,
             'respuesta' => 'Hidrógeno',
@@ -169,10 +122,51 @@ class DatabaseSeeder extends Seeder
             'idPregunta' => 10,
             'respuesta' => 'Kripton',
         ]);
+        //---------- Fin del  Nivel 1 Trivia- ------------
 
-             //Nivel 2
-
-         DB::table('respuesta')->insert([
+        //---------------- Nivel 2 Trivia ----------------
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Cuál es el número atómico del Hidrógeno?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Cuál es el número atómico del Oro?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Cuál es el número atómico de la Plata?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Cuál es el número atómico del Magnesio?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Cuál es el número atómico del Calcio?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Cuál es el número atómico del Neón?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Cuál es el número atómico del Cloro?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Cuál es el número atómico del Mercurio?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Cuál es el número atómico del Radio?',
+            'nivel' => 2,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Cuál es el número atómico del Uranio?',
+            'nivel' => 2,
+        ]);
+        //RESPUESTAS
+        DB::table('respuesta')->insert([
             'idPregunta' => 11,
             'respuesta' => '1',
         ]);
@@ -212,12 +206,9 @@ class DatabaseSeeder extends Seeder
             'idPregunta' => 20,
             'respuesta' => '92',
         ]);
+        //---------- Fin del  Nivel 2 Trivia- ------------
 
-
-        //Nivel 3
-
-
-        //Elementos
+        //---------------- Nivel 3 Trivia ----------------
         DB::table('pregunta')->insert([
             'pregunta' => '¿A qué bloque pertenece el Potasio?',
             'nivel' => 3,
@@ -254,12 +245,11 @@ class DatabaseSeeder extends Seeder
             'pregunta' => '¿A qué bloque pertenece el Xenon?',
             'nivel' => 3,
         ]);
-    
         DB::table('pregunta')->insert([
             'pregunta' => '¿A qué bloque pertenece el Plutonio?',
             'nivel' => 3,
         ]);
-
+        //RESPUESTAS
         DB::table('respuesta')->insert([
             'idPregunta' => 21,
             'respuesta' => 'Metales Alcalinos',
@@ -268,7 +258,6 @@ class DatabaseSeeder extends Seeder
             'idPregunta' => 22,
             'respuesta' => 'Metaloides',
         ]);
-
         DB::table('respuesta')->insert([
             'idPregunta' => 23,
             'respuesta' => 'Metales (Otros metales)',
@@ -301,6 +290,175 @@ class DatabaseSeeder extends Seeder
             'idPregunta' => 30,
             'respuesta' => 'Metales Actínidos',
         ]);
-     
+        //---------- Fin del  Nivel 3 Trivia- ------------
+
+        //---------------- Nivel 4 Trivia ----------------
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Quién descrubrio el elemento Actinio?',
+            'nivel' => 4,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Quién descrubrio el elemento Indio?',
+            'nivel' => 4,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Quién descrubrio el elemento Litio?',
+            'nivel' => 4,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Quién descrubrio el elemento Osmio?',
+            'nivel' => 4,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Quién descrubrio el elemento Talio?',
+            'nivel' => 4,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Quién descrubrio el elemento Uranio?',
+            'nivel' => 4,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Quién descrubrio el elemento Francio?',
+            'nivel' => 4,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Quién descrubrio el elemento Cobalto?',
+            'nivel' => 4,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Quién descrubrio el elemento Bromo?',
+            'nivel' => 4,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿Quién descrubrio el elemento Erbio?',
+            'nivel' => 4,
+        ]);
+        //RESPUESTAS
+        DB::table('respuesta')->insert([
+            'idPregunta' => 31,
+            'respuesta' => 'André-Louis',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 32,
+            'respuesta' => 'Reich F. y Ritcher T.',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 33,
+            'respuesta' => 'Johann A. Arfvedson',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 34,
+            'respuesta' => 'Smithson Tennant',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 35,
+            'respuesta' => 'William Crookes',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 36,
+            'respuesta' => 'Martin H. Klaproth',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 37,
+            'respuesta' => 'Marguerite Perey',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 38,
+            'respuesta' => 'Georg Brandt',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 39,
+            'respuesta' => 'Antoine Balard',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 40,
+            'respuesta' => 'Carl G. Mosander',
+        ]);
+        //---------- Fin del  Nivel 4 Trivia- ------------
+
+        //---------------- Nivel 5 Trivia ----------------
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué corresponde el compuesto H20?',
+            'nivel' => 5,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué corresponde el compuesto NaCl?',
+            'nivel' => 5,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué corresponde el compuesto HCl?',
+            'nivel' => 5,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué corresponde el compuesto CH4?',
+            'nivel' => 5,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué corresponde el compuesto NH3?',
+            'nivel' => 5,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué corresponde el compuesto KBr?',
+            'nivel' => 5,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué corresponde el compuesto CO2?',
+            'nivel' => 5,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué corresponde el compuesto NaOH?',
+            'nivel' => 5,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué corresponde el compuesto H2SO4?',
+            'nivel' => 5,
+        ]);
+        DB::table('pregunta')->insert([
+            'pregunta' => '¿A qué corresponde el compuesto NaHCO3?',
+            'nivel' => 5,
+        ]);
+            //RESPUESTAS
+        DB::table('respuesta')->insert([
+            'idPregunta' => 41,
+            'respuesta' => 'Agua',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 42,
+            'respuesta' => 'Cloruro de sodio',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 43,
+            'respuesta' => 'Ácido clorhídrico',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 44,
+            'respuesta' => 'Metano',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 45,
+            'respuesta' => 'Amoniaco',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 46,
+            'respuesta' => 'Bromuro de potasio',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 47,
+            'respuesta' => 'Dióxido de carbono',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 48,
+            'respuesta' => 'Hidroxido de sodio',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 49,
+            'respuesta' => 'Ácido sulfúrico',
+        ]);
+        DB::table('respuesta')->insert([
+            'idPregunta' => 50,
+            'respuesta' => 'Bicarbonato de sodio',
+        ]);
+
+        //---------- Fin del  Nivel 5 Trivia- ------------
     }
 }

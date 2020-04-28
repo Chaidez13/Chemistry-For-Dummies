@@ -13,10 +13,10 @@ export default {
     this.logout();
   },
   methods:{
-    ...mapMutations(["changeSesion"]),
+    ...mapMutations(["logOut"]),
     logout: async function(){
       await axios.get('/logout').then(() => {
-        this.changeSesion()
+        this.logOut()
          this.$router.push({ name: "home" });
       })
     }

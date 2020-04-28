@@ -40,10 +40,10 @@ export default {
         case "2":
           this.updateLevelDataMM();
           this.levels = this.nivelesMM;
-          console.log(this.levels)
           break;
         case "3":
-          this.setGameTriviaOn();
+          this.updateLevelDataTR();
+          this.levels = this.nivelesTR;
           break;
         case "1":
           this.setGameTetrisOn();
@@ -51,12 +51,15 @@ export default {
       }
   },
   computed: {
-    ...mapState('memoria', ['nivelesMM'])
+    ...mapState('memoria', ['nivelesMM']),
+    ...mapState('trivia', ['nivelesTR']),
   },
   methods: {
-    ...mapMutations(["setGameTriviaOn", "setGameTetrisOn"]),
+    ...mapMutations(["setGameTetrisOn"]),
     ...mapMutations('memoria', ['setGameMemoriaOn', 'setLevelMemoria']),
     ...mapActions('memoria', ['updateLevelDataMM']),
+    ...mapMutations('trivia', ['setGameTriviaOn', 'setLevelTrivia']),
+    ...mapActions('trivia', ['updateLevelDataTR']),
 /*     getProgress: async function(){
       await axios.get('/partida/all',{
          headers: {
@@ -80,6 +83,7 @@ export default {
           break;
         case "3":
           this.setGameTriviaOn();
+          this.setLevelTrivia(dificultad)
           break;
         case "1":
           this.setGameTetrisOn();

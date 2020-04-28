@@ -4,8 +4,7 @@
       <h1 class="display-2" style="color: #E57373;">TRIVIA</h1>
     </v-row>
 
-    <select-level :levels="niveles" v-if="!gameTrivia" game="3" />
-
+    <select-level v-if="!gameTrivia" game="3" />
     <trivia-game v-if="gameTrivia" />
   </v-container>
 </template>
@@ -23,52 +22,10 @@ export default {
   },
   data() {
     return {
-      niveles: [
-        {
-          progreso: 100,
-          nombre: "Nuevo ingreso",
-          icon: "mdi-account-tie",
-          color: "amber lighten-2",
-          dificultad: 4,
-          status: true
-        },
-        {
-          progreso: 0,
-          nombre: "Crisol para niños",
-          icon: "mdi-test-tube",
-          color: "amber lighten-2",
-          dificultad: 8,
-          status: false
-        },
-        {
-          progreso: 0,
-          nombre: "Al' Matraz",
-          icon: "mdi-beaker",
-          color: "amber lighten-1",
-          dificultad: 12,
-          status: false
-        },
-        {
-          progreso: 0,
-          nombre: "John Dalton",
-          icon: "mdi-atom",
-          color: "amber darken-1",
-          dificultad: 16,
-          status: false
-        },
-        {
-          progreso: 0,
-          nombre: "Ernest Rutherford",
-          icon: "mdi-radioactive",
-          color: "amber darken-2",
-          dificultad: 20,
-          status: false
-        }
-      ]
     };
   },
   computed: {
-    ...mapState(["gameTrivia"])
+    ...mapState('trivia', ["gameTrivia"])
   }
 };
 </script>

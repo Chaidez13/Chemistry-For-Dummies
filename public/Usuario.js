@@ -138,6 +138,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -148,12 +154,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       pass: null,
       nombre: null,
       primerApellido: null,
-      segundoApellido: "",
+      segundoApellido: null,
       registro: false,
-      error: false,
       date: "",
       actual: new Date().toISOString().substr(0, 10),
-      modal: ""
+      modal: "",
+      errorMessage: ""
     };
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["validarSesion"]), {
@@ -186,7 +192,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     name: "home"
                   });
                 })["catch"](function (e) {
-                  return console.error(e);
+                  var errorCode = e.response.status;
+
+                  if (errorCode == 422) {
+                    _this.errorMessage = "Datos de acceso incorrectos";
+                  } else {
+                    _this.errorMessage = "Ocurrio un error, intentelo de nuevo";
+                  }
                 });
 
               case 3:
@@ -418,7 +430,17 @@ var render = function() {
                                     { attrs: { cols: "12", sm: "6", md: "4" } },
                                     [
                                       _c("v-text-field", {
-                                        attrs: { label: "Segundo Apellido" },
+                                        attrs: {
+                                          label: "Segundo Apellido*",
+                                          rules: [
+                                            function() {
+                                              return (
+                                                !!_vm.segundoApellido ||
+                                                "Este campo es obligatorio."
+                                              )
+                                            }
+                                          ]
+                                        },
                                         model: {
                                           value: _vm.segundoApellido,
                                           callback: function($$v) {
@@ -661,9 +683,11 @@ var render = function() {
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
-                              _vm.error
-                                ? _c("v-col", { attrs: { cols: "12" } })
-                                : _vm._e()
+                              _c("v-col", { attrs: { cols: "12" } }, [
+                                _c("span", { staticClass: "red--text" }, [
+                                  _vm._v(_vm._s(_vm.errorMessage))
+                                ])
+                              ])
                             ],
                             1
                           )

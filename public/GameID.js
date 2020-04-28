@@ -62,7 +62,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -72,14 +71,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       dialog: true
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['setGameTriviaOff', 'setGameTetrisOff']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('memoria', ['setGameMemoriaOff']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['setGameTetrisOff']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('memoria', ['setGameMemoriaOff']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('trivia', ['setGameTriviaOff']), {
     getOut: function getOut() {
+      this.dialog = false;
+
       switch (this.game) {
         case '1':
           break;
 
         case '2':
           this.setGameMemoriaOff();
+          break;
+
+        case '3':
+          this.setGameTriviaOff();
           break;
       }
     }
@@ -562,11 +567,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       case "2":
         this.updateLevelDataMM();
         this.levels = this.nivelesMM;
-        console.log(this.levels);
         break;
 
       case "3":
-        this.setGameTriviaOn();
+        this.updateLevelDataTR();
+        this.levels = this.nivelesTR;
         break;
 
       case "1":
@@ -574,8 +579,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         break;
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('memoria', ['nivelesMM'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(["setGameTriviaOn", "setGameTetrisOn"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('memoria', ['setGameMemoriaOn', 'setLevelMemoria']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('memoria', ['updateLevelDataMM']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('memoria', ['nivelesMM']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('trivia', ['nivelesTR'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(["setGameTetrisOn"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('memoria', ['setGameMemoriaOn', 'setLevelMemoria']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('memoria', ['updateLevelDataMM']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('trivia', ['setGameTriviaOn', 'setLevelTrivia']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('trivia', ['updateLevelDataTR']), {
     /*     getProgress: async function(){
           await axios.get('/partida/all',{
              headers: {
@@ -600,6 +605,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         case "3":
           this.setGameTriviaOn();
+          this.setLevelTrivia(dificultad);
           break;
 
         case "1":
@@ -741,7 +747,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -751,46 +756,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     TriviaGame: _components_TriviaGame__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
-    return {
-      niveles: [{
-        progreso: 100,
-        nombre: "Nuevo ingreso",
-        icon: "mdi-account-tie",
-        color: "amber lighten-2",
-        dificultad: 4,
-        status: true
-      }, {
-        progreso: 0,
-        nombre: "Crisol para niños",
-        icon: "mdi-test-tube",
-        color: "amber lighten-2",
-        dificultad: 8,
-        status: false
-      }, {
-        progreso: 0,
-        nombre: "Al' Matraz",
-        icon: "mdi-beaker",
-        color: "amber lighten-1",
-        dificultad: 12,
-        status: false
-      }, {
-        progreso: 0,
-        nombre: "John Dalton",
-        icon: "mdi-atom",
-        color: "amber darken-1",
-        dificultad: 16,
-        status: false
-      }, {
-        progreso: 0,
-        nombre: "Ernest Rutherford",
-        icon: "mdi-radioactive",
-        color: "amber darken-2",
-        dificultad: 20,
-        status: false
-      }]
-    };
+    return {};
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])(["gameTrivia"]))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])('trivia', ["gameTrivia"]))
 });
 
 /***/ }),
@@ -867,6 +835,7 @@ axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.headers.common = {
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      title: "",
       questions: [],
       pregunta: {},
       answerOp: [],
@@ -876,7 +845,9 @@ axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.headers.common = {
       lifes: 3,
       time: 0,
       interval: null,
-      gameO: false
+      gameO: false,
+      status: false,
+      puntos: 0
     };
   },
   components: {
@@ -885,25 +856,23 @@ axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.headers.common = {
     GameOver: _components_GameOver__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   created: function created() {
+    this.init();
     this.getQuestion();
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(["setGameTriviaOn", "setGameTriviaOff"]), {
-    getQuestion: function () {
-      var _getQuestion = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this = this;
-
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('trivia', ['levelTrivia'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])('trivia', ["setGameTriviaOn", "setGameTriviaOff"]), {
+    init: function () {
+      var _init = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_5___default.a.get('/trivia/respuestas').then(function (response) {
-                  _this.questions = _this.shuffle(response.data);
-                  _this.actual = 0;
-
-                  _this.newQuestion();
-                })["catch"](function (error) {
-                  return console.log(error);
+                return axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/partida/store', {
+                  idJuego: 3,
+                  idUsuario: -1,
+                  nivel: this.levelTrivia,
+                  puntos: 0
                 });
 
               case 2:
@@ -911,7 +880,47 @@ axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.headers.common = {
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, this);
+      }));
+
+      function init() {
+        return _init.apply(this, arguments);
+      }
+
+      return init;
+    }(),
+    getQuestion: function () {
+      var _getQuestion = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_5___default.a.get('/trivia/respuestas').then(function (response) {
+                  var perguntasLevel = response.data.filter(function (d) {
+                    return d.pregunta.nivel == _this.levelTrivia;
+                  });
+                  _this.questions = _this.shuffle(perguntasLevel);
+                  _this.actual = 0;
+
+                  _this.newQuestion();
+
+                  _this.oneSecond();
+                })["catch"](function (error) {
+                  return console.log(error);
+                });
+
+              case 2:
+                console.log(this.questions);
+
+              case 3:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
       }));
 
       function getQuestion() {
@@ -921,26 +930,34 @@ axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.headers.common = {
       return getQuestion;
     }(),
     newQuestion: function newQuestion() {
+      var _this2 = this;
+
       var i = 0;
       this.answerOp = [];
       this.pregunta = this.questions[this.actual];
+      this.title = this.pregunta.pregunta.pregunta;
       this.answerOp.push({
         id: this.pregunta.pregunta.id,
         respuesta: this.pregunta.respuesta
       });
 
-      do {
-        var aux = Math.trunc(Math.random() * this.questions.length);
-        var othrAnswer = {
-          id: this.questions[aux].idPregunta,
-          respuesta: this.questions[aux].respuesta
-        };
+      var _loop = function _loop() {
+        var aux = Math.trunc(Math.random() * _this2.questions.length);
 
-        if (this.answerOp.indexOf(othrAnswer) == -1) {
-          this.answerOp.push(othrAnswer);
+        if (!_this2.answerOp.find(function (e) {
+          return e.id == _this2.questions[aux].id;
+        })) {
+          _this2.answerOp.push({
+            id: _this2.questions[aux].idPregunta,
+            respuesta: _this2.questions[aux].respuesta
+          });
+
           i++;
-          console.log(i);
         }
+      };
+
+      do {
+        _loop();
       } while (i < 3);
 
       this.shuffle(this.answerOp);
@@ -958,6 +975,58 @@ axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.headers.common = {
         this.message = "INCORRECTO";
       }
     },
+    reset: function reset() {
+      this.progreso = 0;
+      this.message = "";
+    },
+    next: function next() {
+      this.puntos += 100 - this.time;
+      this.progreso += 10;
+      this.actual++;
+      this.time = 0;
+      this.message = "CORRECTO";
+      if (this.progreso < 100) this.newQuestion();
+    },
+    oneSecond: function oneSecond() {
+      this.interval = setInterval(this.timer, 1000);
+    },
+    timer: function timer() {
+      this.time += 10;
+    },
+    gameEnded: function () {
+      var _gameEnded = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                this.gameO = true;
+                clearInterval(this.interval);
+                _context3.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('partida/update/3', {
+                  puntos: this.puntos,
+                  nivel: this.levelTrivia,
+                  estado: this.status,
+                  progreso: this.actual * 10
+                }).then(function (e) {
+                  return console.log('SUCCESS');
+                })["catch"](function (e) {
+                  console.log('ERROR');
+                });
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function gameEnded() {
+        return _gameEnded.apply(this, arguments);
+      }
+
+      return gameEnded;
+    }(),
     shuffle: function shuffle(a) {
       for (var i = a.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -966,38 +1035,24 @@ axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.headers.common = {
         a[j] = _ref[1];
       }
 
-      console.log(a);
       return a;
-    },
-    reset: function reset() {
-      this.progreso = 0;
-      this.message = "";
-    },
-    next: function next() {
-      this.progreso += 10;
-      this.time = 0;
-      this.actual++;
-      this.message = "CORRECTO";
-      this.newQuestion();
-    },
-    oneSecond: function oneSecond() {
-      this.interval = setInterval(this.timer, 1000);
-    },
-    timer: function timer() {
-      this.time += 10;
     }
   }),
   watch: {
     progreso: function progreso(newProgress) {
       if (newProgress >= 100) {
-        clearInterval(this.interval);
-        this.gameO = true;
+        this.status = true;
+        this.gameEnded();
       }
     },
     time: function time(newTime) {
       if (newTime >= 100) {
-        clearInterval(this.interval);
-        this.gameO = true;
+        this.gameEnded();
+      }
+    },
+    lifes: function lifes(life) {
+      if (life <= 0) {
+        this.gameEnded();
       }
     }
   }
@@ -1300,13 +1355,7 @@ var render = function() {
                   on: { click: _vm.getOut }
                 },
                 [_vm._v("Salir")]
-              ),
-              _vm._v(" "),
-              !_vm.status
-                ? _c("v-btn", { attrs: { color: "blue darken-1", text: "" } }, [
-                    _vm._v("Reintentar")
-                  ])
-                : _vm._e()
+              )
             ],
             1
           )
@@ -1680,9 +1729,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      !_vm.gameTrivia
-        ? _c("select-level", { attrs: { levels: _vm.niveles, game: "3" } })
-        : _vm._e(),
+      !_vm.gameTrivia ? _c("select-level", { attrs: { game: "3" } }) : _vm._e(),
       _vm._v(" "),
       _vm.gameTrivia ? _c("trivia-game") : _vm._e()
     ],
@@ -1717,7 +1764,7 @@ var render = function() {
       _c("vidas", { attrs: { cantVidas: _vm.lifes } }),
       _vm._v(" "),
       _c("v-row", { attrs: { align: "center", justify: "center" } }, [
-        _c("h2", [_vm._v(_vm._s(_vm.pregunta.pregunta.pregunta))])
+        _c("h2", [_vm._v(_vm._s(_vm.title))])
       ]),
       _vm._v(" "),
       _c(
@@ -1792,7 +1839,7 @@ var render = function() {
       _vm._v(" "),
       _vm.gameO
         ? _c("GameOver", {
-            attrs: { points: _vm.puntos, status: _vm.status, game: "2" }
+            attrs: { points: _vm.puntos, status: _vm.status, game: "3" }
           })
         : _vm._e()
     ],
