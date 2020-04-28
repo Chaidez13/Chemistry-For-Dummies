@@ -9,6 +9,16 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -41,6 +51,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 var gradients = [["#222"], ["#42b3f4"], ["red", "orange", "yellow"], ["purple", "violet"], ["#00c6ff", "#F0F", "#FF0"], ["#f72047", "#ffd200", "#1feaea"]];
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -55,17 +67,58 @@ var gradients = [["#222"], ["#42b3f4"], ["red", "orange", "yellow"], ["purple", 
       fill: false,
       type: "trend",
       autoLineWidth: false,
+      carga: false,
       juegos: [{
         nombre: "Tetris",
-        value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0]
+        value: [0, 0, 0, 0, 0]
       }, {
         nombre: "Memoria",
-        value: [0, 1, 6, 4, 3, 10, 7, 8, 2, 1, 0, 2, 3, 9, 2]
+        value: [0, 0, 0, 0, 0]
       }, {
         nombre: "Trivia",
-        value: [1, 10, 5, 3, 3, 1, 9, 0, 8, 1, 3, 4, 6, 3, 1]
+        value: [0, 0, 0, 0, 0]
       }]
     };
+  },
+  methods: {
+    updateData: function () {
+      var _updateData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/partida/all', {
+                  headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                  }
+                }).then(function (d) {
+                  d.data.forEach(function (e) {
+                    _this.juegos[e.idJuego - 1].value[e.nivel - 1] = e.puntos;
+                  });
+                  _this.carga = true;
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function updateData() {
+        return _updateData.apply(this, arguments);
+      }
+
+      return updateData;
+    }()
+  },
+  created: function created() {
+    this.updateData();
   }
 });
 
@@ -114,21 +167,23 @@ var render = function() {
                     _vm._v(_vm._s(item.nombre))
                   ]),
                   _vm._v(" "),
-                  _c("v-sparkline", {
-                    attrs: {
-                      value: item.value,
-                      gradient: _vm.gradient,
-                      smooth: _vm.radius || false,
-                      padding: _vm.padding,
-                      "line-width": _vm.width,
-                      "stroke-linecap": _vm.lineCap,
-                      "gradient-direction": _vm.gradientDirection,
-                      fill: _vm.fill,
-                      type: _vm.type,
-                      "auto-line-width": _vm.autoLineWidth,
-                      "auto-draw": ""
-                    }
-                  }),
+                  _vm.carga
+                    ? _c("v-sparkline", {
+                        attrs: {
+                          value: item.value,
+                          gradient: _vm.gradient,
+                          smooth: _vm.radius || false,
+                          padding: _vm.padding,
+                          "line-width": _vm.width,
+                          "stroke-linecap": _vm.lineCap,
+                          "gradient-direction": _vm.gradientDirection,
+                          fill: _vm.fill,
+                          type: _vm.type,
+                          "auto-line-width": _vm.autoLineWidth,
+                          "auto-draw": ""
+                        }
+                      })
+                    : _vm._e(),
                   _vm._v(" "),
                   _vm._l(item.value, function(data, j) {
                     return _c(
@@ -138,7 +193,7 @@ var render = function() {
                         _c("v-divider"),
                         _vm._v(" "),
                         _c("v-list-item", [
-                          _vm._v("Estadistica: " + _vm._s(data))
+                          _vm._v("Nivel " + _vm._s(j + 1) + ": " + _vm._s(data))
                         ])
                       ],
                       1

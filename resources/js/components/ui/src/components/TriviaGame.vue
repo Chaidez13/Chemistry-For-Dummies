@@ -2,7 +2,7 @@
   <v-container>
     <vidas :cantVidas="lifes" />
     <v-row align="center" justify="center">
-      <h2>{{pregunta.pregunta.pregunta}}</h2>
+      <h2>{{title}}</h2>
     </v-row>
     <v-row align="center" justify="center" style="margin: 50px 0">
       <v-col
@@ -25,12 +25,12 @@
     <v-row align="center" justify="center" style="margin-top: 4%">
       <v-btn @click="setGameTriviaOff" color="danger">Salir</v-btn>
     </v-row>
-     <GameOver v-if="gameO" :points="puntos" :status="status" game="2"/>
+     <GameOver v-if="gameO" :points="puntos" :status="status" game="3"/>
   </v-container>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapState } from "vuex";
 import Vidas from "../components/Vidas";
 import TimeBar from "../components/TimeBar";
 import GameOver from "../components/GameOver";
@@ -45,6 +45,7 @@ axios.defaults.headers.common = {
 export default {
   data() {
     return {
+      title: "",
       questions: [],
       pregunta: {},
       answerOp: [],
@@ -55,6 +56,8 @@ export default {
       time: 0,
       interval: null,
       gameO: false,
+      status: false,
+      puntos: 0,
     };
   },
   components: {
@@ -63,39 +66,54 @@ export default {
     GameOver,
   },
   created() {
+    this.init()
     this.getQuestion()
   },
+  computed: {
+    ...mapState('trivia', ['levelTrivia'])
+  },
   methods: {
-    ...mapMutations(["setGameTriviaOn", "setGameTriviaOff"]),
+    ...mapMutations('trivia', ["setGameTriviaOn", "setGameTriviaOff"]),
+    init: async function(){
+      await axios.post('/partida/store',{
+        idJuego: 3,
+        idUsuario: -1,
+        nivel: this.levelTrivia,
+        puntos: 0,
+      })
+    },
     getQuestion: async function(){
       await axios.get('/trivia/respuestas').then(response => {
-          this.questions = this.shuffle(response.data)
-          this.actual = 0
-          this.newQuestion()
-        }).catch(error => console.log(error))
+        const perguntasLevel = response.data.filter(d => d.pregunta.nivel == this.levelTrivia)
+        this.questions = this.shuffle(perguntasLevel)
+        this.actual = 0
+        this.newQuestion()
+        this.oneSecond()
+      }).catch(error => console.log(error))
+      console.log(this.questions)
     },
     newQuestion(){
       var i = 0;
       this.answerOp = []
       this.pregunta = this.questions[this.actual]
+      this.title = this.pregunta.pregunta.pregunta
       this.answerOp.push({
         id: this.pregunta.pregunta.id,
         respuesta: this.pregunta.respuesta
       })
       do {
         let aux = Math.trunc(Math.random() * this.questions.length);
-        let othrAnswer = {
-          id: this.questions[aux].idPregunta,
-          respuesta: this.questions[aux].respuesta,
-        }
-        if (this.answerOp.indexOf(othrAnswer) == -1) {
-          this.answerOp.push(othrAnswer);
-          i++;
-          console.log(i)
+        if(!this.answerOp.find(e => e.id == this.questions[aux].id)){
+          this.answerOp.push({
+            id: this.questions[aux].idPregunta,
+            respuesta: this.questions[aux].respuesta,
+          })
+          i++
         }
      }while (i < 3);
      this.shuffle(this.answerOp);
     },
+
     resetGame() {
       this.lifes = 3;
       this.progreso = 0;
@@ -109,43 +127,62 @@ export default {
         this.message = "INCORRECTO";
       }
     },
-    shuffle(a) {
-      for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-      }
-      console.log(a);
-      return a;
-    },
     reset() {
       this.progreso = 0;
       this.message = "";
     },
     next() {
+      this.puntos += 100 - this.time;
       this.progreso += 10;
-      this.time = 0;
       this.actual ++;
+      this.time = 0;
       this.message = "CORRECTO";
-      this.newQuestion()
+      if(this.progreso < 100)
+        this.newQuestion()
     },
     oneSecond: function() {
       this.interval = setInterval(this.timer, 1000);
     },
     timer: function() {
       this.time += 10;
-    }
+    },
+    gameEnded: async function(){
+      this.gameO = true;
+      clearInterval(this.interval)
+      await axios.post('partida/update/3',{
+        puntos: this.puntos,
+        nivel: this.levelTrivia,
+        estado: this.status,
+        progreso: this.actual*10,
+      }).then(e => console.log('SUCCESS'))
+      .catch(e => {
+        console.log('ERROR')
+      })
+    },
+
+    shuffle(a) {
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    },
   },
   watch: {
     progreso: function(newProgress) {
       if (newProgress >= 100) {
-        clearInterval(this.interval);
-        this.gameO = true;
+        this.status = true;
+        this.gameEnded();
       }
     },
     time: function(newTime) {
       if (newTime >= 100) {
-        clearInterval(this.interval);
-        this.gameO = true;
+        this.gameEnded();
+      }
+    },
+    lifes: function(life){
+      if(life <= 0){
+        this.gameEnded();
       }
     }
   }

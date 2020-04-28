@@ -25,7 +25,11 @@
                   ></v-text-field>
                 </v-col>
                 <v-col v-if="registro" cols="12" sm="6" md="4">
-                  <v-text-field label="Segundo Apellido" v-model="segundoApellido"></v-text-field>
+                  <v-text-field 
+                    label="Segundo Apellido*" 
+                    v-model="segundoApellido"
+                    :rules="[() => !!segundoApellido || 'Este campo es obligatorio.']">
+                    </v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-text-field
@@ -75,7 +79,9 @@
                     </v-date-picker>
                   </v-dialog>
                 </v-col>
-                <v-col v-if="error" cols="12"></v-col>
+                <v-col cols="12">
+                  <span class="red--text">{{errorMessage}}</span>
+                </v-col>
               </v-row>
             </v-container>
             <small>*Campos obligatorios</small>
@@ -122,12 +128,12 @@ export default {
     pass: null,
     nombre: null,
     primerApellido: null,
-    segundoApellido: "",
+    segundoApellido: null,
     registro: false,
-    error: false,
     date: "",
     actual: new Date().toISOString().substr(0, 10),
-    modal: ""
+    modal: "",
+    errorMessage: "",
   }),
   methods: {
     ...mapActions(["validarSesion"]),
@@ -144,7 +150,14 @@ export default {
        }).then(() => {
          this.validarSesion()
          this.$router.push({ name: "home" });
-       }).catch((e) => console.error(e))
+       }).catch((e) =>{
+         const errorCode = e.response.status
+         if(errorCode == 422){
+           this.errorMessage = "Datos de acceso incorrectos"
+         }else{
+           this.errorMessage = "Ocurrio un error, intentelo de nuevo"
+         }
+       })
      }
     },
     registrarse: async function() {

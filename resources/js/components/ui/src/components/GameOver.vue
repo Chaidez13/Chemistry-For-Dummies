@@ -13,7 +13,6 @@
           </v-card-text>
           <v-card-actions class="justify-end">
               <v-btn color="blue darken-1" text @click="getOut">Salir</v-btn>
-              <v-btn v-if="!status" color="blue darken-1" text>Reintentar</v-btn>
           </v-card-actions>
       </v-card>
     </v-dialog>
@@ -29,15 +28,20 @@ export default {
       dialog: true,
   }),
   methods:{
-    ...mapMutations(['setGameTriviaOff','setGameTetrisOff']),
+    ...mapMutations(['setGameTetrisOff']),
     ...mapMutations('memoria', ['setGameMemoriaOff']),
+    ...mapMutations('trivia', ['setGameTriviaOff']),
       getOut(){
+        this.dialog = false;
         switch(this.game){
           case '1':
           break;
           case '2':
             this.setGameMemoriaOff()
-            break;
+          break;
+          case '3':
+            this.setGameTriviaOff()
+          break;
         }
       }
   },

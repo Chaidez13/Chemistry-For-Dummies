@@ -16,12 +16,11 @@ export default new Vuex.Store({
     },
     //States del Tetris
     gameTetris: false,
-    //States de la Memoria
-    
-    //States de la trivia
-    gameTrivia: false,
+
     //States extra
     reportDialog: false,
+    warningDialog: false,
+    changesDialog: false,
   },
   mutations: {
     //Mutaciones del tetris
@@ -31,22 +30,26 @@ export default new Vuex.Store({
     setGameTetrisOn(state) {
       state.gameTetris = true;
     },
-    //Mutaciones de la memoria
-    
-    //Mutaciones de la trivia
-    setGameTriviaOff(state) {
-      state.gameTrivia = false;
-    },
-    setGameTriviaOn(state) {
-      state.gameTrivia = true;
-    },
+   
     //Mutaciones extra
     setUserData(state, payload){
       state.sesion.status = true;
       state.sesion.name = payload;
     },
+    logOut(state){
+      state.sesion = {
+        status: false,
+        name: null,
+      }
+    },
     changeReport(state){
       state.reportDialog = !state.reportDialog
+    },
+    changeWarning(state){
+      state.warningDialog = !state.warningDialog
+    },
+    changeChanges(state){
+      state.changesDialog = !state.changesDialog
     },
   },
   getters: {

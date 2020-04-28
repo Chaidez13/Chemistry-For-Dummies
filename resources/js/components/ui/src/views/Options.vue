@@ -3,14 +3,14 @@
     <v-list subheader two-line>
       <v-subheader>Opciones de Usuario</v-subheader>
 
-      <v-list-item @click>
+      <v-list-item @click="changeChanges()">
         <v-list-item-content>
           <v-list-item-title>Actualizar datos</v-list-item-title>
-          <v-list-item-subtitle>Cambiar la contraseña o el correo electronico</v-list-item-subtitle>
+          <v-list-item-subtitle>Cambiar la contraseña</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item @click>
+      <v-list-item @click="eraseData()">
         <v-list-item-content>
           <v-list-item-title>Borar datos</v-list-item-title>
           <v-list-item-subtitle>
@@ -20,7 +20,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item @click>
+      <v-list-item @click="deleteData()">
         <v-list-item-content>
           <v-list-item-title>Eliminar cuenta</v-list-item-title>
           <v-list-item-subtitle>
@@ -29,9 +29,12 @@
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
+
+      <Warning :ruta="ruta" v-if="warningDialog"/>
+      <Update v-if="changesDialog"/>
     </v-list>
 
-    <v-divider></v-divider>
+<!--     <v-divider></v-divider>
 
     <v-list flat subheader two-line>
       <v-subheader>Opciones Generales</v-subheader>
@@ -67,7 +70,7 @@
         </v-list-item>
       </v-list-item-group>
     </v-list>
-
+ -->
     <v-divider></v-divider>
     <v-list flat subheader two-line>
       <v-list-item @click="changeReport()">
@@ -83,25 +86,38 @@
 
 <script>
 import Report from '../components/Report'
+import Warning from '../components/Warning'
+import Update from '../components/UpdateData'
 import { mapState, mapMutations } from "vuex";
 
 
 export default {
   components: {
-    Report
+    Report,
+    Warning,
+    Update,
   },
   data() {
     return {
       settings: [],
       dialog: false,
       addReport: false,
+      ruta: null,
     };
   },
   methods: {
-    ...mapMutations(['changeReport'])
+    ...mapMutations(['changeReport','changeWarning','changeChanges']),
+    eraseData(){
+      this.ruta = '/partida/delete';
+      this.changeWarning();
+    },
+    deleteData(){
+      this.ruta = '/user/delete';
+      this.changeWarning();
+    }
   },
   computed:{
-    ...mapState(['reportDialog'])
+    ...mapState(['reportDialog','warningDialog','changesDialog'])
   }
 };
 </script>

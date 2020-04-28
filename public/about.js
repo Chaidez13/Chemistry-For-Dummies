@@ -38,7 +38,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.logout();
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapMutations"])(["changeSesion"]), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapMutations"])(["logOut"]), {
     logout: function () {
       var _logout = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var _this = this;
@@ -49,7 +49,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 _context.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/logout').then(function () {
-                  _this.changeSesion();
+                  _this.logOut();
 
                   _this.$router.push({
                     name: "home"
