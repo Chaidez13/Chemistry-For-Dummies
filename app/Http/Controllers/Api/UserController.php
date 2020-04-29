@@ -96,7 +96,28 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
- 
+
+    }
+
+    public function changePassword(Request $request){
+        if (!(Hash::check($request['actual'], Auth::user()->password))) {
+            // La contraseña actual no coincide
+            return -1;
+        }
+        if(strcmp($request['actual'], $request['nueva']) == 0){
+            //La contraseña actual y la nueva son iguales
+            return -2;
+        } 
+
+        $validatedData = $request->validate([
+            'actual' => 'required',
+            'nueva' => 'required|string|min:8',
+        ]);
+        $user = Auth::user();
+        $user->password = Hash::make($validatedData['nueva']);;
+        $user->save();
+        return 0;
+
     }
 
     /**
@@ -111,5 +132,6 @@ class UserController extends Controller
         Partida::where('idUsuario',$id)->delete();
         Reporte::where('idUsuario',$id)->delete();
         User::find($id)->delete();
+        Auth::logout();
     }
 }
