@@ -518,9 +518,17 @@ axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.headers.common = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -575,44 +583,60 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         break;
 
       case "1":
-        this.setGameTetrisOn();
+        this.updateLevelDataTT();
+        this.levels = this.nivelesTT;
         break;
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('memoria', ['nivelesMM']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('trivia', ['nivelesTR'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(["setGameTetrisOn"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('memoria', ['setGameMemoriaOn', 'setLevelMemoria']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('memoria', ['updateLevelDataMM']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('trivia', ['setGameTriviaOn', 'setLevelTrivia']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('trivia', ['updateLevelDataTR']), {
-    /*     getProgress: async function(){
-          await axios.get('/partida/all',{
-             headers: {
-               'X-Requested-With': 'XMLHttpRequest',
-               'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-             }
-            }).then(d => {
-              const progress = d.data.filter(e => e.idJuego == this.game)
-              for (let i = 0; i < progress.length; i++) {
-                this.datosNivel[i].progreso = progress[i].puntos;
-                this.datosNivel[i+1].status = progress[i].estado;
-              }
-              console.log(this.datosNivel)
-            })
-        }, */
-    beginGame: function beginGame(dificultad) {
-      switch (this.game) {
-        case "2":
-          this.setGameMemoriaOn();
-          this.setLevelMemoria(dificultad);
-          break;
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('memoria', ['nivelesMM']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('trivia', ['nivelesTR']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('tetris', ['nivelesTT'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(["setGameTetrisOn"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])('memoria', ['setGameMemoriaOn', 'setLevelMemoria']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('memoria', ['updateLevelDataMM']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])('trivia', ['setGameTriviaOn', 'setLevelTrivia']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('trivia', ['updateLevelDataTR']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])('tetris', ['setGameTetrisOn', 'setLevelTetris']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('tetris', ['updateLevelDataTT']), {
+    beginGame: function () {
+      var _beginGame = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(dificultad) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.t0 = this.game;
+                _context.next = _context.t0 === "2" ? 3 : _context.t0 === "3" ? 6 : _context.t0 === "1" ? 9 : 12;
+                break;
 
-        case "3":
-          this.setGameTriviaOn();
-          this.setLevelTrivia(dificultad);
-          break;
+              case 3:
+                this.setGameMemoriaOn();
+                this.setLevelMemoria(dificultad);
+                return _context.abrupt("break", 12);
 
-        case "1":
-          this.setGameTetrisOn();
-          break;
+              case 6:
+                this.setGameTriviaOn();
+                this.setLevelTrivia(dificultad);
+                return _context.abrupt("break", 12);
+
+              case 9:
+                _context.next = 11;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/tetris/level', {
+                  nivel: dificultad
+                }).then(function () {
+                  return window.location.href = '/tetris';
+                })["catch"](function () {
+                  return alert("Ups, ocurrio un problema, intentalo de nuevo.");
+                });
+
+              case 11:
+                return _context.abrupt("break", 12);
+
+              case 12:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function beginGame(_x) {
+        return _beginGame.apply(this, arguments);
       }
-    }
+
+      return beginGame;
+    }()
   })
 });
 
@@ -628,6 +652,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_SelectLevel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/SelectLevel */ "./resources/js/components/ui/src/components/SelectLevel.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -637,53 +668,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     SelectLevel: _components_SelectLevel__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
-    return {
-      niveles: [{
-        progreso: 100,
-        nombre: "Nuevo ingreso",
-        icon: "mdi-account-tie",
-        color: "red lighten-2",
-        dificultad: 4,
-        status: true
-      }, {
-        progreso: 0,
-        nombre: "Probador de probetas",
-        icon: "mdi-test-tube",
-        color: "red lighten-2",
-        dificultad: 8,
-        status: true
-      }, {
-        progreso: 0,
-        nombre: "pH-rofesional",
-        icon: "mdi-beaker",
-        color: "red lighten-1",
-        dificultad: 12,
-        status: false
-      }, {
-        progreso: 0,
-        nombre: "Antoine Lavoisier",
-        icon: "mdi-atom",
-        color: "red darken-1",
-        dificultad: 16,
-        status: false
-      }, {
-        progreso: 0,
-        nombre: "Michael Faraday",
-        icon: "mdi-radioactive",
-        color: "red darken-2",
-        dificultad: 20,
-        status: false
-      }] //Estos datos deben venir de la base de datos:
-
-    };
+    return {};
   },
-  computed: {}
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('tetris', ["gameTetris"]))
 });
 
 /***/ }),
@@ -1649,7 +1643,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("select-level", { attrs: { levels: _vm.niveles, game: "1" } })
+      _c("select-level", { attrs: { game: "1" } })
     ],
     1
   )

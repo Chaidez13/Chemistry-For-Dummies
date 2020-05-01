@@ -62075,11 +62075,119 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
-  state: {},
-  mutations: {},
-  actions: {}
+  state: {
+    gameTetris: false,
+    levelTetris: null,
+    nivelesTT: [{
+      progreso: 0,
+      nombre: "Nuevo ingreso",
+      icon: "mdi-account-tie",
+      color: "red lighten-2",
+      dificultad: 4,
+      status: true
+    }, {
+      progreso: 0,
+      nombre: "Probador de probetas",
+      icon: "mdi-test-tube",
+      color: "red lighten-2",
+      dificultad: 8,
+      status: false
+    }, {
+      progreso: 0,
+      nombre: "pH-rofesional",
+      icon: "mdi-beaker",
+      color: "red lighten-1",
+      dificultad: 12,
+      status: false
+    }, {
+      progreso: 0,
+      nombre: "Antoine Lavoisier",
+      icon: "mdi-atom",
+      color: "red darken-1",
+      dificultad: 16,
+      status: false
+    }, {
+      progreso: 0,
+      nombre: "Michael Faraday",
+      icon: "mdi-radioactive",
+      color: "red darken-2",
+      dificultad: 20,
+      status: false
+    }]
+  },
+  mutations: {
+    setGameTetrisOff: function setGameTetrisOff(state) {
+      state.gameMemoria = false;
+    },
+    setGameTetrisOn: function setGameTetrisOn(state) {
+      state.gameMemoria = true;
+    },
+    setLevelTetris: function setLevelTetris(state, payload) {
+      state.levelMemoria = payload;
+    },
+    setLevelData: function setLevelData(state, payload) {
+      state.nivelesMM[payload.position].progreso = payload.progreso;
+      if (payload.position !== 5) state.nivelesMM[payload.position + 1].status = payload.estado;
+    }
+  },
+  actions: {
+    updateLevelDataTT: function () {
+      var _updateLevelDataTT = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
+        var commit;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref.commit;
+                _context.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/partida/all', {
+                  headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                  }
+                }).then(function (d) {
+                  var progress = d.data.filter(function (e) {
+                    return e.idJuego == 1;
+                  });
+
+                  for (var i = 0; i < progress.length; i++) {
+                    var payload = {
+                      position: i,
+                      progreso: progress[i].progreso,
+                      estado: progress[i].estado
+                    };
+                    commit('setLevelData', payload);
+                  }
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function updateLevelDataTT(_x) {
+        return _updateLevelDataTT.apply(this, arguments);
+      }
+
+      return updateLevelDataTT;
+    }()
+  }
 });
 
 /***/ }),
@@ -62272,6 +62380,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: function component() {
       return __webpack_require__.e(/*! import() | Dashboard */ "Dashboard").then(__webpack_require__.bind(null, /*! ./views/Dashboard.vue */ "./resources/js/components/ui/src/views/Dashboard.vue"));
     }
+  }, {
+    path: '/tetris',
+    name: 'tetris'
   }]
 });
 router.beforeEach(function (to, from, next) {
@@ -62323,22 +62434,11 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
       status: false,
       name: null
     },
-    //States del Tetris
-    gameTetris: false,
-    //States extra
     reportDialog: false,
     warningDialog: false,
     changesDialog: false
   },
   mutations: {
-    //Mutaciones del tetris
-    setGameTetrisOff: function setGameTetrisOff(state) {
-      state.gameTetris = false;
-    },
-    setGameTetrisOn: function setGameTetrisOn(state) {
-      state.gameTetris = true;
-    },
-    //Mutaciones extra
     setUserData: function setUserData(state, payload) {
       state.sesion.status = true;
       state.sesion.name = payload;
@@ -62427,8 +62527,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Chemistry-For-Dummies\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Chemistry-For-Dummies\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Workspaces\IdS2-Proyect\Chemistry-For-Dummies\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Workspaces\IdS2-Proyect\Chemistry-For-Dummies\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

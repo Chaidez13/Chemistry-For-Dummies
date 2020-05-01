@@ -46,13 +46,15 @@ export default {
           this.levels = this.nivelesTR;
           break;
         case "1":
-          this.setGameTetrisOn();
+          this.updateLevelDataTT();
+          this.levels = this.nivelesTT;
           break;
       }
   },
   computed: {
     ...mapState('memoria', ['nivelesMM']),
     ...mapState('trivia', ['nivelesTR']),
+    ...mapState('tetris', ['nivelesTT']),
   },
   methods: {
     ...mapMutations(["setGameTetrisOn"]),
@@ -60,22 +62,10 @@ export default {
     ...mapActions('memoria', ['updateLevelDataMM']),
     ...mapMutations('trivia', ['setGameTriviaOn', 'setLevelTrivia']),
     ...mapActions('trivia', ['updateLevelDataTR']),
-/*     getProgress: async function(){
-      await axios.get('/partida/all',{
-         headers: {
-           'X-Requested-With': 'XMLHttpRequest',
-           'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-         }
-        }).then(d => {
-          const progress = d.data.filter(e => e.idJuego == this.game)
-          for (let i = 0; i < progress.length; i++) {
-            this.datosNivel[i].progreso = progress[i].puntos;
-            this.datosNivel[i+1].status = progress[i].estado;
-          }
-          console.log(this.datosNivel)
-        })
-    }, */
-    beginGame(dificultad) {
+    ...mapMutations('tetris', ['setGameTetrisOn', 'setLevelTetris']),
+    ...mapActions('tetris', ['updateLevelDataTT']),
+
+    beginGame: async function(dificultad) {
       switch (this.game) {
         case "2":
           this.setGameMemoriaOn();
@@ -86,7 +76,10 @@ export default {
           this.setLevelTrivia(dificultad)
           break;
         case "1":
-          this.setGameTetrisOn();
+          await axios.post('/tetris/level',{
+            nivel: dificultad,
+          }).then(()=> window.location.href = '/tetris')
+          .catch(() => alert("Ups, ocurrio un problema, intentalo de nuevo."))
           break;
       }
     }

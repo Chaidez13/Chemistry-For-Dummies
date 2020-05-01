@@ -49,6 +49,10 @@ const router = new Router({
       name: "dashboard",
       component: () =>
         import(/* webpackChunkName: "Dashboard" */ "./views/Dashboard.vue")
+    },
+    {
+      path: '/tetris',
+      name: 'tetris',
     }
   ],
 });
