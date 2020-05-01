@@ -60,7 +60,7 @@ export default {
         },
         setLevelData(state, payload){
             state.nivelesMM[payload.position].progreso = payload.progreso;
-            if(payload.position !== 5)
+            if(payload.position !== 4)
             state.nivelesMM[(payload.position) + 1].status = payload.estado;
         }
      },
