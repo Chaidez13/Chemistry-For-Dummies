@@ -82,7 +82,6 @@ export default {
         puntos: 0,
       })
       await axios.get('/memorama/elementos').then(response => {
-          console.log(response.data)
           this.elemets = this.chargeNElements(response.data)
           this.elemets.forEach(e => e.state = false)
           this.begin()

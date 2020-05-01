@@ -266,7 +266,6 @@ axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.headers.common = {
               case 2:
                 _context.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/memorama/elementos').then(function (response) {
-                  console.log(response.data);
                   _this.elemets = _this.chargeNElements(response.data);
 
                   _this.elemets.forEach(function (e) {
