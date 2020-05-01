@@ -54,7 +54,7 @@ export default {
     ...mapMutations(['changeReport']),
     sentReport: async function(){
       try {
-        await axios.post('/api/reporte/store',{
+        await axios.post('/reporte/store',{
           //Usuario probicional equisde
           idUsuario: 1,
           juego: this.selectedGame,

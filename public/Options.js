@@ -87,7 +87,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/reporte/store', {
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/reporte/store', {
                   //Usuario probicional equisde
                   idUsuario: 1,
                   juego: this.selectedGame,

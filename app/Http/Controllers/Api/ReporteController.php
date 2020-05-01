@@ -39,6 +39,7 @@ class ReporteController extends Controller
             'juego' => 'required',
             'mensaje'=> 'required',
         ]);
+        $datos['idUsuario'] = Auth::user()->id;
         Reporte::create($datos);
         
     }

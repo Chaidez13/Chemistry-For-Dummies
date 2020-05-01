@@ -51,6 +51,9 @@ Route::middleware('auth')->group(function () {
   Route::POST('/user/resetPassword','Api\UserController@changePassword');
   Route::POST('/user/delete',"Api\UserController@destroy");
   Route::POST('/partida/delete',"Api\PartidaController@destroy"); 
+  Route::POST('/tetris/level','TetrisController@setLevel');
+  Route::GET('/tetris/get','TetrisController@getLevel');
+
 });
 Route::POST('/login','Auth\LoginController@login'); //Inicio de sesión
 Route::POST('/registro/user','Api\UserController@store'); //Registro de usuario

@@ -14,7 +14,7 @@ Menu menu;
 var altoTabla = 9;
 var opcion = -1;
 var created = false;
-var nivel = 1;
+var nivel = 2;
 var typed = '';
 var confirmar;
 var continuar = true,
@@ -37,7 +37,7 @@ var tablero = [
 	["", "", "","57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", ""],
 	["", "", "", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100", "101", "102", ""],
 ];
-
+cargarNivel();
 void setup() {
 	size(1261, 1000);
 	crearMatriz();
@@ -175,7 +175,7 @@ void keyPressed() {
 		if (key == ' ') {
 			let simbol = actual.simbolo;
 			if (encontrado((actual.x) + actual.h, actual.y, simbol)) {
-				contadorDePiezas++;
+				++contadorDePiezas;
 				matchSound();
 				actual.agregar();
 				actual = elementoNivel(nivel);
@@ -344,7 +344,6 @@ function marcador(title,points, x, y) {
 
 
 function elementoNivel(nivel) {
-	++contadorDePiezas;
 	switch (nivel) {
 		case 1:
 		case 2:

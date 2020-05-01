@@ -19,7 +19,24 @@ function obtenerElementos() {
 	});
 	return datos;
 }
-
+function cargarNivel() {
+	var nivel = 0;
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+	$.getJSON({
+		url: '/tetris/level',
+		async: false,
+		data: {
+		}
+	}, (data) => {
+		console.log(data);
+	});
+	
+		//return 0;
+}
 function cargarPuntos(nivel) {
 	var datos = 0;
 	$.ajaxSetup({
@@ -81,7 +98,8 @@ function actualizarPartida(point, level, estado) {
 			console.log(data);
 		}
 	});
-}function obtenerElementos() {
+}
+function obtenerElementos() {
 	var datos = [];
 	$.ajaxSetup({
 		headers: {
