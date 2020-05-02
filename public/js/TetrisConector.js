@@ -27,15 +27,15 @@ function cargarNivel() {
 		}
 	});
 	$.getJSON({
-		url: '/tetris/level',
+		url: '/tetris/get',
 		async: false,
-		data: {
-		}
 	}, (data) => {
-		console.log(data);
+		nivel = data;
 	});
-	
-		//return 0;
+	if(nivel>=1)
+		return nivel;
+	else
+		return 1;
 }
 function cargarPuntos(nivel) {
 	var datos = 0;
@@ -95,7 +95,6 @@ function actualizarPartida(point, level, estado) {
 			'estado': estado,
 		},
 		success: function(data) {
-			console.log(data);
 		}
 	});
 }
@@ -177,7 +176,6 @@ function actualizarPartida(point,progreso, level, estado) {
 			'progreso': progreso
 		},
 		success: function(data) {
-			console.log(data);
 		}
 	});
 }

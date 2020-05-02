@@ -53,7 +53,6 @@ Route::middleware('auth')->group(function () {
   Route::POST('/partida/delete',"Api\PartidaController@destroy"); 
   Route::POST('/tetris/level','TetrisController@setLevel');
   Route::GET('/tetris/get','TetrisController@getLevel');
-
 });
 Route::POST('/login','Auth\LoginController@login'); //Inicio de sesión
 Route::POST('/registro/user','Api\UserController@store'); //Registro de usuario

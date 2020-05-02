@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Api;
 use App\Reporte;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 class ReporteController extends Controller
 {
     /**
@@ -39,9 +40,9 @@ class ReporteController extends Controller
             'juego' => 'required',
             'mensaje'=> 'required',
         ]);
-        $datos['idUsuario'] = Auth::user()->id;
+        $idUsuario = Auth::user()->id;
+        $datos['idUsuario'] = $idUsuario;
         Reporte::create($datos);
-        
     }
 
     /**

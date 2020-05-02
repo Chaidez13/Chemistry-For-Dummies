@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Session;
+use Illuminate\Session\Store;
 use Illuminate\Http\Request;
 
 class TetrisController extends Controller
@@ -10,7 +11,7 @@ class TetrisController extends Controller
         $nivel = $request->validate([
             'nivel' => 'required',
         ]);
-        Session::put('nivel',$nivel['nivel']);
+        session(['nivel' => $nivel['nivel']]);
     }
 
     public function getLevel(){

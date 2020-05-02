@@ -14,7 +14,7 @@ Menu menu;
 var altoTabla = 9;
 var opcion = -1;
 var created = false;
-var nivel = 2;
+var nivel = cargarNivel();
 var typed = '';
 var confirmar;
 var continuar = true,
@@ -37,7 +37,7 @@ var tablero = [
 	["", "", "","57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", ""],
 	["", "", "", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100", "101", "102", ""],
 ];
-cargarNivel();
+
 void setup() {
 	size(1261, 1000);
 	crearMatriz();
@@ -127,8 +127,8 @@ void draw() {
 }
 
 void actualizarPuntos(puntos,progreso, puntosGuardados, nivel, estado) {
-	if (puntos > puntosGuardados) {
-		actualizarPartida(puntos,progreso ,nivel, estado);
+	if (puntos > puntosGuardados+1) {
+		actualizarPartida(puntos,progreso,nivel, 0);
 	}
 }
 
@@ -142,7 +142,7 @@ void mouseClicked() {
 				return 1;
 				break;
 			case 1:
-				alert("Saliendo");
+				window.location.replace("/");
 				break;
 			default:
 				opcion = -1;
