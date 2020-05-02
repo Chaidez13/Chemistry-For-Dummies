@@ -54,6 +54,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   _this.$router.push({
                     name: "home"
                   });
+
+                  location.reload();
                 });
 
               case 2:

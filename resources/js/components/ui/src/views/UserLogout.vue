@@ -18,6 +18,7 @@ export default {
       await axios.get('/logout').then(() => {
         this.logOut()
          this.$router.push({ name: "home" });
+         location.reload();
       })
     }
   }
