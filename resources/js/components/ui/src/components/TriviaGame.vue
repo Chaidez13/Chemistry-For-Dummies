@@ -149,7 +149,7 @@ export default {
     gameEnded: async function(){
       this.gameO = true;
       clearInterval(this.interval)
-      await axios.post('/nepe',{
+      await axios.post('/partida/update/3',{
         puntos: this.puntos,
         nivel: this.levelTrivia,
         estado: this.status,
