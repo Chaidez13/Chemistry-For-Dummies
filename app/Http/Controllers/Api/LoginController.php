@@ -36,19 +36,4 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
-    
-    /*public function login(Request $request){
-        $datos = $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-        //$password = Hash::make($datos['password']);
-        $feil = 'fail';
-        if(Auth::attempt($datos)){
-            return $datos;
-        }else{
-            return $feil;
-        }
-    }*/
 }
