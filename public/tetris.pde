@@ -1,8 +1,5 @@
 var tabla = [];
 var logros = [];
-var loaded = window.addEventListener('load', function () {
-	return true;
-});
 var data = obtenerElementos();
 var progreso = 0,contadorDePiezas=0;
 var piezas = [];
@@ -45,6 +42,7 @@ void setup() {
 	size(1261, 1000);
 	crearMatriz();
 	menu = new Menu();
+	menu.activo = true;
 	if(nivel!=5)
 		fondo = loadImage("src/fondo.jpg");
 	else
