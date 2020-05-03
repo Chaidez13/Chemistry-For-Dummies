@@ -149,7 +149,7 @@ export default {
          }
        }).then(() => {
          this.validarSesion()
-         this.$router.push({ name: "home" });
+         window.location.href = '/'
        }).catch((e) =>{
          const errorCode = e.response.status
          if(errorCode == 422){
