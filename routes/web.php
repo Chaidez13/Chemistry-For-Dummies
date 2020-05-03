@@ -54,7 +54,6 @@ Route::middleware('auth')->group(function () {
   Route::POST('/tetris/level','TetrisController@setLevel');
   Route::GET('/tetris/get','TetrisController@getLevel');
 });
-Route::GET('/user/test','Api\UserController@test');
 Route::POST('/login','Auth\LoginController@login'); //Inicio de sesión
 Route::POST('/registro/user','Api\UserController@store'); //Registro de usuario
 

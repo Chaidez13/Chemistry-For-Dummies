@@ -1,3 +1,4 @@
+$(document).ready(function(){
 var tabla = [];
 var logros = [];
 var data = obtenerElementos();
@@ -379,3 +380,5 @@ function encontrado(x, y, simbolo) {
 	}
 	return false;
 }
+
+});
