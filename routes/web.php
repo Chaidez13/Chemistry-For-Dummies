@@ -32,9 +32,7 @@ Route::get('game/memoria', function () {
 Route::get('game/tetris', function () {	
   return view('welcome');
 });
-Route::get('/tetris', function () {	
-  return view('tetris.index');
-});
+
 Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 Route::middleware('auth')->group(function () {
@@ -53,6 +51,9 @@ Route::middleware('auth')->group(function () {
   Route::POST('/partida/delete',"Api\PartidaController@destroy"); 
   Route::POST('/tetris/level','TetrisController@setLevel');
   Route::GET('/tetris/get','TetrisController@getLevel');
+  Route::get('/tetris', function () {	
+    return view('tetris');
+  });
 });
 Route::GET('/user/test','Api\UserController@test');
 Route::POST('/login','Auth\LoginController@login'); //Inicio de sesión
