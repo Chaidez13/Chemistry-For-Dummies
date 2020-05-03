@@ -1,8 +1,8 @@
-window.addEventListener('load', function () {
-
-
 var tabla = [];
 var logros = [];
+var loaded = window.addEventListener('load', function () {
+	return true;
+});
 var data = obtenerElementos();
 var progreso = 0,contadorDePiezas=0;
 var piezas = [];
@@ -382,4 +382,3 @@ function encontrado(x, y, simbolo) {
 	}
 	return false;
 }
-})
