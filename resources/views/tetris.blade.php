@@ -10,13 +10,11 @@
 		
 	</head>
 	<body>	
-		<h1>EN MANTENIMIENTO </h1>
-	<!--
 		<CENTER>
 			<canvas width="1261" height="1000" data-processing-sources="tetris.pde Elemento.pde menu.pde logro.pde"></canvas>
 			<div>
 				<h4>A</h4>
 			</div>  
-		</CENTER> -->
+		</CENTER>
 	</body>
 </html>

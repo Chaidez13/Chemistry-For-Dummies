@@ -44,15 +44,15 @@ void setup() {
 	menu = new Menu();
 	menu.activo = true;
 	if(nivel!=5)
-		fondo = loadImage("src/fondo.jpg");
+		fondo = requestImage("src/fondo.jpg");
 	else
-		fondo = loadImage("src/fondo_5.jpg");
+		fondo = requestImage("src/fondo_5.jpg");
 
 	vidaIcono = loadImage("src/vida.png");
 	frameRate(30);
 }
-
-void draw() {
+void draw(){
+ if(fondo.width!=0 && fondo.width!=-1){
 	background(0);
 	image(fondo, 0, 0);
 	if (!created) {
@@ -62,7 +62,6 @@ void draw() {
 		created = true;
 		puntosGuardados = cargarPuntos(nivel);
 	}
-
 	if (actual != null) {
 		if(nivel>5) nivel = 1;
 		progreso = Math.trunc((contadorDePiezas/118)*100);
@@ -125,6 +124,11 @@ void draw() {
 		} else
 			logros.shift();
 	}
+ }else{
+	 background(255);
+	 textSize(32);
+	 text("CARGANDO",500,500);
+ }
 }
 
 void actualizarPuntos(puntos,progreso, puntosGuardados, nivel, estado) {
