@@ -1,7 +1,7 @@
 var tabla = [];
 var logros = [];
 var data = obtenerElementos();
-var progreso = 0,contadorDePiezas=0;
+var progreso = 0,contadorDePiezas=0,contadorCarga;
 var piezas = [];
 var puntos = 0,
 	puntosGuardados = 0;
@@ -128,7 +128,18 @@ void draw(){
 	 background(255);
 	 textSize(32);
 	 fill(0);
-	 text("CARGANDO...",500,500);
+	 contadorCarga++;
+	 if(contadorCarga<15)
+	 	text("CARGANDO.",500,500);
+	 else if(contadorCarga>30 && contadorCarga<45)
+	 	text("CARGANDO..",500,500);
+     else if(contadorCarga>45 && contadorCarga<60)
+	 	text("CARGANDO..,",500,500);
+     else
+	  contadorCarga = 0;
+
+
+
  }
 }
 
