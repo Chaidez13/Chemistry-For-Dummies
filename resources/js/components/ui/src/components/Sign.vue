@@ -150,7 +150,6 @@ export default {
        }).then(() => {
           this.validarSesion()
           window.location.href = '/'
-          location.reload();
        }).catch((e) =>{
          const errorCode = e.response.status
          if(errorCode == 422){
