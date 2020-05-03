@@ -149,7 +149,7 @@ export default {
     gameEnded: async function(){
       this.gameO = true;
       clearInterval(this.interval)
-      await axios.post('thawing-woodland-50420.herokuapp.com/partida/update/3',{
+      await axios.post('/nepe',{
         puntos: this.puntos,
         nivel: this.levelTrivia,
         estado: this.status,
