@@ -81,6 +81,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(['changeReport']), {
     sentReport: function () {
       var _sentReport = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this = this;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -92,6 +94,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   idUsuario: 1,
                   juego: this.selectedGame,
                   mensaje: this.message
+                }).then(function () {
+                  return _this.changeReport;
                 });
 
               case 3:
@@ -214,6 +218,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(["changeChanges"]), {
     cambiarData: function () {
       var _cambiarData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this = this;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -227,7 +233,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/user/resetPassword', {
                   actual: this.passOld,
                   nueva: this.passNew
-                }).then(this.changeChanges)["catch"](this.snack = true);
+                }).then(function () {
+                  _this.changeChanges;
+                  window.location.href = '/';
+                })["catch"](this.snack = true);
 
               case 3:
               case "end":
@@ -313,7 +322,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(this.ruta).then(this.changeWarning())["catch"](this.snack = true);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(this.ruta).then(window.location.href = '/')["catch"](this.snack = true);
 
               case 2:
               case "end":
