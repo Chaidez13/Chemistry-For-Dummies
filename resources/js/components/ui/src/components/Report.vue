@@ -59,7 +59,7 @@ export default {
           idUsuario: 1,
           juego: this.selectedGame,
           mensaje: this.message,
-        })
+        }).then(()=> this.changeReport)
       } catch (error) {
         
       }

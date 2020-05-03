@@ -31,7 +31,7 @@ export default {
   methods:{
     ...mapMutations(['changeWarning']),
     aceptar: async function(){
-        await axios.post(this.ruta).then(this.changeWarning()).catch(this.snack=true)
+        await axios.post(this.ruta).then(window.location.href = '/').catch(this.snack=true)
     },
   },
   computed:{ }
