@@ -38,7 +38,7 @@ class LoginController extends Controller
     }
 
     
-    public function login(Request $request){
+    /*public function login(Request $request){
         $datos = $request->validate([
             'email' => 'required',
             'password' => 'required',
@@ -50,5 +50,5 @@ class LoginController extends Controller
         }else{
             return $feil;
         }
-    }
+    }*/
 }
