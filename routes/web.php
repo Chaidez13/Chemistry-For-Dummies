@@ -33,7 +33,7 @@ Route::get('game/tetris', function () {
   return view('welcome');
 });
 Route::get('/tetris', function () {	
-  return view('tetris.index');
+  return view('tetris');
 });
 Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
