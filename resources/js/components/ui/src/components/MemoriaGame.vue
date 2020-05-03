@@ -215,7 +215,7 @@ export default {
       this.game = false;
       this.gameOv = true;
       clearInterval(this.interval)
-      await axios.post('./partida/update/2',{
+      await axios.post('thawing-woodland-50420.herokuapp.com/partida/update/2',{
         puntos: this.puntos,
         nivel: this.levelMemoria,
         estado: this.status,
