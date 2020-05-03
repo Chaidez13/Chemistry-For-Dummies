@@ -449,7 +449,7 @@ axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.headers.common = {
                 this.gameOv = true;
                 clearInterval(this.interval);
                 _context2.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('partida/update/2', {
+                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/partida/update/2', {
                   puntos: this.puntos,
                   nivel: this.levelMemoria,
                   estado: this.status,
@@ -995,7 +995,7 @@ axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.headers.common = {
                 this.gameO = true;
                 clearInterval(this.interval);
                 _context3.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('partida/update/3', {
+                return axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/partida/update/3', {
                   puntos: this.puntos,
                   nivel: this.levelTrivia,
                   estado: this.status,
