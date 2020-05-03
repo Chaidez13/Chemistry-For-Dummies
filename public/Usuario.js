@@ -187,6 +187,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   }
                 }).then(function () {
                   _this.validarSesion();
+
+                  window.location.href = '/';
+                  location.reload();
                 })["catch"](function (e) {
                   var errorCode = e.response.status;
 
