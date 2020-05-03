@@ -69,7 +69,10 @@ export default {
             await axios.post('/user/resetPassword',{
                 actual: this.passOld,
                 nueva: this.passNew,
-            }).then(this.changeChanges).catch(this.snack = true)
+            }).then(()=> {
+              this.changeChanges
+              window.location.href = '/'
+            }).catch(this.snack = true)
         }
     }
   },
