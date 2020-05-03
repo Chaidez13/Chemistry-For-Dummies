@@ -1,4 +1,6 @@
-$(document).ready(function(){
+window.addEventListener('load', function () {
+
+
 var tabla = [];
 var logros = [];
 var data = obtenerElementos();
@@ -380,5 +382,4 @@ function encontrado(x, y, simbolo) {
 	}
 	return false;
 }
-
-});
+})
