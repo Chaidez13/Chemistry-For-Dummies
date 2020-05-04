@@ -65,7 +65,6 @@ void draw() {
 		image(fondo, 0, 0);
 		if (!created) {
 			guardarPartida(puntos, nivel);
-			actualizarPartida(puntos, progreso, nivel, 1);
 			llenarMatriz();
 			actual = elementoNivel(nivel);
 			puntosGuardados = banderaPuntos;
@@ -208,7 +207,7 @@ void keyPressed() {
 		}
 		if(key=='G')
 			ganar = true;
-			
+
 		if (key == ' ') {
 			opcion = -1;
 			let simbol = actual.simbolo;
