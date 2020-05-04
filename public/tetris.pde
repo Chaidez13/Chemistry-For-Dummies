@@ -22,6 +22,7 @@ var confirmar;
 var continuar = false,
 	musicOn = false,
 	activarMenu = false,
+	mute = false,
 	ganar = false,
 	perder = false,
 	mostrarInstrucciones = false,
@@ -182,8 +183,13 @@ void keyPressed() {
 	}
 	if ((key == 'Q' || key == 'q') && (!perder || !ganar)) {
 		mostrarInstrucciones = !mostrarInstrucciones;
-		menu.activo = false;
-		continuar = !continuar;
+	}
+	if ((key == 'M' || key == 'm')) {
+		mute = !mute;
+		if(mute)
+		 	pauseGameMusic();
+		 else
+		 	gameMusic(nivel);
 	}
 
 	if (!menu.activo && actual != null) {
@@ -366,6 +372,11 @@ function vidas(x, y, vida) {
 	fill(255);
 	text("Nivel  " + nivel, x + 40, y - 5);
 	text("Progreso  " + progreso + "%", x + 60, y + 53);
+	if(!mute)
+		text("Música: ON",x+55,y+115);
+	else 
+		text("Música: Off",x+55,y+115);
+	
 	textFont(createFont("Comic sans ms", 20));
 }
 
