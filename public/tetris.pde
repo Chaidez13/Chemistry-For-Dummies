@@ -137,6 +137,7 @@ void draw() {
 	} else {
 		background(255);
 		textSize(32);
+		fill(0);
 		text("CARGANDO...", 500, 500);
 	}
 }
