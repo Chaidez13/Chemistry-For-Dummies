@@ -205,9 +205,6 @@ void keyPressed() {
 			if (down.currentTime <= 0)
 				actual.y += actual.h;
 		}
-		if(key=='G')
-			ganar = true;
-
 		if (key == ' ') {
 			opcion = -1;
 			let simbol = actual.simbolo;
