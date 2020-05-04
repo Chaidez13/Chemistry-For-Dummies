@@ -97,6 +97,7 @@ void draw() {
 		}
 		if (ganar) {
 			menu.mostrar(mouseX, mouseY, "ganar");
+			pauseGameMusic();
 			if (opcion != -1) {
 				actualizarPuntos(puntos, 100, puntosGuardados, nivel, 1);
 				nextLevel();
