@@ -3,11 +3,12 @@ class Menu {
     PImage[] img;
 
     Menu() {
-        this.img = new PImage[9];
+        this.img = new PImage[10];
         //Default menu
         this.img[0] = loadImage("src/1.png");
         this.img[1] = loadImage("src/2.png");
         this.img[2] = loadImage("src/3.png");
+        this.img[9] = loadImage("src/4.png");
         //Ganar menu
         this.img[3] = loadImage("src/ganar/default.png");
         this.img[4] = loadImage("src/ganar/continuar.png");
@@ -26,6 +27,8 @@ class Menu {
                 image(img[0], 0, 0);
             else if ((x > 418 && x < 773) && (y > 528 && y < 602))
                 image(img[1], 0, 0);
+            else if((x>433 && x<888) && (y>831 && y<879))
+                image(img[9], 0, 0);
             else
                 image(img[2], 0, 0);
         } else if (tipo == 'ganar') {
@@ -50,7 +53,9 @@ class Menu {
             return 0;
         else if ((x > 418 && x < 773) && (y > 528 && y < 602))
             return 1;
-        else
+        else if((x>433 && x<888) && (y>831 && y<879))
+            return 2;
+        else 
             return -1;
     }
 
