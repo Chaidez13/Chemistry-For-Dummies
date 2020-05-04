@@ -54,7 +54,6 @@ void setup() {
 		fondo = requestImage("src/fondo.jpg");
 	else
 		fondo = requestImage("src/fondo_5.jpg");
-
 	banderaPuntos = cargarPuntos(nivel);
 	frameRate(30);
 }
@@ -66,6 +65,7 @@ void draw() {
 		image(fondo, 0, 0);
 		if (!created) {
 			guardarPartida(puntos, nivel);
+			actualizarPartida(puntos, progreso, nivel, 1);
 			llenarMatriz();
 			actual = elementoNivel(nivel);
 			puntosGuardados = banderaPuntos;
