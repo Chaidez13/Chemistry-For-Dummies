@@ -145,7 +145,7 @@ void draw() {
 
 void actualizarPuntos(puntos, progreso, puntosGuardados, nivel, estado) {
 	if (puntos > puntosGuardados + 1 || banderaPuntos==0) {
-		actualizarPartida(puntos, progreso, nivel, 0);
+		actualizarPartida(puntos, progreso, nivel, estado);
 	}
 }
 
