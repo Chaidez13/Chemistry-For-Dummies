@@ -53,7 +53,7 @@ void setup() {
 		fondo = requestImage("src/fondo.jpg");
 	else
 		fondo = requestImage("src/fondo_5.jpg");
-		
+
 	banderaPuntos = cargarPuntos(nivel);
 	frameRate(30);
 }
@@ -110,7 +110,7 @@ void draw() {
 				reset();
 			}
 		}
-		if (!logoOtorgado && (puntos > puntosGuardados) && puntosGuardados > 0) {
+		if (!logoOtorgado && (puntos > puntosGuardados) && (puntosGuardados > 0||banderaPuntos==0)) {
 			var h = 900;
 			if (logros.length > 0) {
 				h = 800;
@@ -282,6 +282,7 @@ void reset() {
 	logoOtorgado = false;
 	contadorDePiezas = 0;
 	musicOn = false;
+	banderaPuntos = cargarPuntos(nivel);
 	mostrarInstrucciones = false;
 	opcion = -1;
 	crearMatriz();
