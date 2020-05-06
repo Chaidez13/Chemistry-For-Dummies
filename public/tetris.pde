@@ -19,7 +19,7 @@ var created = false;
 var nivel = cargarNivel(); //Carga el nivel del juego
 var typed = '';
 var confirmar;
-var continuar = false,
+var continuar = true,
 	musicOn = false,
 	activarMenu = false,
 	mute = false,
@@ -47,11 +47,8 @@ void setup() {
 	size(1261, 1000);
 	crearMatriz();
 	menu = new Menu();
-	menu.activo = true;
 	setUpMusic();
-
 	instrucciones = loadImage("src/instrucciones.png");
-
 	banderaPuntos = cargarPuntos(nivel);
 	frameRate(30);
 }
