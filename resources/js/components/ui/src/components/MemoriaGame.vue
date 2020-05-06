@@ -1,14 +1,14 @@
 <template>
   <v-container>
-    <time-bar :time="time" :color="timeColor" v-if="game" />
-    <v-row align="center" justify="center" style="margin-top: 4%">
-      <v-btn fab color="primary" @click="startGameButton" class="btn-game">
+    <v-row align="center" justify="center" class="buttons">
+      <v-btn fab color="primary" v-if="!game" @click="startGameButton" class="btn-game">
           <v-icon>mdi-play</v-icon>
       </v-btn>
       <v-btn fab color="error" @click="setGameMemoriaOff" class="btn-game">
           <v-icon>mdi-backspace</v-icon>
       </v-btn>
     </v-row>
+    <time-bar :time="time" :color="timeColor" v-if="game" style="margin-bottom: 2%"/>
     <v-row align="center" justify="center">
       <v-col
         class="carta"
@@ -53,7 +53,7 @@ export default {
       game: false,
       cardsActive: 0,
       anterior: null,
-      difTime: 1.6666,
+      difTime: 0.888,
       gameOv: false,
       puntos: 0,
       status: false,
@@ -267,6 +267,10 @@ export default {
   max-width: 150px;
   min-width: 130px;
   min-height: 210px;
+}
+.buttons{
+  margin-top: 1%;
+  margin-bottom: 2%;
 }
 .btn-game{
   margin: 0 10px;

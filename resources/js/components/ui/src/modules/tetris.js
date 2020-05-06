@@ -50,13 +50,13 @@ export default {
     },
     mutations:{ 
         setGameTetrisOff(state) {
-            state.gameMemoria = false;
+            state.gameTetris = false;
         },
         setGameTetrisOn(state) {
-            state.gameMemoria = true;
+            state.gameTetris = true;
         },
         setLevelTetris(state, payload){
-            state.levelMemoria = payload;
+            state.levelTetris = payload;
         },
         setLevelData(state, payload){
             state.nivelesTT[payload.position].progreso = payload.progreso;
@@ -73,7 +73,6 @@ export default {
                 }
                }).then(d => {
                  const progress = d.data.filter(e => e.idJuego == 1)
-                 console.log(progress)
                  for (let i = 0; i < progress.length; i++) {
                     const payload = {
                         position: i,

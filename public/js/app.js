@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"Dashboard":"Dashboard","GameID":"GameID","Home":"Home","Options":"Options","Usuario":"Usuario","about":"about"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"Dashboard":"Dashboard","Home":"Home","Options":"Options","Usuario":"Usuario","about":"about","vendors~GameID":"vendors~GameID","GameID":"GameID"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -62130,13 +62130,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mutations: {
     setGameTetrisOff: function setGameTetrisOff(state) {
-      state.gameMemoria = false;
+      state.gameTetris = false;
     },
     setGameTetrisOn: function setGameTetrisOn(state) {
-      state.gameMemoria = true;
+      state.gameTetris = true;
     },
     setLevelTetris: function setLevelTetris(state, payload) {
-      state.levelMemoria = payload;
+      state.levelTetris = payload;
     },
     setLevelData: function setLevelData(state, payload) {
       state.nivelesTT[payload.position].progreso = payload.progreso;
@@ -62162,7 +62162,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   var progress = d.data.filter(function (e) {
                     return e.idJuego == 1;
                   });
-                  console.log(progress);
 
                   for (var i = 0; i < progress.length; i++) {
                     var payload = {
@@ -62373,7 +62372,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     path: "/game/:id",
     name: "game",
     component: function component() {
-      return __webpack_require__.e(/*! import() | GameID */ "GameID").then(__webpack_require__.bind(null, /*! ./views/Game.vue */ "./resources/js/components/ui/src/views/Game.vue"));
+      return Promise.all(/*! import() | GameID */[__webpack_require__.e("vendors~GameID"), __webpack_require__.e("GameID")]).then(__webpack_require__.bind(null, /*! ./views/Game.vue */ "./resources/js/components/ui/src/views/Game.vue"));
     }
   }, {
     path: "/dashboard",

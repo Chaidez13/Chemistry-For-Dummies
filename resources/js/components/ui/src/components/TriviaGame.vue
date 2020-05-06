@@ -1,8 +1,27 @@
 <template>
   <v-container>
-    <vidas :cantVidas="lifes" />
-    <v-row align="center" justify="center">
+    <v-row align="center" justify="center" style="margin-top: 4%">
+      <v-col cols="12" align="center" justify="center">
+        <v-btn fab color="error" @click="setGameTriviaOff" class="btn-game">
+          <v-icon>mdi-backspace</v-icon>
+        </v-btn>
+      </v-col>
+       <v-col cols="12" lg="5" md="3" style="position: absolute; right:5%" justify="flex-end" v-if="$vuetify.breakpoint.mdAndUp">
+        <vidas :cantVidas="lifes" />
+      </v-col>
+      <v-col cols="12" sm="10" align="center" justify="center" v-if="$vuetify.breakpoint.smAndDown">
+        <vidas :cantVidas="lifes" />
+      </v-col>
+    </v-row>
+    <v-row align="center" justify="center" style=" margin-bottom: 2%; margin-top: 1%; ">
       <h2>{{title}}</h2>
+    </v-row>
+    <time-bar :time="time" />
+    <v-row align="center" justify="center" class="pa-5">
+      <h3>{{message}}</h3>
+    </v-row>
+    <v-row align="center" justify="center">
+      <v-progress-linear :value="progreso" rounded height="10px" style="max-width: 800px"></v-progress-linear>
     </v-row>
     <v-row align="center" justify="center" style="margin: 50px 0">
       <v-col
@@ -15,17 +34,7 @@
         <p class="text-center" style="margin-top: 70px">{{item.respuesta}}</p>
       </v-col>
     </v-row>
-    <time-bar :time="time" />
-    <v-row align="center" justify="center" class="pa-5">
-      <h3>{{message}}</h3>
-    </v-row>
-    <v-row align="center" justify="center">
-      <v-progress-linear :value="progreso" rounded height="10px" style="max-width: 800px"></v-progress-linear>
-    </v-row>
-    <v-row align="center" justify="center" style="margin-top: 4%">
-      <v-btn @click="setGameTriviaOff" color="danger">Salir</v-btn>
-    </v-row>
-     <GameOver v-if="gameO" :points="puntos" :status="status" game="3"/>
+    <GameOver v-if="gameO" :points="puntos" :status="status" game="3"/>
   </v-container>
 </template>
 
@@ -90,7 +99,6 @@ export default {
         this.newQuestion()
         this.oneSecond()
       }).catch(error => console.log(error))
-      console.log(this.questions)
     },
     newQuestion(){
       var i = 0;
@@ -144,7 +152,7 @@ export default {
       this.interval = setInterval(this.timer, 1000);
     },
     timer: function() {
-      this.time += 10;
+      this.time += 5;
     },
     gameEnded: async function(){
       this.gameO = true;
@@ -201,5 +209,8 @@ export default {
 }
 .answer-option:hover {
   background-color: yellow;
+}
+.btn-game{
+  margin: 0 10px;
 }
 </style>
