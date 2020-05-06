@@ -3,7 +3,6 @@ class Menu {
     PImage[] img;
 
     Menu() {
-<<<<<<< HEAD
         this.img = new PImage[7];
         //Default menu
         this.img[0] = loadImage("src/menu/default.png");
@@ -56,7 +55,6 @@ class Menu {
         text(mensaje,635,405);
         fill(0);
         text(mensaje,630,400);
-=======
         this.img = new PImage[10];
         //Default menu
         this.img[0] = loadImage("src/1.png");
@@ -100,19 +98,17 @@ class Menu {
             else
                 image(img[6], 0, 0);
         }
->>>>>>> b9d92d26c7931ba5acf3ea4655c22b1235d3cccb
     }
-
     int opcion(x, y) {
          if((x>350 && x<507)&& (y>478&&y<634))
             return 0;
         else if((x>555 && x<709)&& (y>478&&y<634))
             return 1;
-<<<<<<< HEAD
+
         else if((x>751&&x<911)&&(y>478&&y<634))
-=======
+
         else if((x>433 && x<888) && (y>831 && y<879))
->>>>>>> b9d92d26c7931ba5acf3ea4655c22b1235d3cccb
+
             return 2;
         else 
             return -1;

@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-var down = new Audio('src/Audio/phaserUp6.ogg');
-var match = new Audio('src/Audio/threeTone2.ogg');
-var fail = new Audio('src/Audio/lowRandom.ogg');
-var old = new Audio('src/Audio/old.ogg');
-var now = new Audio('src/Audio/now.ogg');
-var archivement = new Audio('src/Audio/logro.ogg');
-var sov = new Audio('src/Audio/soviet.ogg');
-var pump = new Audio('src/Audio/pumped.ogg');
-var levelMusic = [];
-levelMusic[0] = new Audio('src/Audio/1.ogg');
-levelMusic[1] = new Audio('src/Audio/5.ogg');
-levelMusic[2] = new Audio('src/Audio/3.ogg');
-levelMusic[3] = new Audio('src/Audio/4.ogg');
-levelMusic[4] = new Audio('src/Audio/2.ogg');
-=======
 var down = new Audio('../src/Audio/phaserUp6.ogg');
 var match = new Audio('../src/Audio/threeTone2.ogg');
 var fail = new Audio('../src/Audio/lowRandom.ogg');
@@ -28,7 +12,6 @@ levelMusic[1] = new Audio('../src/Audio/5.ogg');
 levelMusic[2] = new Audio('../src/Audio/3.ogg');
 levelMusic[3] = new Audio('../src/Audio/4.ogg');
 levelMusic[4] = new Audio('../src/Audio/2.ogg');
->>>>>>> b9d92d26c7931ba5acf3ea4655c22b1235d3cccb
 
 function backgroundSound() {
 	archivement.volume = 0.5;
