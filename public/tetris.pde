@@ -19,7 +19,7 @@ var created = false;
 var nivel = cargarNivel(); //Carga el nivel del juego
 var typed = '';
 var confirmar;
-var continuar = true,
+var continuar = false,
 	musicOn = false,
 	activarMenu = false,
 	mute = false,
@@ -47,21 +47,19 @@ void setup() {
 	size(1261, 1000);
 	crearMatriz();
 	menu = new Menu();
+	menu.activo = true;
 	setUpMusic();
-	instrucciones = loadImage("src/instrucciones.jpg");
-	if (nivel != 5)
-		fondo = requestImage("src/fondo.jpg");
-	else
-		fondo = requestImage("src/fondo_5.jpg");
+
+	instrucciones = loadImage("src/instrucciones.png");
+
 	banderaPuntos = cargarPuntos(nivel);
 	frameRate(30);
 }
 
 void draw() {
 
-	if (instrucciones.width != 0 && fondo.width != 0 && fondo.width != -1 && instrucciones.width != -1) {
-		background(0);
-		image(fondo, 0, 0);
+	if (instrucciones.width != 0 && instrucciones.width != -1) {
+		background(245, 245, 245);
 		if (!created) {
 			guardarPartida(puntos, nivel);
 			llenarMatriz();
@@ -87,23 +85,20 @@ void draw() {
 			ganar = true;
 		}
 		textSize(16);
-		vidas(10, 30, salud);
-		marcador(puntos, 1128, 75);
-		marcador(puntosGuardados, 1128, 157);
+		vidas(10, 5, salud);
 		if (!continuar) {
 			menu.activo = true;
-			menu.mostrar(mouseX, mouseY, "pause");
+			menu.mostrar(mouseX, mouseY, "Pause");
 		}
 		if (ganar) {
-			menu.mostrar(mouseX, mouseY, "ganar");
-			pauseGameMusic();
+			menu.mostrar(mouseX, mouseY, "¡Ganaste!");
 			if (opcion != -1) {
 				actualizarPuntos(puntos, 100, puntosGuardados, nivel, 1);
 				nextLevel();
 			}
 		}
 		if (perder) {
-			menu.mostrar(mouseX, mouseY, "perder");
+			menu.mostrar(mouseX, mouseY, "Has perdido");
 			if (opcion != -1) {
 				actualizarPuntos(puntos, progreso, puntosGuardados, nivel, 0);
 				puntosGuardados = cargarPuntos(nivel);
@@ -347,40 +342,33 @@ function elementoRandom() {
 }
 
 function vidas(x, y, vida) {
+		noStroke();
+		fill(227, 227, 227);
+		rect(x, y, 250*4.95, 15, 8);
+		rect(x, y + 20, 250*4.95, 15, 8);
 	if (vida >= 50 && vida <= 100)
 		fill(229, 101, 13);
 	else if (vida <= 50) {
 		fill(229, 36, 13);
 	} else
-		fill(59, 229, 13);
-	stroke(1);
-	rect(x, y, vida, 30, 8);
-	stroke(3);
-	fill(255, 50);
-	rect(x, y, 250, 30, 8);
+	fill(56, 142, 60);
+	rect(x, y, vida*4.95, 15, 8);
+	fill(25,118,210);
+	rect(x, y + 20, (progreso * 2.5)*4.95, 15, 8);
 	fill(0);
-	textSize(18);
-	fill(255);
-	//Progreso
-	stroke(1);
-	fill(255, 50);
-	rect(x, y + 60, 250, 30, 8);
-	stroke(1);
-	fill(59, 229, 13);
-	rect(x, y + 60, progreso * 2.5, 30, 8);
-	fill(255);
-	text("Nivel  " + nivel, x + 40, y - 5);
-	text("Progreso  " + progreso + "%", x + 60, y + 53);
-	if(!mute)
-		text("Música: ON",x+55,y+115);
-	else 
-		text("Música: Off",x+55,y+115);
 	
+	textSize(20);
+	textAlign(LEFT);
+	text(puntos + " / " + puntosGuardados,x, y+60);
+	text(progreso + "% / 100%",x, y+85);
+	if(!mute)
+		text("Música: On",x,975);
+	else 
+		text("Música: Off",x,975);
 	textFont(createFont("Comic sans ms", 20));
 }
 
 function marcador(points, x, y) {
-	fill(255);
 	textFont(createFont("Comic sans ms", 32));
 	text(points, x, y);
 }
