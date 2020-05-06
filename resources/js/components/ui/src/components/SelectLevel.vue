@@ -76,6 +76,7 @@ export default {
           this.setLevelTrivia(dificultad)
           break;
         case "1":
+         /*  this.setGameTetrisOn(); */
           await axios.post('/tetris/level',{
             nivel: dificultad,
           }).then(()=> window.location.href = '/tetris')

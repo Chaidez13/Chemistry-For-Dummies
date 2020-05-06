@@ -30,7 +30,7 @@ class Logro {
 			}
 			if (!end()) {
 				image(img[tipo], x, y, w / 2, h / 2);
-				if (time++ > 80) {
+				if (time++ >150) {
 					this.move();
 				}
 

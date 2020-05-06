@@ -72,6 +72,7 @@ export default {
             }).then(()=> {
               this.changeChanges
               window.location.href = '/'
+              location.reload();
             }).catch(this.snack = true)
         }
     }

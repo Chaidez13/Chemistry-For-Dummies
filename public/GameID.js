@@ -59,9 +59,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -228,7 +225,7 @@ axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.headers.common = {
       game: false,
       cardsActive: 0,
       anterior: null,
-      difTime: 1.6666,
+      difTime: 0.888,
       gameOv: false,
       puntos: 0,
       status: false,
@@ -449,7 +446,7 @@ axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.headers.common = {
                 this.gameOv = true;
                 clearInterval(this.interval);
                 _context2.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('partida/update/2', {
+                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/partida/update/2', {
                   puntos: this.puntos,
                   nivel: this.levelMemoria,
                   estado: this.status,
@@ -651,7 +648,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_SelectLevel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/SelectLevel */ "./resources/js/components/ui/src/components/SelectLevel.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_TetrisGame__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/TetrisGame */ "./resources/js/components/ui/src/components/TetrisGame.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -667,16 +665,47 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    SelectLevel: _components_SelectLevel__WEBPACK_IMPORTED_MODULE_0__["default"]
+    SelectLevel: _components_SelectLevel__WEBPACK_IMPORTED_MODULE_0__["default"],
+    TetrisGame: _components_TetrisGame__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {};
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('tetris', ["gameTetris"]))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])('tetris', ["gameTetris"]))
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ui/src/components/TetrisGame.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ui/src/components/TetrisGame.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+
+window.$ = $;
+/* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    $.post('/tetris', function (juego) {
+      $("#contenedor").html(juego);
+    });
+  }
 });
 
 /***/ }),
@@ -816,6 +845,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -906,14 +944,11 @@ axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.headers.common = {
                 });
 
               case 2:
-                console.log(this.questions);
-
-              case 3:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee2);
       }));
 
       function getQuestion() {
@@ -984,7 +1019,7 @@ axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.headers.common = {
       this.interval = setInterval(this.timer, 1000);
     },
     timer: function timer() {
-      this.time += 10;
+      this.time += 5;
     },
     gameEnded: function () {
       var _gameEnded = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
@@ -995,7 +1030,7 @@ axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.headers.common = {
                 this.gameO = true;
                 clearInterval(this.interval);
                 _context3.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('partida/update/3', {
+                return axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/partida/update/3', {
                   puntos: this.puntos,
                   nivel: this.levelTrivia,
                   estado: this.status,
@@ -1150,7 +1185,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.carta[data-v-7c384f34] {\r\n  margin: 20px;\r\n  border-radius: 5px;\r\n  border: 1px solid darkgray;\r\n  max-width: 150px;\r\n  min-width: 130px;\r\n  min-height: 210px;\n}\n.btn-game[data-v-7c384f34]{\r\n  margin: 0 10px;\n}\r\n", ""]);
+exports.push([module.i, "\n.carta[data-v-7c384f34] {\r\n  margin: 20px;\r\n  border-radius: 5px;\r\n  border: 1px solid darkgray;\r\n  max-width: 150px;\r\n  min-width: 130px;\r\n  min-height: 210px;\n}\n.buttons[data-v-7c384f34]{\r\n  margin-top: 1%;\r\n  margin-bottom: 2%;\n}\n.btn-game[data-v-7c384f34]{\r\n  margin: 0 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -1169,7 +1204,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.answer-option[data-v-d7cc841a] {\r\n  margin: 10px;\r\n  border-radius: 5px;\r\n  border: 1px solid darkgray;\r\n  background-color: lightblue;\r\n  max-width: 170px;\r\n  min-width: 130px;\r\n  min-height: 200px;\n}\n.answer-option[data-v-d7cc841a]:hover {\r\n  background-color: yellow;\n}\r\n", ""]);
+exports.push([module.i, "\n.answer-option[data-v-d7cc841a] {\r\n  margin: 10px;\r\n  border-radius: 5px;\r\n  border: 1px solid darkgray;\r\n  background-color: lightblue;\r\n  max-width: 170px;\r\n  min-width: 130px;\r\n  min-height: 200px;\n}\n.answer-option[data-v-d7cc841a]:hover {\r\n  background-color: yellow;\n}\n.btn-game[data-v-d7cc841a]{\r\n  margin: 0 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -1304,31 +1339,26 @@ var render = function() {
         "v-card",
         { staticClass: "mx-auto", attrs: { "max-width": "400" } },
         [
-          _c(
-            "v-img",
-            {
-              staticClass: "white--text align-end",
-              attrs: {
-                height: "200px",
-                src: _vm.status
-                  ? __webpack_require__(/*! ../assets/win.jpg */ "./resources/js/components/ui/src/assets/win.jpg")
-                  : __webpack_require__(/*! ../assets/gameOver.jpg */ "./resources/js/components/ui/src/assets/gameOver.jpg")
-              }
-            },
-            [_c("v-card-title", [_vm._v("\n            GAME OVER\n        ")])],
-            1
-          ),
+          _c("v-img", {
+            staticClass: "white--text align-end",
+            attrs: {
+              height: "200px",
+              src: _vm.status
+                ? __webpack_require__(/*! ../assets/win.jpg */ "./resources/js/components/ui/src/assets/win.jpg")
+                : __webpack_require__(/*! ../assets/gameOver.jpg */ "./resources/js/components/ui/src/assets/gameOver.jpg")
+            }
+          }),
           _vm._v(" "),
           _vm.status
             ? _c("v-card-subtitle", [
-                _vm._v("Felicidades! Has superado este nivel.")
+                _vm._v("!Felicidades!, has superado este nivel.")
               ])
             : _vm._e(),
           _vm._v(" "),
           !_vm.status
             ? _c("v-card-subtitle", [
                 _vm._v(
-                  "Salsa tartara! Has fracasado este nivel 😢 intentalo de nuevo."
+                  "!Salsa tartara!, has fracasado este nivel. 😢 Inténtalo de nuevo."
                 )
               ])
             : _vm._e(),
@@ -1426,27 +1456,25 @@ var render = function() {
   return _c(
     "v-container",
     [
-      _vm.game
-        ? _c("time-bar", { attrs: { time: _vm.time, color: _vm.timeColor } })
-        : _vm._e(),
-      _vm._v(" "),
       _c(
         "v-row",
         {
-          staticStyle: { "margin-top": "4%" },
+          staticClass: "buttons",
           attrs: { align: "center", justify: "center" }
         },
         [
-          _c(
-            "v-btn",
-            {
-              staticClass: "btn-game",
-              attrs: { fab: "", color: "primary" },
-              on: { click: _vm.startGameButton }
-            },
-            [_c("v-icon", [_vm._v("mdi-play")])],
-            1
-          ),
+          !_vm.game
+            ? _c(
+                "v-btn",
+                {
+                  staticClass: "btn-game",
+                  attrs: { fab: "", color: "primary" },
+                  on: { click: _vm.startGameButton }
+                },
+                [_c("v-icon", [_vm._v("mdi-play")])],
+                1
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "v-btn",
@@ -1461,6 +1489,13 @@ var render = function() {
         ],
         1
       ),
+      _vm._v(" "),
+      _vm.game
+        ? _c("time-bar", {
+            staticStyle: { "margin-bottom": "2%" },
+            attrs: { time: _vm.time, color: _vm.timeColor }
+          })
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "v-row",
@@ -1654,6 +1689,30 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ui/src/components/TetrisGame.vue?vue&type=template&id=355cf0ee&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ui/src/components/TetrisGame.vue?vue&type=template&id=355cf0ee& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "contenedor" } })
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ui/src/components/TimeBar.vue?vue&type=template&id=c5245ad0&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ui/src/components/TimeBar.vue?vue&type=template&id=c5245ad0& ***!
@@ -1754,11 +1813,90 @@ var render = function() {
   return _c(
     "v-container",
     [
-      _c("vidas", { attrs: { cantVidas: _vm.lifes } }),
+      _c(
+        "v-row",
+        {
+          staticStyle: { "margin-top": "4%" },
+          attrs: { align: "center", justify: "center" }
+        },
+        [
+          _c(
+            "v-col",
+            { attrs: { cols: "12", align: "center", justify: "center" } },
+            [
+              _c(
+                "v-btn",
+                {
+                  staticClass: "btn-game",
+                  attrs: { fab: "", color: "error" },
+                  on: { click: _vm.setGameTriviaOff }
+                },
+                [_c("v-icon", [_vm._v("mdi-backspace")])],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm.$vuetify.breakpoint.mdAndUp
+            ? _c(
+                "v-col",
+                {
+                  staticStyle: { position: "absolute", right: "5%" },
+                  attrs: { cols: "12", lg: "5", md: "3", justify: "flex-end" }
+                },
+                [_c("vidas", { attrs: { cantVidas: _vm.lifes } })],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.$vuetify.breakpoint.smAndDown
+            ? _c(
+                "v-col",
+                {
+                  attrs: {
+                    cols: "12",
+                    sm: "10",
+                    align: "center",
+                    justify: "center"
+                  }
+                },
+                [_c("vidas", { attrs: { cantVidas: _vm.lifes } })],
+                1
+              )
+            : _vm._e()
+        ],
+        1
+      ),
       _vm._v(" "),
-      _c("v-row", { attrs: { align: "center", justify: "center" } }, [
-        _c("h2", [_vm._v(_vm._s(_vm.title))])
-      ]),
+      _c(
+        "v-row",
+        {
+          staticStyle: { "margin-bottom": "2%", "margin-top": "1%" },
+          attrs: { align: "center", justify: "center" }
+        },
+        [_c("h2", [_vm._v(_vm._s(_vm.title))])]
+      ),
+      _vm._v(" "),
+      _c("time-bar", { attrs: { time: _vm.time } }),
+      _vm._v(" "),
+      _c(
+        "v-row",
+        { staticClass: "pa-5", attrs: { align: "center", justify: "center" } },
+        [_c("h3", [_vm._v(_vm._s(_vm.message))])]
+      ),
+      _vm._v(" "),
+      _c(
+        "v-row",
+        { attrs: { align: "center", justify: "center" } },
+        [
+          _c("v-progress-linear", {
+            staticStyle: { "max-width": "800px" },
+            attrs: { value: _vm.progreso, rounded: "", height: "10px" }
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "v-row",
@@ -1794,42 +1932,6 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("time-bar", { attrs: { time: _vm.time } }),
-      _vm._v(" "),
-      _c(
-        "v-row",
-        { staticClass: "pa-5", attrs: { align: "center", justify: "center" } },
-        [_c("h3", [_vm._v(_vm._s(_vm.message))])]
-      ),
-      _vm._v(" "),
-      _c(
-        "v-row",
-        { attrs: { align: "center", justify: "center" } },
-        [
-          _c("v-progress-linear", {
-            staticStyle: { "max-width": "800px" },
-            attrs: { value: _vm.progreso, rounded: "", height: "10px" }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-row",
-        {
-          staticStyle: { "margin-top": "4%" },
-          attrs: { align: "center", justify: "center" }
-        },
-        [
-          _c(
-            "v-btn",
-            { attrs: { color: "danger" }, on: { click: _vm.setGameTriviaOff } },
-            [_vm._v("Salir")]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
       _vm.gameO
         ? _c("GameOver", {
             attrs: { points: _vm.puntos, status: _vm.status, game: "3" }
@@ -1861,71 +1963,74 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "v-content",
-    [
-      _c(
-        "v-row",
-        { attrs: { justify: "end" } },
-        [
-          _c(
-            "v-col",
-            { attrs: { cols: "10", md: "3", lg: "3" } },
-            [
-              _c("v-row", [
-                _c("h4", { staticClass: "text-center" }, [_vm._v("Vidas")])
-              ]),
-              _vm._v(" "),
-              _c(
-                "v-row",
-                [
-                  _c(
-                    "v-col",
-                    [
-                      _vm.cantVidas > 0
-                        ? _c("v-icon", { attrs: { color: "teal darken-2" } }, [
-                            _vm._v("mdi-test-tube")
-                          ])
-                        : _c("v-icon", [_vm._v("mdi-test-tube-empty")])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-col",
-                    [
-                      _vm.cantVidas > 1
-                        ? _c("v-icon", { attrs: { color: "teal darken-2" } }, [
-                            _vm._v("mdi-test-tube")
-                          ])
-                        : _c("v-icon", [_vm._v("mdi-test-tube-empty")])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-col",
-                    [
-                      _vm.cantVidas > 2
-                        ? _c("v-icon", { attrs: { color: "teal darken-2" } }, [
-                            _vm._v("mdi-test-tube")
-                          ])
-                        : _c("v-icon", [_vm._v("mdi-test-tube-empty")])
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
+  return _c("v-content", [
+    _c(
+      "div",
+      [
+        _c("v-row", { attrs: { align: "center", justify: "center" } }, [
+          _c("h4", { staticClass: "text-center" }, [_vm._v("Vidas")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "v-row",
+          [
+            _c(
+              "v-col",
+              { attrs: { cols: "4" } },
+              [
+                _vm.cantVidas > 0
+                  ? _c(
+                      "v-icon",
+                      { attrs: { "x-large": "", color: "teal darken-2" } },
+                      [_vm._v("mdi-test-tube")]
+                    )
+                  : _c("v-icon", { attrs: { "x-large": "" } }, [
+                      _vm._v("mdi-test-tube-empty")
+                    ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-col",
+              { attrs: { cols: "4" } },
+              [
+                _vm.cantVidas > 1
+                  ? _c(
+                      "v-icon",
+                      { attrs: { "x-large": "", color: "teal darken-2" } },
+                      [_vm._v("mdi-test-tube")]
+                    )
+                  : _c("v-icon", { attrs: { "x-large": "" } }, [
+                      _vm._v("mdi-test-tube-empty")
+                    ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-col",
+              { attrs: { cols: "4" } },
+              [
+                _vm.cantVidas > 2
+                  ? _c(
+                      "v-icon",
+                      { attrs: { "x-large": "", color: "teal darken-2" } },
+                      [_vm._v("mdi-test-tube")]
+                    )
+                  : _c("v-icon", { attrs: { "x-large": "" } }, [
+                      _vm._v("mdi-test-tube-empty")
+                    ])
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -1965,7 +2070,7 @@ render._withStripped = true
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/gameOver.jpg?54209937894bffe00bd2d8df16d492a7";
+module.exports = "/images/gameOver.jpg?2c73e4cfca37d7253221e50fe23b40b3";
 
 /***/ }),
 
@@ -1976,7 +2081,7 @@ module.exports = "/images/gameOver.jpg?54209937894bffe00bd2d8df16d492a7";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/win.jpg?d069dc2f698441bcb54bed88301a0361";
+module.exports = "/images/win.jpg?e98bff7a9cf69fd4c6913289bb7b429a";
 
 /***/ }),
 
@@ -2407,6 +2512,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Tetris_vue_vue_type_template_id_4479e7f7_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Tetris_vue_vue_type_template_id_4479e7f7_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ui/src/components/TetrisGame.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/ui/src/components/TetrisGame.vue ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TetrisGame_vue_vue_type_template_id_355cf0ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TetrisGame.vue?vue&type=template&id=355cf0ee& */ "./resources/js/components/ui/src/components/TetrisGame.vue?vue&type=template&id=355cf0ee&");
+/* harmony import */ var _TetrisGame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TetrisGame.vue?vue&type=script&lang=js& */ "./resources/js/components/ui/src/components/TetrisGame.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TetrisGame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TetrisGame_vue_vue_type_template_id_355cf0ee___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TetrisGame_vue_vue_type_template_id_355cf0ee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ui/src/components/TetrisGame.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ui/src/components/TetrisGame.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/ui/src/components/TetrisGame.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TetrisGame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./TetrisGame.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ui/src/components/TetrisGame.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TetrisGame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ui/src/components/TetrisGame.vue?vue&type=template&id=355cf0ee&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/ui/src/components/TetrisGame.vue?vue&type=template&id=355cf0ee& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TetrisGame_vue_vue_type_template_id_355cf0ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./TetrisGame.vue?vue&type=template&id=355cf0ee& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ui/src/components/TetrisGame.vue?vue&type=template&id=355cf0ee&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TetrisGame_vue_vue_type_template_id_355cf0ee___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TetrisGame_vue_vue_type_template_id_355cf0ee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

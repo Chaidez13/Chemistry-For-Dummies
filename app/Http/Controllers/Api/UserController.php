@@ -19,12 +19,6 @@ class UserController extends Controller
     {      
         return Auth::user();
     }
-
-    public function test(){
-        $data = User::get();
-        return $data;
-    }
-
     /**
      * Show the form for creating a new resource.
      *

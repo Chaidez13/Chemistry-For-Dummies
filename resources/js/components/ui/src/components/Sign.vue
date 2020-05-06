@@ -148,8 +148,8 @@ export default {
            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
          }
        }).then(() => {
-         this.validarSesion()
-         this.$router.push({ name: "home" });
+          this.validarSesion()
+          window.location.href = '/'
        }).catch((e) =>{
          const errorCode = e.response.status
          if(errorCode == 422){

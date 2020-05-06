@@ -45,6 +45,7 @@ class PartidaController extends Controller
         ]);
        $idUsuario = Auth::user()->id;
        $partida['idUsuario'] = $idUsuario;
+<<<<<<< HEAD
        if(Partida::where('idJuego', $partida['idJuego'])->where('nivel',$partida['nivel'])->where('idUsuario',$idUsuario)->count()==0)
             Partida::create([
                 'idJuego' => $partida['idJuego'],
@@ -54,6 +55,11 @@ class PartidaController extends Controller
                 'estado' => 1,
                 'progreso' =>0, 
             ]);
+=======
+       if(Partida::where('idJuego', $partida['idJuego'])->where('nivel',$partida['nivel'])->where('idUsuario',$idUsuario)->count()==0){
+            Partida::create($partida);
+       }
+>>>>>>> b9d92d26c7931ba5acf3ea4655c22b1235d3cccb
         else
             return 'La partida existe';
     }

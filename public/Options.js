@@ -236,6 +236,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 }).then(function () {
                   _this.changeChanges;
                   window.location.href = '/';
+                  location.reload();
                 })["catch"](this.snack = true);
 
               case 3:
@@ -322,7 +323,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(this.ruta).then(window.location.href = '/')["catch"](this.snack = true);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(this.ruta).then(function () {
+                  window.location.href = '/';
+                  location.reload();
+                })["catch"](this.snack = true);
 
               case 2:
               case "end":

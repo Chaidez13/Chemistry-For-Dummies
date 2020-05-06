@@ -32,7 +32,13 @@ Route::get('game/memoria', function () {
 Route::get('game/tetris', function () {	
   return view('welcome');
 });
+<<<<<<< HEAD
 
+=======
+Route::get('/tetris', function () {	
+  return view('tetris');
+});
+>>>>>>> b9d92d26c7931ba5acf3ea4655c22b1235d3cccb
 Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 Route::middleware('auth')->group(function () {
@@ -55,7 +61,6 @@ Route::middleware('auth')->group(function () {
     return view('tetris');
   });
 });
-Route::GET('/user/test','Api\UserController@test');
 Route::POST('/login','Auth\LoginController@login'); //Inicio de sesión
 Route::POST('/registro/user','Api\UserController@store'); //Registro de usuario
 

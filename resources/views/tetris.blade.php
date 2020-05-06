@@ -13,5 +13,9 @@
 		<CENTER>
 			<canvas width="1261" height="1000" data-processing-sources="tetris.pde Elemento.pde menu.pde logro.pde"></canvas>
 		</CENTER>
+<<<<<<< HEAD
+=======
+	<script>fullScreen()</script>
+>>>>>>> b9d92d26c7931ba5acf3ea4655c22b1235d3cccb
 	</body>
 </html>
