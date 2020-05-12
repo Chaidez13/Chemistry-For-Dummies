@@ -19,7 +19,7 @@ var created = false;
 var nivel = cargarNivel(); //Carga el nivel del juego
 var typed = '';
 var confirmar;
-var continuar = false,
+var continuar = true,
 	musicOn = false,
 	activarMenu = false,
 	mute = false,
@@ -47,8 +47,8 @@ void setup() {
 	size(1261, 1000);
 	crearMatriz();
 	menu = new Menu();
-	menu.activo = true;
 	setUpMusic();
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	instrucciones = loadImage("src/instrucciones.png");
@@ -60,12 +60,16 @@ void setup() {
 	else
 		fondo = requestImage("src/fondo_5.jpg");
 >>>>>>> b9d92d26c7931ba5acf3ea4655c22b1235d3cccb
+=======
+	instrucciones = loadImage("src/instrucciones.png");
+>>>>>>> 1ef13cdd4b15fcdd45e4a5d1692f0e774893a036
 	banderaPuntos = cargarPuntos(nivel);
 	frameRate(30);
 }
 
 void draw() {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (instrucciones.width != 0 && instrucciones.width != -1) {
 		background(245, 245, 245);
@@ -74,6 +78,10 @@ void draw() {
 		background(0);
 		image(fondo, 0, 0);
 >>>>>>> b9d92d26c7931ba5acf3ea4655c22b1235d3cccb
+=======
+	if (instrucciones.width != 0 && instrucciones.width != -1) {
+		background(245, 245, 245);
+>>>>>>> 1ef13cdd4b15fcdd45e4a5d1692f0e774893a036
 		if (!created) {
 			guardarPartida(puntos, nivel);
 			llenarMatriz();
@@ -100,6 +108,7 @@ void draw() {
 		}
 		textSize(16);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vidas(10, 5, salud);
 		if (!continuar) {
 			menu.activo = true;
@@ -111,14 +120,21 @@ void draw() {
 		vidas(10, 30, salud);
 		marcador(puntos, 1128, 75);
 		marcador(puntosGuardados, 1128, 157);
+=======
+		vidas(10, 5, salud);
+>>>>>>> 1ef13cdd4b15fcdd45e4a5d1692f0e774893a036
 		if (!continuar) {
 			menu.activo = true;
-			menu.mostrar(mouseX, mouseY, "pause");
+			menu.mostrar(mouseX, mouseY, "Pause");
 		}
 		if (ganar) {
+<<<<<<< HEAD
 			menu.mostrar(mouseX, mouseY, "ganar");
 			pauseGameMusic();
 >>>>>>> b9d92d26c7931ba5acf3ea4655c22b1235d3cccb
+=======
+			menu.mostrar(mouseX, mouseY, "¡Ganaste!");
+>>>>>>> 1ef13cdd4b15fcdd45e4a5d1692f0e774893a036
 			if (opcion != -1) {
 				actualizarPuntos(puntos, 100, puntosGuardados, nivel, 1);
 				nextLevel();
@@ -126,10 +142,14 @@ void draw() {
 		}
 		if (perder) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			menu.mostrar(mouseX, mouseY, "Has perdido");
 =======
 			menu.mostrar(mouseX, mouseY, "perder");
 >>>>>>> b9d92d26c7931ba5acf3ea4655c22b1235d3cccb
+=======
+			menu.mostrar(mouseX, mouseY, "Has perdido");
+>>>>>>> 1ef13cdd4b15fcdd45e4a5d1692f0e774893a036
 			if (opcion != -1) {
 				actualizarPuntos(puntos, progreso, puntosGuardados, nivel, 0);
 				puntosGuardados = cargarPuntos(nivel);
@@ -374,22 +394,32 @@ function elementoRandom() {
 
 function vidas(x, y, vida) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1ef13cdd4b15fcdd45e4a5d1692f0e774893a036
 		noStroke();
 		fill(227, 227, 227);
 		rect(x, y, 250*4.95, 15, 8);
 		rect(x, y + 20, 250*4.95, 15, 8);
+<<<<<<< HEAD
 =======
 >>>>>>> b9d92d26c7931ba5acf3ea4655c22b1235d3cccb
+=======
+>>>>>>> 1ef13cdd4b15fcdd45e4a5d1692f0e774893a036
 	if (vida >= 50 && vida <= 100)
 		fill(229, 101, 13);
 	else if (vida <= 50) {
 		fill(229, 36, 13);
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1ef13cdd4b15fcdd45e4a5d1692f0e774893a036
 	fill(56, 142, 60);
 	rect(x, y, vida*4.95, 15, 8);
 	fill(25,118,210);
 	rect(x, y + 20, (progreso * 2.5)*4.95, 15, 8);
+<<<<<<< HEAD
 	fill(0);
 	
 	textSize(20);
@@ -407,33 +437,35 @@ function vidas(x, y, vida) {
 	stroke(3);
 	fill(255, 50);
 	rect(x, y, 250, 30, 8);
+=======
+>>>>>>> 1ef13cdd4b15fcdd45e4a5d1692f0e774893a036
 	fill(0);
-	textSize(18);
-	fill(255);
-	//Progreso
-	stroke(1);
-	fill(255, 50);
-	rect(x, y + 60, 250, 30, 8);
-	stroke(1);
-	fill(59, 229, 13);
-	rect(x, y + 60, progreso * 2.5, 30, 8);
-	fill(255);
-	text("Nivel  " + nivel, x + 40, y - 5);
-	text("Progreso  " + progreso + "%", x + 60, y + 53);
+	
+	textSize(20);
+	textAlign(LEFT);
+	text(puntos + " / " + puntosGuardados,x, y+60);
+	text(progreso + "% / 100%",x, y+85);
 	if(!mute)
-		text("Música: ON",x+55,y+115);
+		text("Música: On",x,975);
 	else 
+<<<<<<< HEAD
 		text("Música: Off",x+55,y+115);
 	
 >>>>>>> b9d92d26c7931ba5acf3ea4655c22b1235d3cccb
+=======
+		text("Música: Off",x,975);
+>>>>>>> 1ef13cdd4b15fcdd45e4a5d1692f0e774893a036
 	textFont(createFont("Comic sans ms", 20));
 }
 
 function marcador(points, x, y) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	fill(255);
 >>>>>>> b9d92d26c7931ba5acf3ea4655c22b1235d3cccb
+=======
+>>>>>>> 1ef13cdd4b15fcdd45e4a5d1692f0e774893a036
 	textFont(createFont("Comic sans ms", 32));
 	text(points, x, y);
 }

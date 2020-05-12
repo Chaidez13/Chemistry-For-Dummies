@@ -11,6 +11,7 @@
 	</head>
 	<body>	
 		<CENTER>
+			<h5>Utilice la tecla "P" para pausar</h5>
 			<canvas width="1261" height="1000" data-processing-sources="tetris.pde Elemento.pde menu.pde logro.pde"></canvas>
 		</CENTER>
 	</body>
