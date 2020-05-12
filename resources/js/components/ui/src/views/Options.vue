@@ -12,7 +12,7 @@
 
       <v-list-item @click="eraseData()">
         <v-list-item-content>
-          <v-list-item-title>Borar datos</v-list-item-title>
+          <v-list-item-title>Borrar datos</v-list-item-title>
           <v-list-item-subtitle>
             Reiniciar todo el progreso en todos los juegos de Chemistry For
             Dummies (Acción irreversible)

@@ -1029,7 +1029,7 @@ var render = function() {
               _c(
                 "v-list-item-content",
                 [
-                  _c("v-list-item-title", [_vm._v("Borar datos")]),
+                  _c("v-list-item-title", [_vm._v("Borrar datos")]),
                   _vm._v(" "),
                   _c("v-list-item-subtitle", [
                     _vm._v(
