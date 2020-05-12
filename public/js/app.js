@@ -2187,7 +2187,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         icon: "mdi-cogs",
         ruta: "/options"
       }, {
-        opcion: "Estadisticas",
+        opcion: "Estadísticas",
         icon: "mdi-google-analytics",
         ruta: "/dashboard"
       }]

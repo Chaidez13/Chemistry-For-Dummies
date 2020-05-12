@@ -205,6 +205,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -1185,7 +1188,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.carta[data-v-7c384f34] {\r\n  margin: 20px;\r\n  border-radius: 5px;\r\n  border: 1px solid darkgray;\r\n  max-width: 150px;\r\n  min-width: 130px;\r\n  min-height: 210px;\n}\n.buttons[data-v-7c384f34]{\r\n  margin-top: 1%;\r\n  margin-bottom: 2%;\n}\n.btn-game[data-v-7c384f34]{\r\n  margin: 0 10px;\n}\r\n", ""]);
+exports.push([module.i, "\n.carta[data-v-7c384f34] {\r\n  margin: 20px;\r\n  border-radius: 5px;\r\n  border: 1px solid darkgray;\r\n  max-width: 150px;\r\n  min-width: 130px;\r\n  min-height: 210px;\n}\n.buttons[data-v-7c384f34]{\r\n  margin-top: 1%;\r\n  margin-bottom: 2%;\n}\n.btn-game[data-v-7c384f34]{\r\n  margin: 0 10px;\n}\n.icon-bg[data-v-7c384f34]{\r\n  width: 100%;\r\n  height: 100%;\r\n  text-align: center;\r\n  margin-top: 35px;\n}\r\n", ""]);
 
 // exports
 
@@ -1518,7 +1521,26 @@ var render = function() {
                 }
               }
             },
-            [_c("carta-memoria", { attrs: { item: item } })],
+            [
+              !item.activa
+                ? _c(
+                    "div",
+                    { staticClass: "icon-bg" },
+                    [
+                      _c(
+                        "v-icon",
+                        {
+                          attrs: { color: "blue-grey lighten-2", size: "600%" }
+                        },
+                        [_vm._v("mdi-atom")]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c("carta-memoria", { attrs: { item: item } })
+            ],
             1
           )
         }),

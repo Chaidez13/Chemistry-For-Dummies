@@ -149,7 +149,7 @@ var render = function() {
             staticClass: "display-2",
             staticStyle: { color: "#EC407A", padding: "20px 0 100px" }
           },
-          [_vm._v("ESTADISTICAS")]
+          [_vm._v("ESTADÍSTICAS")]
         )
       ]),
       _vm._v(" "),

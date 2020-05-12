@@ -23,6 +23,9 @@
         ]"
         @click="flipCard(item)"
       >
+        <div v-if="!item.activa" class="icon-bg">
+          <v-icon color="blue-grey lighten-2"  size="600%">mdi-atom</v-icon>
+        </div>
         <carta-memoria :item="item" />
       </v-col>
     </v-row>
@@ -274,5 +277,11 @@ export default {
 }
 .btn-game{
   margin: 0 10px;
+}
+.icon-bg{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  margin-top: 35px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row align="center" justify="center">
-      <h1 class="display-2" style="color: #EC407A; padding: 20px 0 100px">ESTADISTICAS</h1>
+      <h1 class="display-2" style="color: #EC407A; padding: 20px 0 100px">ESTADÍSTICAS</h1>
     </v-row>
     <v-row>
       <v-col v-for="(item, i) in juegos" :key="i">

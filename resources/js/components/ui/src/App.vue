@@ -53,7 +53,7 @@ export default {
       { opcion: "Juegos", icon: "mdi-gamepad-variant", ruta: "/" },
       { opcion: "Opciones", icon: "mdi-cogs", ruta: "/options" },
       {
-        opcion: "Estadisticas",
+        opcion: "Estadísticas",
         icon: "mdi-google-analytics",
         ruta: "/dashboard"
       },
