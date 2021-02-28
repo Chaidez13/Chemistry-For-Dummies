@@ -146,7 +146,7 @@ export default {
           this.validarSesion()
           window.location.href = '/'
        }).catch((e) =>{
-         const errorCode = e?.response?.status
+         const errorCode = e.response.status
          if(errorCode == 422){
            this.errorMessage = "Datos de acceso incorrectos"
          }else{

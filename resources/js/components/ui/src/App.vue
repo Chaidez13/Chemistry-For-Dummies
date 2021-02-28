@@ -15,7 +15,7 @@
       </v-list-item>
 
       <v-divider></v-divider>
-
+      
       <v-list>
         <v-list-item v-for="(item,i) in opciones" :key="i" link @click="changeOption(item.ruta)">
           <v-list-item-icon>
@@ -26,14 +26,7 @@
             <v-list-item-title>{{ item.opcion }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <!-- <v-list-item @click="changeOption('/logout')" v-if="sesion.status">
-          <v-list-item-icon>
-            <v-icon>mdi-logout</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>Cerrar sesión</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item> -->
+       
       </v-list>
     </v-navigation-drawer>
   </v-app>
@@ -61,7 +54,7 @@ export default {
         icon: "mdi-format-list-numbered",
         ruta: "/ranking"
       },
-      {
+      sesion.status && {
         opcion: "Cerrar sesión",
         icon: "mdi-logout",
         ruta: "/logout"
