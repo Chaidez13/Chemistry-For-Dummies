@@ -1,16 +1,16 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
 
-import memoria from './modules/memoria';
-import trivia from './modules/trivia';
-import tetris from './modules/tetris';
+import memoria from "./modules/memoria";
+import trivia from "./modules/trivia";
+import tetris from "./modules/tetris";
+import { getUserData } from "../utils/services";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    sesion:{
+    sesion: {
       status: false,
       name: null,
     },
@@ -19,46 +19,43 @@ export default new Vuex.Store({
     changesDialog: false,
   },
   mutations: {
-    setUserData(state, payload){
+    setUserData(state, payload) {
       state.sesion.status = true;
       state.sesion.name = payload;
     },
-    logOut(state){
+    logOut(state) {
       state.sesion = {
         status: false,
         name: null,
-      }
+      };
     },
-    changeReport(state){
-      state.reportDialog = !state.reportDialog
+    changeReport(state) {
+      state.reportDialog = !state.reportDialog;
     },
-    changeWarning(state){
-      state.warningDialog = !state.warningDialog
+    changeWarning(state) {
+      state.warningDialog = !state.warningDialog;
     },
-    changeChanges(state){
-      state.changesDialog = !state.changesDialog
+    changeChanges(state) {
+      state.changesDialog = !state.changesDialog;
     },
   },
   getters: {
-    auth(state){
+    auth(state) {
       return state.sesion;
-    }
-  },
-  actions:{
-    validarSesion: async function( { commit } ){
-      await axios.get('/user/datos',{
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        }
-       }).then(response =>{
-        commit('setUserData', response.data.nombre)
-      }).catch(e => e);
     },
   },
-  modules:{
+  actions: {
+    validarSesion: function({ commit }) {
+      getUserData()
+        .then((response) => {
+          commit("setUserData", response.data.nombre);
+        })
+        .catch((e) => e);
+    },
+  },
+  modules: {
     tetris,
     trivia,
     memoria,
-  }
+  },
 });

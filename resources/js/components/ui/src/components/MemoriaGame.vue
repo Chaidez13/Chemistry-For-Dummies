@@ -37,14 +37,9 @@
 import { mapState, mapActions, mapMutations } from "vuex";
 import GameOver from "../components/GameOver";
 import CartaMemoria from "../components/CartaMemoria";
-import axios from "axios";
 import Vidas from "../components/Vidas";
 import TimeBar from "../components/TimeBar";
-
-axios.defaults.headers.common = {
-  'X-Requested-With': 'XMLHttpRequest',
-  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-};
+import { getMemoElements, storeGame, updateGame } from '../../utils/services';
 
 export default {
   data() {
@@ -78,13 +73,13 @@ export default {
     ...mapMutations('memoria', ["setGameMemoriaOn", "setGameMemoriaOff"]),
 
     getCards: async function(){
-      await axios.post('/partida/store',{
+      await storeGame({
         idJuego: 2,
         idUsuario: -1,
         nivel: this.levelMemoria,
         puntos: 0,
       })
-      await axios.get('/memorama/elementos').then(response => {
+      await getMemoElements().then(response => {
           this.elemets = this.chargeNElements(response.data)
           this.elemets.forEach(e => e.state = false)
           this.begin()
@@ -214,16 +209,16 @@ export default {
       }
     },
 
-    gameEnded: async function(){
+    gameEnded:  function(){
       this.game = false;
       this.gameOv = true;
       clearInterval(this.interval)
-      await axios.post('/partida/update/2',{
+      updateGame({
         puntos: this.puntos,
         nivel: this.levelMemoria,
         estado: this.status,
         progreso: Math.trunc((this.contadorCartas * 100)/this.elemets.length),
-      }).then(e => console.log('SUCCESS'))
+      }, 2).then(e => console.log('SUCCESS'))
       .catch(e => {
         console.log('ERROR')
       })

@@ -44,12 +44,7 @@ import Vidas from "../components/Vidas";
 import TimeBar from "../components/TimeBar";
 import GameOver from "../components/GameOver";
 
-import axios from "axios";
-
-axios.defaults.headers.common = {
-  'X-Requested-With': 'XMLHttpRequest',
-  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-};
+import { reportStore, triviaAnswers, updateGame } from '../../utils/services';
 
 export default {
   data() {
@@ -84,15 +79,15 @@ export default {
   methods: {
     ...mapMutations('trivia', ["setGameTriviaOn", "setGameTriviaOff"]),
     init: async function(){
-      await axios.post('/partida/store',{
+      await reportStore('/partida/store',{
         idJuego: 3,
         idUsuario: -1,
         nivel: this.levelTrivia,
         puntos: 0,
       })
     },
-    getQuestion: async function(){
-      await axios.get('/trivia/respuestas').then(response => {
+    getQuestion: function(){
+     triviaAnswers().get('/trivia/respuestas').then(response => {
         const perguntasLevel = response.data.filter(d => d.pregunta.nivel == this.levelTrivia)
         this.questions = this.shuffle(perguntasLevel)
         this.actual = 0
@@ -157,12 +152,12 @@ export default {
     gameEnded: async function(){
       this.gameO = true;
       clearInterval(this.interval)
-      await axios.post('/partida/update/3',{
+      await updateGame({
         puntos: this.puntos,
         nivel: this.levelTrivia,
         estado: this.status,
         progreso: this.actual*10,
-      }).then(e => console.log('SUCCESS'))
+      }, 3).then(e => console.log('SUCCESS'))
       .catch(e => {
         console.log('ERROR')
       })

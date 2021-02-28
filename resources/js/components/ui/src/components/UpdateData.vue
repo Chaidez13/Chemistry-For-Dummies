@@ -52,7 +52,7 @@
 
 <script>
 import { mapMutations } from "vuex";
-import axios from 'axios';
+import { resetPassword } from '../../utils/services';
 
 
 export default {
@@ -64,9 +64,9 @@ export default {
   }),
   methods: {
     ...mapMutations(["changeChanges"]),
-    cambiarData: async function(){
+    cambiarData: function(){
         if (this.$refs.form.validate()) {
-            await axios.post('/user/resetPassword',{
+            resetPassword({
                 actual: this.passOld,
                 nueva: this.passNew,
             }).then(()=> {

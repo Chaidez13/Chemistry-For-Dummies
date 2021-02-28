@@ -42,7 +42,7 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
-import axios from "axios";
+import { reportStore } from '../../utils/services';
 
 export default {
   data: () => ({
@@ -52,17 +52,16 @@ export default {
   }),
   methods:{
     ...mapMutations(['changeReport']),
-    sentReport: async function(){
-      try {
-        await axios.post('/reporte/store',{
+    sentReport: function(){
+      reportStore({
           //Usuario probicional equisde
           idUsuario: 1,
           juego: this.selectedGame,
           mensaje: this.message,
-        }).then(()=> this.changeReport)
-      } catch (error) {
-        
-      }
+        }).then(()=> {
+          this.changeReport()
+          
+        }).catch(e => console.log(e))
     }
   },
   computed:{

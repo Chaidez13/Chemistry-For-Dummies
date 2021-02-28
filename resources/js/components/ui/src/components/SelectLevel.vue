@@ -26,7 +26,7 @@
 
 <script>
 import { mapMutations, mapActions, mapState } from "vuex";
-import axios from 'axios';
+import { tetrisLevel } from '../../utils/services';
 
 export default {
   props: ["game"],
@@ -65,7 +65,7 @@ export default {
     ...mapMutations('tetris', ['setGameTetrisOn', 'setLevelTetris']),
     ...mapActions('tetris', ['updateLevelDataTT']),
 
-    beginGame: async function(dificultad) {
+    beginGame: function(dificultad) {
       switch (this.game) {
         case "2":
           this.setGameMemoriaOn();
@@ -77,7 +77,7 @@ export default {
           break;
         case "1":
          /*  this.setGameTetrisOn(); */
-          await axios.post('/tetris/level',{
+          tetrisLevel({
             nivel: dificultad,
           }).then(()=> window.location.href = '/tetris')
           .catch(() => alert("Ups, ocurrio un problema, intentalo de nuevo."))

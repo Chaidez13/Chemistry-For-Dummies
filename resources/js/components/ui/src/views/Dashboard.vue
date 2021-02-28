@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { allGame } from '../../utils/services';
 
 const gradients = [
   ["#222"],
@@ -72,13 +72,8 @@ export default {
     ]
   }),
   methods:{
-    updateData: async function(){
-      await axios.get('/partida/all',{
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        }
-      }).then(d => {
+    updateData: function(){
+      allGame().then(d => {
         d.data.forEach(e => {
           this.juegos[e.idJuego-1].value[e.nivel-1] = e.puntos;
         });
