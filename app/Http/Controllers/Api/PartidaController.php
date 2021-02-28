@@ -23,30 +23,33 @@ class PartidaController extends Controller
 
     public function topTenPerGame(){
         $tetris = DB::table('partida')
+        ->select('user.nombre','user.apellidoPaterno', 'partida.puntos')
            ->join('user', 'partida.idUsuario', '=', 'user.id')
-           ->select('user.nombre','user.apellidoPaterno', 'partida.puntos')
            ->where('partida.idJuego', '=', 1)
            ->where('partida.puntos','>',0)
            ->orderBy('puntos','DESC')
-           ->distinct('user.nombre')
            ->limit(10)
+           ->groupBy('user.nombre')
            ->get();
+           
         $memorama = DB::table('partida')
            ->join('user', 'partida.idUsuario', '=', 'user.id')
            ->select('user.nombre','user.apellidoPaterno', 'partida.puntos')
+           ->distinct('user.nombre')
            ->where('partida.idJuego', '=', 2)
            ->where('partida.puntos','>',0)
            ->orderBy('puntos','DESC')
-           ->distinct('user.nombre')
            ->limit(10)
+           ->groupBy('user.nombre')
            ->get();
         $trivia = DB::table('partida')
            ->join('user', 'partida.idUsuario', '=', 'user.id')
            ->select('user.nombre','user.apellidoPaterno', 'partida.puntos')
+           ->distinct('user.nombre')
            ->where('partida.idJuego', '=', 3)
            ->where('partida.puntos','>',0)
            ->orderBy('puntos','DESC')
-           ->distinct('user.nombre')
+           ->groupBy('user.nombre')
            ->limit(10)
            ->get();
         return response()->json(['tetris'=> $tetris,'memorama' => $memorama, 'trivia' => $trivia]);
