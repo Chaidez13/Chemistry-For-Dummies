@@ -60,6 +60,7 @@ export default {
         ruta: "/logout"
       }
     ]
+    // :/
   }),
   computed: {
     ...mapState(['sesion'])
