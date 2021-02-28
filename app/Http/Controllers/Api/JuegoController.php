@@ -46,7 +46,7 @@ class JuegoController extends Controller
      */
     public function show($id)
     {
-        Juego::find($id):
+        Juego::find($id);
     }
 
     /**
@@ -57,7 +57,7 @@ class JuegoController extends Controller
      */
     public function edit($id)
     {
-        $juego = Juego::find($id):
+        $juego = Juego::find($id);
         return $juego;
     }
 
