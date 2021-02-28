@@ -5,6 +5,8 @@ use App\Partida;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 class PartidaController extends Controller
 {
     /**
@@ -19,6 +21,40 @@ class PartidaController extends Controller
         return $partida;
     }
 
+    public function topTenPerGame(){
+        $tetris = DB::table('partida')
+        ->select('user.nombre','user.apellidoPaterno', 'partida.puntos')
+           ->join('user', 'partida.idUsuario', '=', 'user.id')
+           ->where('partida.idJuego', '=', 1)
+           ->where('partida.puntos','>',0)
+           ->orderBy('puntos','DESC')
+           ->limit(10)
+           ->groupBy('user.nombre')
+           ->get();
+           
+        $memorama = DB::table('partida')
+           ->join('user', 'partida.idUsuario', '=', 'user.id')
+           ->select('user.nombre','user.apellidoPaterno', 'partida.puntos')
+           ->distinct('user.nombre')
+           ->where('partida.idJuego', '=', 2)
+           ->where('partida.puntos','>',0)
+           ->orderBy('puntos','DESC')
+           ->limit(10)
+           ->groupBy('user.nombre')
+           ->get();
+        $trivia = DB::table('partida')
+           ->join('user', 'partida.idUsuario', '=', 'user.id')
+           ->select('user.nombre','user.apellidoPaterno', 'partida.puntos')
+           ->distinct('user.nombre')
+           ->where('partida.idJuego', '=', 3)
+           ->where('partida.puntos','>',0)
+           ->orderBy('puntos','DESC')
+           ->groupBy('user.nombre')
+           ->limit(10)
+           ->get();
+        return response()->json(['tetris'=> $tetris,'memorama' => $memorama, 'trivia' => $trivia]);
+    }
+    
     /**
      * Show the form for creating a new resource.
      *

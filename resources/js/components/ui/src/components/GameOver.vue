@@ -17,7 +17,6 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
-import axios from "axios";
 
 export default {
   props: ['points', 'status', 'game'],

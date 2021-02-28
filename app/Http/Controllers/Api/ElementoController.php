@@ -18,7 +18,10 @@ class ElementoController extends Controller
         $elementos = Storage::disk('local')->get('data.json');
         return $elementos;
     }
-
+    public function elementsInformation(){
+        $elementos = Storage::disk('local')->get('Elementos.json');
+        return $elementos;
+    }
     /**
      * Show the form for creating a new resource.
      *

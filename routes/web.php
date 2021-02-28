@@ -45,9 +45,11 @@ Route::middleware('auth')->group(function () {
   Route::POST('/partida/update/{id}','Api\PartidaController@update'); //Actualiza los datos de la partida {id}
   Route::GET('/trivia/respuestas' , 'Api\RespuestaController@index'); //obtiene las preguntas y respuestas
   Route::GET('/memorama/elementos','Api\ElementoController@index'); //Obtiene los elementos JSON
+  Route::GET('/glosario/elementos','Api\ElementoController@elementsInformation'); //Obtiene los elementos JSON PARA EL GLOSARIO
   Route::POST('/reporte/store','Api\ReporteController@store'); //Guarda los reportes
   Route::GET('/partida/datos','Api\PartidaController@obtenerDatosPartida');
   Route::GET('/partida/all','Api\PartidaController@index');
+  Route::GET('/partida/topTen','Api\PartidaController@topTenPerGame'); //Obtiene el top 10 de puntos de cada juego
   Route::POST('/user/resetPassword','Api\UserController@changePassword');
   Route::POST('/user/delete',"Api\UserController@destroy");
   Route::POST('/partida/delete',"Api\PartidaController@destroy"); 

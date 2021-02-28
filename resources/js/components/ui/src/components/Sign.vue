@@ -118,7 +118,7 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
-import axios from 'axios';
+import { login, register } from '../../utils/services';
 
 
 export default {
@@ -137,21 +137,16 @@ export default {
   }),
   methods: {
     ...mapActions(["validarSesion"]),
-   login: async function(){
+   login: function(){
      if (this.$refs.form.validate()) {
-       await axios.post('/login',{
+       login({
          email: this.email,
          password: this.pass,
-       },{
-         headers: {
-           'X-Requested-With': 'XMLHttpRequest',
-           'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-         }
        }).then(() => {
           this.validarSesion()
           window.location.href = '/'
        }).catch((e) =>{
-         const errorCode = e.response.status
+         const errorCode = e?.response?.status
          if(errorCode == 422){
            this.errorMessage = "Datos de acceso incorrectos"
          }else{
@@ -160,9 +155,9 @@ export default {
        })
      }
     },
-    registrarse: async function() {
+    registrarse: function() {
       if (this.$refs.form.validate()) {
-        await axios.post('/registro/user',{
+        register({
           nombre: this.nombre,
           apellidoPaterno: this.primerApellido,
           apellidoMaterno: this.segundoApellido,

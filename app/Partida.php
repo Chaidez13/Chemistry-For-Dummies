@@ -10,4 +10,9 @@ class Partida extends Model
     protected $fillable = [
         'idJuego','idUsuario','nivel','puntos','estado','progreso'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User','idUsuario')->withDefault();
+    }
 }

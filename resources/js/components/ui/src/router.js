@@ -12,55 +12,62 @@ const router = new Router({
       path: "/",
       name: "home",
       component: () =>
-        import(/* webpackChunkName: "Home" */ "./views/Games.vue")
+        import(/* webpackChunkName: "Home" */ "./views/Games.vue"),
     },
     {
       path: "/logout",
       name: "logout",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/UserLogout.vue")
+        import(/* webpackChunkName: "about" */ "./views/UserLogout.vue"),
     },
     {
       path: "/games",
       name: "games",
       component: () =>
-        import(/* webpackChunkName: "Games" */ "./views/Games.vue")
+        import(/* webpackChunkName: "Games" */ "./views/Games.vue"),
     },
     {
       path: "/usuario",
       name: "usuario",
       component: () =>
-        import(/* webpackChunkName: "Usuario" */ "./views/Usuario.vue")
+        import(/* webpackChunkName: "Usuario" */ "./views/Usuario.vue"),
     },
     {
       path: "/options",
       name: "options",
       component: () =>
-        import(/* webpackChunkName: "Options" */ "./views/Options.vue")
+        import(/* webpackChunkName: "Options" */ "./views/Options.vue"),
     },
     {
       path: "/game/:id",
       name: "game",
       component: () =>
-        import(/* webpackChunkName: "GameID" */ "./views/Game.vue")
+        import(/* webpackChunkName: "GameID" */ "./views/Game.vue"),
     },
     {
       path: "/dashboard",
       name: "dashboard",
       component: () =>
-        import(/* webpackChunkName: "Dashboard" */ "./views/Dashboard.vue")
+        import(/* webpackChunkName: "Dashboard" */ "./views/Dashboard.vue"),
     },
     {
-      path: '/tetris',
-      name: 'tetris',
-    }
+      path: "/ranking",
+      name: "ranking",
+      component: () =>
+        import(/* webpackChunkName: "Dashboard" */ "./views/Ranking.vue"),
+    },
+    {
+      path: "/tetris",
+      name: "tetris",
+    },
   ],
 });
 
 router.beforeEach((to, from, next) => {
   //necessary logic to resolve the hook
-  if(to.name !== 'home' && to.name !== 'usuario' && !store.getters.auth.status) next({name: 'usuario'})
-  else next()
- })
+  if (to.name !== "home" && to.name !== "usuario" && !store.getters.auth.status)
+    next({ name: "usuario" });
+  else next();
+});
 
-export default router
+export default router;

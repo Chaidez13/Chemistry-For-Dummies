@@ -57,8 +57,6 @@ class Elemento {
 				fill(151, 203, 66)
 			}
 		} else {
-<<<<<<< HEAD
-<<<<<<< HEAD
 			fill(219,232,255)
 		}
 		stroke(0);
@@ -66,21 +64,6 @@ class Elemento {
 		strokeCap(ROUND);
 		if (!this.jugable) {
 		rect(this.x + this.dx, this.y, this.h, this.h, 3);
-=======
-			fill(255)
-=======
-			fill(219,232,255)
->>>>>>> 1ef13cdd4b15fcdd45e4a5d1692f0e774893a036
-		}
-		stroke(0);
-		strokeWeight(1.5);
-		strokeCap(ROUND);
-		if (!this.jugable) {
-<<<<<<< HEAD
->>>>>>> b9d92d26c7931ba5acf3ea4655c22b1235d3cccb
-=======
-		rect(this.x + this.dx, this.y, this.h, this.h, 3);
->>>>>>> 1ef13cdd4b15fcdd45e4a5d1692f0e774893a036
 			if (this.visible) {
 				rect(this.x + this.dx, this.y, this.h, this.h, 3);
 				fill(0)
@@ -130,15 +113,7 @@ class Elemento {
 			this.y += this.dy;
 		else {
 			this.x = 350
-<<<<<<< HEAD
-<<<<<<< HEAD
 			this.y = 50
-=======
-			this.y = 0
->>>>>>> b9d92d26c7931ba5acf3ea4655c22b1235d3cccb
-=======
-			this.y = 50
->>>>>>> 1ef13cdd4b15fcdd45e4a5d1692f0e774893a036
 		}
 	}
 

@@ -26,14 +26,14 @@
             <v-list-item-title>{{ item.opcion }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item @click="changeOption('/logout')" v-if="sesion.status">
+        <!-- <v-list-item @click="changeOption('/logout')" v-if="sesion.status">
           <v-list-item-icon>
             <v-icon>mdi-logout</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>Cerrar sesión</v-list-item-title>
           </v-list-item-content>
-        </v-list-item>
+        </v-list-item> -->
       </v-list>
     </v-navigation-drawer>
   </v-app>
@@ -41,7 +41,6 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
-import axios from 'axios';
 
 export default {
   name: "App",
@@ -57,6 +56,16 @@ export default {
         icon: "mdi-google-analytics",
         ruta: "/dashboard"
       },
+      {
+        opcion: "Ranking",
+        icon: "mdi-format-list-numbered",
+        ruta: "/ranking"
+      },
+      {
+        opcion: "Cerrar sesión",
+        icon: "mdi-logout",
+        ruta: "/logout"
+      }
     ]
   }),
   computed: {

@@ -1,7 +1,10 @@
 
+<<<<<<< HEAD
 function fullScreen(){
 	alert("Recomendamos jugar en pantalla completa, puede habilitar el modo pantalla completa utilizando la tecla F11");
 }
+=======
+>>>>>>> 4d9919e726ccd10d619700dc6ee3af27d2501910
 function obtenerElementos() {
 	var datos = [];
 	$.ajaxSetup({

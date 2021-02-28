@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { logOutService } from '../../utils/services'
 import { mapMutations } from 'vuex'
 
 export default {
@@ -14,8 +14,8 @@ export default {
   },
   methods:{
     ...mapMutations(["logOut"]),
-    logout: async function(){
-      await axios.get('/logout').then(() => {
+    logout: function(){
+      logOutService().then(() => {
         this.logOut()
          this.$router.push({ name: "home" });
          location.reload();

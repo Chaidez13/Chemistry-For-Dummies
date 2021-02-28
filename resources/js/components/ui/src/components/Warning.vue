@@ -20,6 +20,7 @@
 
 <script>
 import axios from "axios";
+import { url } from '../../utils/services'
 import { mapState, mapMutations } from "vuex";
 
 export default {
@@ -30,8 +31,8 @@ export default {
   }),
   methods:{
     ...mapMutations(['changeWarning']),
-    aceptar: async function(){
-        await axios.post(this.ruta).then(()=>{
+    aceptar: function(){
+        axios.post(url + this.ruta.replace("/", '')).then(()=>{
           window.location.href = '/'
           location.reload();
         }).catch(this.snack=true)
