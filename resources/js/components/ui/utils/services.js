@@ -94,4 +94,8 @@ export const allGame = () => axios.get(url + "partida/all");
 
 export const logOutService = () => axios.get(url + "logout");
 
-export const triviaAnswers = () => axios.get("/trivia/respuestas");
+export const triviaAnswers = () => axios.get(url + "trivia/respuestas");
+
+export const getTopTen = () => axios.get(url + "partida/topTen");
+
+export const glossary = () => axios.get(url + "glosario/elementos");
