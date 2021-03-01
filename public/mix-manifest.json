@@ -1,11 +1,4 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/Dashboard.js": "/Dashboard.js",
-    "/GameID.js": "/GameID.js",
-    "/Home.js": "/Home.js",
-    "/Options.js": "/Options.js",
-    "/Usuario.js": "/Usuario.js",
-    "/about.js": "/about.js",
-    "/vendors~GameID.js": "/vendors~GameID.js"
+    "/css/app.css": "/css/app.css"
 }
