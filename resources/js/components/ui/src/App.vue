@@ -17,7 +17,7 @@
       <v-divider></v-divider>
       
       <v-list>
-        <v-list-item v-for="(item,i) in opciones" :key="i" link @click="changeOption(item.ruta)">
+        <v-list-item v-for="(item,i) in opciones" :key="i" link @click="changeOption(item.ruta)" v-show="item.show == sesion.status">
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -33,31 +33,33 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "App",
-
   data: () => ({
     //
     drawer: null,
     opciones: [
-      { opcion: "Juegos", icon: "mdi-gamepad-variant", ruta: "/" },
-      { opcion: "Opciones", icon: "mdi-cogs", ruta: "/options" },
+      { opcion: "Juegos", icon: "mdi-gamepad-variant", ruta: "/", show: false },
+      { opcion: "Opciones", icon: "mdi-cogs", ruta: "/options", show: false },
       {
         opcion: "Estadísticas",
         icon: "mdi-google-analytics",
-        ruta: "/dashboard"
+        ruta: "/dashboard", 
+        show: false
       },
       {
         opcion: "Ranking",
         icon: "mdi-format-list-numbered",
-        ruta: "/ranking"
+        ruta: "/ranking", 
+        show: false
       },
-      sesion.status && {
+      {
         opcion: "Cerrar sesión",
         icon: "mdi-logout",
-        ruta: "/logout"
+        ruta: "/logout", 
+        show: true
       }
     ]
     // :/
