@@ -9,17 +9,8 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./resources/js/components/ui/node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _utils_services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/services */ "./resources/js/components/ui/utils/services.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -162,101 +153,50 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       errorMessage: ""
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["validarSesion"]), {
-    login: function () {
-      var _login = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this = this;
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["validarSesion"]), {
+    login: function login() {
+      var _this = this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!this.$refs.form.validate()) {
-                  _context.next = 3;
-                  break;
-                }
+      if (this.$refs.form.validate()) {
+        Object(_utils_services__WEBPACK_IMPORTED_MODULE_1__["login"])({
+          email: this.email,
+          password: this.pass
+        }).then(function () {
+          _this.validarSesion();
 
-                _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/login', {
-                  email: this.email,
-                  password: this.pass
-                }, {
-                  headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                  }
-                }).then(function () {
-                  _this.validarSesion();
+          window.location.href = '/';
+        })["catch"](function (e) {
+          var errorCode = e.response.status;
 
-                  window.location.href = '/';
-                })["catch"](function (e) {
-                  var errorCode = e.response.status;
-
-                  if (errorCode == 422) {
-                    _this.errorMessage = "Datos de acceso incorrectos";
-                  } else {
-                    _this.errorMessage = "Ocurrio un error, intentelo de nuevo";
-                  }
-                });
-
-              case 3:
-              case "end":
-                return _context.stop();
-            }
+          if (errorCode == 422) {
+            _this.errorMessage = "Datos de acceso incorrectos";
+          } else {
+            _this.errorMessage = "Ocurrio un error, intentelo de nuevo";
           }
-        }, _callee, this);
-      }));
-
-      function login() {
-        return _login.apply(this, arguments);
+        });
       }
+    },
+    registrarse: function registrarse() {
+      var _this2 = this;
 
-      return login;
-    }(),
-    registrarse: function () {
-      var _registrarse = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var _this2 = this;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                if (!this.$refs.form.validate()) {
-                  _context2.next = 3;
-                  break;
-                }
-
-                _context2.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/registro/user', {
-                  nombre: this.nombre,
-                  apellidoPaterno: this.primerApellido,
-                  apellidoMaterno: this.segundoApellido,
-                  email: this.email,
-                  password: this.pass,
-                  fecha: this.date
-                }).then(function () {
-                  console.log('Registro Exitoso');
-                  _this2.registro = false;
-                })["catch"](function (e) {
-                  return console.log(e);
-                });
-
-              case 3:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function registrarse() {
-        return _registrarse.apply(this, arguments);
+      if (this.$refs.form.validate()) {
+        Object(_utils_services__WEBPACK_IMPORTED_MODULE_1__["register"])({
+          nombre: this.nombre,
+          apellidoPaterno: this.primerApellido,
+          apellidoMaterno: this.segundoApellido,
+          email: this.email,
+          password: this.pass,
+          fecha: this.date
+        }).then(function () {
+          console.log('Registro Exitoso');
+          _this2.registro = false;
+        })["catch"](function (e) {
+          return console.log(e);
+        });
       }
-
-      return registrarse;
-    }()
+    }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["sesion"]))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["sesion"]))
 });
 
 /***/ }),
@@ -271,7 +211,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Sign__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Sign */ "./resources/js/components/ui/src/components/Sign.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./resources/js/components/ui/node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
