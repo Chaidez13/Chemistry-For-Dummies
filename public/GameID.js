@@ -523,6 +523,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -550,8 +557,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         break;
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('memoria', ['nivelesMM']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('trivia', ['nivelesTR']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('tetris', ['nivelesTT'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(["setGameTetrisOn"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('memoria', ['setGameMemoriaOn', 'setLevelMemoria']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('memoria', ['updateLevelDataMM']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('trivia', ['setGameTriviaOn', 'setLevelTrivia']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('trivia', ['updateLevelDataTR']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('tetris', ['setGameTetrisOn', 'setLevelTetris']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('tetris', ['updateLevelDataTT']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])("memoria", ["nivelesMM"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])("trivia", ["nivelesTR"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])("tetris", ["nivelesTT"])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(["setGameTetrisOn"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])("memoria", ["setGameMemoriaOn", "setLevelMemoria"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("memoria", ["updateLevelDataMM"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])("trivia", ["setGameTriviaOn", "setLevelTrivia"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("trivia", ["updateLevelDataTR"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])("tetris", ["setGameTetrisOn", "setLevelTetris"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("tetris", ["updateLevelDataTT"]), {
     beginGame: function beginGame(dificultad) {
       switch (this.game) {
         case "2":
@@ -569,9 +576,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           Object(_utils_services__WEBPACK_IMPORTED_MODULE_1__["tetrisLevel"])({
             nivel: dificultad
           }).then(function () {
-            return window.location.href = '/tetris';
-          })["catch"](function () {
-            return alert("Ups, ocurrio un problema, intentalo de nuevo.");
+            return window.location.href = "/tetris";
+          })["catch"](function (e) {
+            console.log(e);
+            alert("Ups, ocurrio un problema, intentalo de nuevo.");
           });
           break;
       }
