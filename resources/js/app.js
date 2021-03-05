@@ -11,6 +11,8 @@ import VueRouter from 'vue-router'
 import router from './components/ui/src/router';
 import store from './components/ui/src/store';
 import '@mdi/font/css/materialdesignicons.css'
+import vuetify from './components/ui/src/plugins/vuetify'
+
 Vue.use(Vuetify);
 Vue.use(Vuex);
 Vue.use(VueRouter)
