@@ -1103,7 +1103,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.carta[data-v-7c384f34] {\r\n  margin: 20px;\r\n  border-radius: 5px;\r\n  border: 1px solid darkgray;\r\n  max-width: 150px;\r\n  min-width: 130px;\r\n  min-height: 210px;\n}\n.buttons[data-v-7c384f34]{\r\n  margin-top: 1%;\r\n  margin-bottom: 2%;\n}\n.btn-game[data-v-7c384f34]{\r\n  margin: 0 10px;\n}\n.icon-bg[data-v-7c384f34]{\r\n  width: 100%;\r\n  height: 100%;\r\n  text-align: center;\r\n  margin-top: 35px;\n}\r\n", ""]);
+exports.push([module.i, "\n.carta[data-v-7c384f34] {\n  margin: 20px;\n  border-radius: 5px;\n  border: 1px solid darkgray;\n  max-width: 150px;\n  min-width: 130px;\n  min-height: 210px;\n}\n.buttons[data-v-7c384f34]{\n  margin-top: 1%;\n  margin-bottom: 2%;\n}\n.btn-game[data-v-7c384f34]{\n  margin: 0 10px;\n}\n.icon-bg[data-v-7c384f34]{\n  width: 100%;\n  height: 100%;\n  text-align: center;\n  margin-top: 35px;\n}\n", ""]);
 
 // exports
 
@@ -1122,7 +1122,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.answer-option[data-v-d7cc841a] {\r\n  margin: 10px;\r\n  border-radius: 5px;\r\n  border: 1px solid darkgray;\r\n  background-color: lightblue;\r\n  max-width: 170px;\r\n  min-width: 130px;\r\n  min-height: 200px;\n}\n.answer-option[data-v-d7cc841a]:hover {\r\n  background-color: yellow;\n}\n.btn-game[data-v-d7cc841a]{\r\n  margin: 0 10px;\n}\r\n", ""]);
+exports.push([module.i, "\n.answer-option[data-v-d7cc841a] {\n  margin: 10px;\n  border-radius: 5px;\n  border: 1px solid darkgray;\n  background-color: lightblue;\n  max-width: 170px;\n  min-width: 130px;\n  min-height: 200px;\n}\n.answer-option[data-v-d7cc841a]:hover {\n  background-color: yellow;\n}\n.btn-game[data-v-d7cc841a]{\n  margin: 0 10px;\n}\n", ""]);
 
 // exports
 

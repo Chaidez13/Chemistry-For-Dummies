@@ -135,6 +135,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -164,7 +196,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }).then(function () {
           _this.validarSesion();
 
-          window.location.href = '/';
+          _this.$router.push({
+            path: "/"
+          });
         })["catch"](function (e) {
           var errorCode = e.response.status;
 
@@ -188,7 +222,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           password: this.pass,
           fecha: this.date
         }).then(function () {
-          console.log('Registro Exitoso');
+          console.log("Registro Exitoso");
           _this2.registro = false;
         })["catch"](function (e) {
           return console.log(e);
@@ -777,7 +811,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return !_vm.sesion.status ? _c("sign") : _vm._e()
+  return _c("sign", {
+    directives: [
+      {
+        name: "show",
+        rawName: "v-show",
+        value: !_vm.sesion.status,
+        expression: "!sesion.status"
+      }
+    ]
+  })
 }
 var staticRenderFns = []
 render._withStripped = true

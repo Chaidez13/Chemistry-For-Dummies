@@ -91,7 +91,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.game-container {\r\n  margin: 40px;\r\n  border-radius: 10px;\n}\na {\r\n  text-decoration: none;\n}\n.game-image {\r\n  width: 95%;\r\n  border-radius: 10px;\r\n  margin: 0 auto;\n}\r\n", ""]);
+exports.push([module.i, "\n.game-container {\n  margin: 40px;\n  border-radius: 10px;\n}\na {\n  text-decoration: none;\n}\n.game-image {\n  width: 95%;\n  border-radius: 10px;\n  margin: 0 auto;\n}\n", ""]);
 
 // exports
 

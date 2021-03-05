@@ -1,5 +1,5 @@
 <template>
-  <sign v-if="!sesion.status" />
+  <sign v-show="!sesion.status" />
 </template>
 
 <script>
@@ -9,14 +9,13 @@ import { mapState } from "vuex";
 export default {
   name: "Usuario",
   components: {
-    Sign
+    Sign,
   },
   computed: {
     ...mapState(["sesion"]),
   },
   created() {
-    if(this.sesion.status)
-      this.$router.push({ name: "home" });
-  }
+    if (this.sesion.status) this.$router.push({ name: "home" });
+  },
 };
 </script>

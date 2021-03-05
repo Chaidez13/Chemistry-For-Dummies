@@ -9,15 +9,24 @@
     <v-navigation-drawer app>
       <v-list-item class="px-2" @click="userValidation">
         <v-list-item-content>
-          <v-list-item-title v-if="sesion.status">{{sesion.name}}</v-list-item-title>
-          <v-list-item-title v-if="!sesion.status">Iniciar Sesión</v-list-item-title>
+          <v-list-item-title v-if="sesion.status">{{
+            sesion.name
+          }}</v-list-item-title>
+          <v-list-item-title v-if="!sesion.status"
+            >Iniciar Sesión</v-list-item-title
+          >
         </v-list-item-content>
       </v-list-item>
 
       <v-divider></v-divider>
-      
+
       <v-list>
-        <v-list-item v-for="(item,i) in opciones" :key="i" link @click="changeOption(item.ruta)" v-show="item.show == sesion.status">
+        <v-list-item
+          v-for="(item, i) in opciones"
+          :key="i"
+          link
+          @click="changeOption(item.ruta)"
+        >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -26,7 +35,15 @@
             <v-list-item-title>{{ item.opcion }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-       
+        <v-list-item @click="changeOption('/logout')" v-if="sesion.status">
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Cerrar sesión</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
   </v-app>
@@ -41,34 +58,25 @@ export default {
     //
     drawer: null,
     opciones: [
-      { opcion: "Juegos", icon: "mdi-gamepad-variant", ruta: "/", show: false },
-      { opcion: "Opciones", icon: "mdi-cogs", ruta: "/options", show: false },
+      { opcion: "Juegos", icon: "mdi-gamepad-variant", ruta: "/" },
+      { opcion: "Opciones", icon: "mdi-cogs", ruta: "/options" },
       {
         opcion: "Estadísticas",
         icon: "mdi-google-analytics",
-        ruta: "/dashboard", 
-        show: false
+        ruta: "/dashboard",
       },
       {
         opcion: "Ranking",
         icon: "mdi-format-list-numbered",
-        ruta: "/ranking", 
-        show: false
+        ruta: "/ranking",
       },
-      {
-        opcion: "Cerrar sesión",
-        icon: "mdi-logout",
-        ruta: "/logout", 
-        show: true
-      }
-    ]
-    // :/
+    ],
   }),
   computed: {
-    ...mapState(['sesion'])
+    ...mapState(["sesion"]),
   },
   methods: {
-    ...mapActions(['validarSesion']),
+    ...mapActions(["validarSesion"]),
     userValidation() {
       if (!this.sesion.status) this.$router.push({ name: "usuario" });
     },
@@ -77,8 +85,8 @@ export default {
       if (ruta != actual) this.$router.push({ path: ruta });
     },
   },
-  created(){
-    this.validarSesion()
+  created() {
+    this.validarSesion();
   },
 };
 

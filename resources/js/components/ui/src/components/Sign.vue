@@ -21,15 +21,20 @@
                   <v-text-field
                     label="Primer Apellido*"
                     v-model="primerApellido"
-                    :rules="[() => !!primerApellido || 'Este campo es obligatorio.']"
+                    :rules="[
+                      () => !!primerApellido || 'Este campo es obligatorio.',
+                    ]"
                   ></v-text-field>
                 </v-col>
                 <v-col v-if="registro" cols="12" sm="6" md="4">
-                  <v-text-field 
-                    label="Segundo Apellido*" 
+                  <v-text-field
+                    label="Segundo Apellido*"
                     v-model="segundoApellido"
-                    :rules="[() => !!segundoApellido || 'Este campo es obligatorio.']">
-                    </v-text-field>
+                    :rules="[
+                      () => !!segundoApellido || 'Este campo es obligatorio.',
+                    ]"
+                  >
+                  </v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-text-field
@@ -44,7 +49,11 @@
                     type="password"
                     v-model="pass"
                     v-if="registro"
-                    :rules="[() => !!pass && pass.length > 8 || 'Este campo es obligatorio y de 8 caracteres mínimo.']"
+                    :rules="[
+                      () =>
+                        (!!pass && pass.length > 8) ||
+                        'Este campo es obligatorio y de 8 caracteres mínimo.',
+                    ]"
                     hint="Longitud mínima de 8 caracteres"
                   ></v-text-field>
                   <v-text-field
@@ -52,7 +61,7 @@
                     type="password"
                     v-model="pass"
                     v-if="!registro"
-                    :rules="[() => !!pass  || 'Este campo es obligatorio.']"
+                    :rules="[() => !!pass || 'Este campo es obligatorio.']"
                   ></v-text-field>
                 </v-col>
                 <v-col v-if="registro" cols="12">
@@ -74,13 +83,20 @@
                     </template>
                     <v-date-picker v-model="date" :max="actual" scrollable>
                       <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
-                      <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+                      <v-btn text color="primary" @click="modal = false"
+                        >Cancel</v-btn
+                      >
+                      <v-btn
+                        text
+                        color="primary"
+                        @click="$refs.dialog.save(date)"
+                        >OK</v-btn
+                      >
                     </v-date-picker>
                   </v-dialog>
                 </v-col>
                 <v-col cols="12">
-                  <span class="red--text">{{errorMessage}}</span>
+                  <span class="red--text">{{ errorMessage }}</span>
                 </v-col>
               </v-row>
             </v-container>
@@ -93,20 +109,36 @@
                   v-if="!registro"
                   color="blue darken-1"
                   text
-                  @click="registro=true"
-                >No tengo una cuenta</v-btn>
+                  @click="registro = true"
+                  >No tengo una cuenta</v-btn
+                >
                 <v-btn
                   v-if="registro"
                   color="blue darken-1"
                   text
-                  @click="registro=false"
-                >Ya tengo una cuenta</v-btn>
+                  @click="registro = false"
+                  >Ya tengo una cuenta</v-btn
+                >
               </v-col>
               <v-col cols="12" sm="6">
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="$router.go(-1)">Cancelar</v-btn>
-                <v-btn v-if="registro" color="blue darken-1" text @click="registrarse">Registrarse</v-btn>
-                <v-btn v-if="!registro" color="blue darken-1" text @click="login">Inicar Sesión</v-btn>
+                <v-btn color="blue darken-1" text @click="$router.go(-1)"
+                  >Cancelar</v-btn
+                >
+                <v-btn
+                  v-if="registro"
+                  color="blue darken-1"
+                  text
+                  @click="registrarse"
+                  >Registrarse</v-btn
+                >
+                <v-btn
+                  v-if="!registro"
+                  color="blue darken-1"
+                  text
+                  @click="login"
+                  >Inicar Sesión</v-btn
+                >
               </v-col>
             </v-row>
           </v-card-actions>
@@ -117,9 +149,8 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
-import { login, register } from '../../utils/services';
-
+import { mapState, mapActions } from "vuex";
+import { login, register } from "../../utils/services";
 
 export default {
   data: () => ({
@@ -137,25 +168,27 @@ export default {
   }),
   methods: {
     ...mapActions(["validarSesion"]),
-   login: function(){
-     if (this.$refs.form.validate()) {
-       login({
-         email: this.email,
-         password: this.pass,
-       }).then(() => {
-          this.validarSesion()
-          window.location.href = '/'
-       }).catch((e) =>{
-         const errorCode = e.response.status
-         if(errorCode == 422){
-           this.errorMessage = "Datos de acceso incorrectos"
-         }else{
-           this.errorMessage = "Ocurrio un error, intentelo de nuevo"
-         }
-       })
-     }
+    login: function () {
+      if (this.$refs.form.validate()) {
+        login({
+          email: this.email,
+          password: this.pass,
+        })
+          .then(() => {
+            this.validarSesion();
+            this.$router.push({ path: "/" });
+          })
+          .catch((e) => {
+            const errorCode = e.response.status;
+            if (errorCode == 422) {
+              this.errorMessage = "Datos de acceso incorrectos";
+            } else {
+              this.errorMessage = "Ocurrio un error, intentelo de nuevo";
+            }
+          });
+      }
     },
-    registrarse: function() {
+    registrarse: function () {
       if (this.$refs.form.validate()) {
         register({
           nombre: this.nombre,
@@ -164,15 +197,17 @@ export default {
           email: this.email,
           password: this.pass,
           fecha: this.date,
-        }).then(() => {
-          console.log('Registro Exitoso')
-          this.registro = false
-        }).catch((e)=> console.log(e))
+        })
+          .then(() => {
+            console.log("Registro Exitoso");
+            this.registro = false;
+          })
+          .catch((e) => console.log(e));
       }
     },
   },
   computed: {
-    ...mapState(["sesion"])
-  }
+    ...mapState(["sesion"]),
+  },
 };
 </script>
