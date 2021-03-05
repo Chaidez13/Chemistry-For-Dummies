@@ -5,13 +5,17 @@ export const url =
   window.location.host === "thawing-woodland-50420.herokuapp.com"
     ? domainProd
     : domainDev;
+    
+axios.defaults.headers.common['X-CSRF-TOKEN'] = document
+    .querySelector('meta[name="csrf-token"]')
+    .getAttribute("content")
 
-axios.defaults.headers.common = {
+/* axios.defaults.headers.common = {
   "X-Requested-With": "XMLHttpRequest",
   "X-CSRF-TOKEN": document
     .querySelector('meta[name="csrf-token"]')
     .getAttribute("content"),
-};
+}; */
 
 export const getUserData = () => axios.get(url + "user/datos");
 
