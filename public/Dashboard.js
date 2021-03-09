@@ -99,14 +99,90 @@ var gradients = [["#222"], ["#42b3f4"], ["red", "orange", "yellow"], ["purple", 
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utils_services__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/services */ "./resources/js/components/ui/utils/services.js");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Ranking"
+  name: "Ranking",
+  data: function data() {
+    return {
+      headers: [{
+        text: "Nombre",
+        align: "start",
+        value: "nombre"
+      }, {
+        text: "Apellido",
+        value: "apellidoPaterno"
+      }, {
+        text: "Puntos",
+        value: "puntos"
+      }],
+      itemsTetris: [],
+      itemsMemorama: [],
+      itemsTrivia: [],
+      loading: true
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    Object(_utils_services__WEBPACK_IMPORTED_MODULE_0__["getTopTen"])().then(function (r) {
+      _this.itemsTetris = r.data.tetris;
+      _this.itemsMemorama = r.data.memorama;
+      _this.itemsTrivia = r.data.trivia;
+      _this.loading = false;
+    })["catch"](function () {
+      return alert("Ha ocurrido un error, favor de contactar a un desarrollador.");
+    });
+  }
 });
 
 /***/ }),
@@ -221,16 +297,101 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "v-container",
+    [
+      _c(
+        "v-col",
+        { attrs: { align: "center" } },
+        [
+          _c(
+            "v-col",
+            [
+              _c(
+                "h1",
+                {
+                  staticClass: "display-2",
+                  staticStyle: { color: "#ec407a", padding: "20px 0 100px" }
+                },
+                [_vm._v("\n        Tetris\n      ")]
+              ),
+              _vm._v(" "),
+              _c("v-data-table", {
+                staticClass: "elevation-1",
+                attrs: {
+                  headers: _vm.headers,
+                  items: _vm.itemsTetris,
+                  "hide-default-footer": "",
+                  loading: _vm.loading,
+                  "loading-text": "Cargando puntuaciones más altas...",
+                  "no-data-text": "No hay registros aún :("
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-col",
+            [
+              _c(
+                "h1",
+                {
+                  staticClass: "display-2",
+                  staticStyle: { color: "#ec407a", padding: "20px 0 100px" }
+                },
+                [_vm._v("\n        Memorama\n      ")]
+              ),
+              _vm._v(" "),
+              _c("v-data-table", {
+                staticClass: "elevation-1",
+                attrs: {
+                  headers: _vm.headers,
+                  items: _vm.itemsMemorama,
+                  "hide-default-footer": "",
+                  loading: _vm.loading,
+                  "loading-text": "Cargando puntuaciones más altas...",
+                  "no-data-text": "No hay registros aún :("
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-col",
+            [
+              _c(
+                "h1",
+                {
+                  staticClass: "display-2",
+                  staticStyle: { color: "#ec407a", padding: "20px 0 100px" }
+                },
+                [_vm._v("\n        Trivia\n      ")]
+              ),
+              _vm._v(" "),
+              _c("v-data-table", {
+                staticClass: "elevation-1",
+                attrs: {
+                  headers: _vm.headers,
+                  items: _vm.itemsTrivia,
+                  "hide-default-footer": "",
+                  loading: _vm.loading,
+                  "loading-text": "Cargando puntuaciones más altas...",
+                  "no-data-text": "No hay registros aún :("
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("Ranking")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
