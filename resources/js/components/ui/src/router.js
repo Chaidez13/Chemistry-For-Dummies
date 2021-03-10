@@ -63,6 +63,13 @@ const router = new Router({
         import(/* webpackChunkName: "Dashboard" */ "./views/Encyclopedia.vue"),
     },
     {
+      path: "/encyclopedia/:id",
+      name: "elementData",
+      props: true,
+      component: () =>
+        import(/* webpackChunkName: "Dashboard" */ "./views/ElementData.vue"),
+    },
+    {
       path: "/tetris",
       name: "tetris",
     },

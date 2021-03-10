@@ -15,40 +15,44 @@
         :items="elementData"
         :search="search"
         :items-per-page="20"
-        class="elevation-1"
+        :loading="loading"
+        loading-text="Cargando los elementos, por favor espere."
+        @click:row="handleClick"
       ></v-data-table>
     </v-card>
   </v-col>
 </template>
 
 <script>
-import data from "../database/data";
+import { glossary } from "../../utils/services";
 
 export default {
   name: "Encyclopedia",
   data: () => ({
     search: "",
     headers: [
-      { text: "Número Atomico", value: "atomicNumber" },
+      { text: "Número Atomico", value: "number" },
       { text: "Símbolo", value: "symbol" },
       { text: "Nombre", value: "name" },
-      { text: "Masa Atomica", value: "atomicMass" },
+      { text: "Masa Atomica", value: "atomic_mass" },
     ],
     elementData: [],
+    loading: true,
   }),
-  created() {
+  mounted() {
     this.chargeTable();
   },
   methods: {
     chargeTable: function() {
-      data.forEach((element) => {
-        this.elementData.push({
-          atomicNumber: element.atomicNumber,
-          symbol: element.symbol,
-          name: element.name,
-          atomicMass: element.atomicMass,
-        });
-      });
+      glossary().then(({ data }) => {
+        this.elementData = data.elements;
+        this.loading = false;
+      }).catch((e) => 
+        console.error(e)
+      )
+    },
+    handleClick: function(e) {
+      this.$router.push({name: 'elementData', params: {id: e.number, data: e} });
     },
   },
 };

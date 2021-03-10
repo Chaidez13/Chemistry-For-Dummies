@@ -51,7 +51,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Helium",
          "spectral_img":"https:\/\/en.wikipedia.org\/wiki\/File:Helium_spectrum.jpg",
          "summary":"El helio es un elemento químico con el símbolo Él y el número atómico 2. Es un gas incoloro, inodoro, insípido, no tóxico, inerte, monatómico que dirige el grupo de gas noble en la tabla periódica. Sus puntos de ebullición y de fusión son los más bajos entre todos los elementos.",
-         "symbol":"Él",
+         "symbol":"He",
          "xpos":18,
          "ypos":1,
          "shells":[
@@ -158,7 +158,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Boron",
          "spectral_img":null,
          "summary":"Boro es un elemento químico metaloide con el símbolo B y el número atómico 5. Producido enteramente por la espallación de rayos cósmicos y supernovas y no por la nucleosíntesis estelar, es un elemento de baja abundancia tanto en el sistema Solar como en la corteza terrestre. El boro se concentra en la Tierra por la hidrosolubilidad de sus compuestos naturales más comunes, los minerales de borato.",
-         "symbol":"B)",
+         "symbol":"B",
          "xpos":13,
          "ypos":2,
          "shells":[
@@ -401,7 +401,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Sodium",
          "spectral_img":"https:\/\/en.wikipedia.org\/wiki\/File:Sodium_Spectra.jpg",
          "summary":"Sodium\/sodium diəm\/ es un elemento químico con el símbolo Na (del griego antiguo Νάτριο) y el número atómico 11. Es un metal suave, plateado y altamente reactivo. En la tabla periódica está en la columna 1 (metales alcalinos), y comparte con los otros seis elementos en esa columna que tiene un único electrón en su cubierta exterior, que fácilmente dona, creando un átomo de carga positiva-un catión.",
-         "symbol":"N",
+         "symbol":"Na",
          "xpos":1,
          "ypos":3,
          "shells":[
@@ -539,7 +539,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Silicon",
          "spectral_img":"https:\/\/en.wikipedia.org\/wiki\/File:Silicon_Spectra.jpg",
          "summary":"El silicio es un elemento químico con el símbolo Si y el número atómico 14. Es un metaloide tetravalente, más reactivo que el germanio, el metaloide directamente debajo de él en la mesa. La controversia sobre el carácter del silicio data de su descubrimiento.",
-         "symbol":"SI",
+         "symbol":"Si",
          "xpos":14,
          "ypos":3,
          "shells":[
@@ -587,7 +587,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Phosphorus",
          "spectral_img":null,
          "summary":"El fósforo es un elemento químico con el símbolo P y el número atómico 15. Como elemento, el fósforo existe en dos formas principales-fósforo blanco y fósforo rojo-pero debido a su alta reactividad, el fósforo nunca se encuentra como un elemento libre en la Tierra. En cambio, los minerales que contienen fósforo casi siempre están presentes en su estado oxidado al máximo, como rocas de fosfato inorgánico.",
-         "symbol":"P.",
+         "symbol":"P",
          "xpos":15,
          "ypos":3,
          "shells":[
@@ -954,7 +954,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Titanium",
          "spectral_img":null,
          "summary":"El titanio es un elemento químico con el símbolo Ti y el número atómico 22. Es un metal de transición lustroso con un color plateado, baja densidad y alta resistencia. Es altamente resistente a la corrosión en agua de mar, agua regia y cloro.",
-         "symbol":"I",
+         "symbol":"Ti",
          "xpos":4,
          "ypos":4,
          "shells":[
@@ -1069,7 +1069,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Chromium",
          "spectral_img":null,
          "summary":"El cromo es un elemento químico con el símbolo Cr y el número atómico 24. Es el primer elemento del Grupo 6. Es un metal steely-gray, lustroso, duro y quebradizo que toma un esmalte alto, se resiste al tarnishing, y tiene un punto de fusión alto.",
-         "symbol":"Acr",
+         "symbol":"Cr",
          "xpos":6,
          "ypos":4,
          "shells":[
@@ -1188,7 +1188,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Iron",
          "spectral_img":"https:\/\/en.wikipedia.org\/wiki\/File:Iron_Spectrum.jpg",
          "summary":"El hierro es un elemento químico con el símbolo Fe (de Latin:ferrum) y el número atómico 26. Es un metal en la primera serie de transición. Es por masa el elemento más común en la Tierra, formando gran parte del núcleo externo e interior de la Tierra.",
-         "symbol":"Fé",
+         "symbol":"Fe",
          "xpos":8,
          "ypos":4,
          "shells":[
@@ -1494,7 +1494,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Gallium",
          "spectral_img":null,
          "summary":"Galio es un elemento químico con el símbolo Ga y el número atómico 31. El galio elemental no se produce en forma libre en la naturaleza, sino como los compuestos de galio (III) que están en cantidades de trazas en minerales de zinc y en bauxita. El galio es un metal suave, plateado, y el galio elemental es un sólido quebradizo a bajas temperaturas, y se derrite a 29,76 ° C (85,57 ° F) (ligeramente por encima de la temperatura ambiente).",
-         "symbol":"GA",
+         "symbol":"Ga",
          "xpos":13,
          "ypos":4,
          "shells":[
@@ -1573,7 +1573,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Arsenic",
          "spectral_img":null,
          "summary":"El arsénico es un elemento químico con el símbolo As y el número atómico 33. El arsénico se produce en muchos minerales, generalmente en conjunción con azufre y metales, y también como un puro cristal elemental. El arsénico es un metaloide.",
-         "symbol":"Como",
+         "symbol":"As",
          "xpos":15,
          "ypos":4,
          "shells":[
@@ -1614,7 +1614,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Selenium",
          "spectral_img":null,
          "summary":"El selenio es un elemento químico con el símbolo Se y el número atómico 34. Es un nonmetal con propiedades que son intermedias entre las de su columna de tabla periódica-elementos chalcogen adyacentes azufre y telurio. Rara vez ocurre en su estado elemental en la naturaleza, o como compuestos puros de mineral.",
-         "symbol":"EL",
+         "symbol":"Se",
          "xpos":16,
          "ypos":4,
          "shells":[
@@ -1656,7 +1656,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Bromine",
          "spectral_img":null,
          "summary":"Bromo (del griego antiguo: βρalg μος, brómos, que significa \"hedor\") es un elemento químico con el símbolo Br, y el número atómico 35. Es un halógeno. El elemento fue aislado independientemente por dos químicos, Carl Jacob Löwig y Antoine Jerome Balard, en 1825-1826.",
-         "symbol":"Fr",
+         "symbol":"Br",
          "xpos":17,
          "ypos":4,
          "shells":[
@@ -1990,7 +1990,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Molybdenum",
          "spectral_img":null,
          "summary":"El molibdeno es un elemento químico con el símbolo Mo y el número atómico 42. El nombre es de Neo-Latin molybdaenum, del antiguo griego Μόλυβδος molybdos, lo que significa plomo, ya que sus minerales se confundieron con los minerales de plomo. Los minerales de molibdeno han sido conocidos a lo largo de la historia, pero el elemento fue descubierto (en el sentido de diferenciarlo como una nueva entidad de las sales minerales de otros metales) en 1778 por Carl Wilhelm Scheele.",
-         "symbol":"M",
+         "symbol":"Mo",
          "xpos":6,
          "ypos":5,
          "shells":[
@@ -2134,7 +2134,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Rhodium",
          "spectral_img":null,
          "summary":"Rhodium es un elemento químico con el símbolo Rh y el número atómico 45. Es un metal de transición raro, plateado, duro y químicamente inerte. Es un miembro del grupo del platino.",
-         "symbol":"RH",
+         "symbol":"Rh",
          "xpos":9,
          "ypos":5,
          "shells":[
@@ -2211,7 +2211,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Silver",
          "spectral_img":null,
          "summary":"La plata es un elemento químico con el símbolo Ag (Greek:άργυρος árguros, Latin:argentum, ambos de la raíz indoeuropea * hader-ergum-para \"gris\" o \"brillante\") y el número atómico 47. Un metal de transición suave, blanco y lustroso, posee la mayor conductividad eléctrica, conductividad térmica y reflectividad de cualquier metal. El metal se produce de forma natural en su forma pura, libre (plata nativa), como una aleación con oro y otros metales, y en minerales como el argentote y el clorargyrita.",
-         "symbol":"AG",
+         "symbol":"Ag",
          "xpos":11,
          "ypos":5,
          "shells":[
@@ -2289,7 +2289,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Indium",
          "spectral_img":null,
          "summary":"El indio es un elemento químico con el símbolo In y el número atómico 49. Es un elemento metálico post-transición que es raro en la corteza terrestre. El metal es muy suave, maleable y fácilmente fusible, con un punto de fusión mayor que el sodio, pero menor que el litio o el estaño.",
-         "symbol":"En",
+         "symbol":"In",
          "xpos":13,
          "ypos":5,
          "shells":[
@@ -2412,7 +2412,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Tellurium",
          "spectral_img":null,
          "summary":"El telurio es un elemento químico con el símbolo Te y el número atómico 52. Es un metaloide de color quebradizo, ligeramente tóxico, raro, plateado. El telurio está químicamente relacionado con el selenio y el azufre.",
-         "symbol":"TTE",
+         "symbol":"Te",
          "xpos":16,
          "ypos":5,
          "shells":[
@@ -2655,7 +2655,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Cerium",
          "spectral_img":null,
          "summary":"El cerio es un elemento químico con el símbolo Ce y el número atómico 58. Es un metal suave, plateado, dúctil que se oxida fácilmente en el aire. Cerio fue nombrado después del planeta enano Ceres (en sí mismo llamado así por la diosa romana de la agricultura).",
-         "symbol":"CCE",
+         "symbol":"Ce",
          "xpos":4,
          "ypos":9,
          "shells":[
@@ -2698,7 +2698,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Praseodymium",
          "spectral_img":null,
          "summary":"El praseodimio es un elemento químico con el símbolo Pr y el número atómico 59. El praseodimio es un metal blando, plateado, maleable y dúctil en el grupo lantano. Se valora por sus propiedades magnéticas, eléctricas, químicas y ópticas.",
-         "symbol":"RRP",
+         "symbol":"Pr",
          "xpos":5,
          "ypos":9,
          "shells":[
@@ -2781,7 +2781,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Promethium",
          "spectral_img":null,
          "summary":"El prometio, originalmente prometeo, es un elemento químico con el símbolo Pm y el número atómico 61. Todos sus isótopos son radiactivos; es uno de los dos únicos elementos que son seguidos en la tabla periódica por elementos con formas estables, una distinción compartida con tecnecio. Químicamente, el prometerio es un lantano, que forma sales cuando se combina con otros elementos.",
-         "symbol":"P.m.",
+         "symbol":"Pm",
          "xpos":7,
          "ypos":9,
          "shells":[
@@ -2863,7 +2863,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Europium",
          "spectral_img":null,
          "summary":"Europium es un elemento químico con símbolo Eu y atómico número 63. Fue aislada en 1901 y lleva el nombre del continente de Europa. Es un metal moderadamente duro, plateado que se oxida fácilmente en el aire y el agua.",
-         "symbol":"Uu",
+         "symbol":"Eu",
          "xpos":9,
          "ypos":9,
          "shells":[
@@ -2986,7 +2986,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Dysprosium",
          "spectral_img":null,
          "summary":"El disprosium es un elemento químico con el símbolo Dy y el número atómico 66. Es un elemento de tierra rara con un lustre metálico de plata. El disprosium nunca se encuentra en la naturaleza como un elemento libre, aunque se encuentra en varios minerales, como el xenottime.",
-         "symbol":"DY",
+         "symbol":"Dy",
          "xpos":12,
          "ypos":9,
          "shells":[
@@ -3671,7 +3671,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Bismuth",
          "spectral_img":null,
          "summary":"Bismuth es un elemento químico con el símbolo Bi y el número atómico 83. Bismuto, un metal de post-transición pentavalente, se asemeja químicamente al arsénico y al antimonio. El bismuto elemental puede ocurrir naturalmente, aunque su sulfuro y óxido forman importantes minerales comerciales.",
-         "symbol":"BBI",
+         "symbol":"Bi",
          "xpos":15,
          "ypos":6,
          "shells":[
@@ -3752,7 +3752,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Astatine",
          "spectral_img":null,
          "summary":"La astatina es un elemento químico radiactivo muy raro con el símbolo químico A y el número atómico 85. Ocurre en la Tierra como el producto de descomposición de varios elementos más pesados. Todos sus isótopos son de corta duración; el más estable es astatine-210, con una vida media de 8,1 horas.",
-         "symbol":"En",
+         "symbol":"At",
          "xpos":17,
          "ypos":6,
          "shells":[
@@ -3867,7 +3867,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Radium",
          "spectral_img":null,
          "summary":"El radio es un elemento químico con el símbolo Ra y el número atómico 88. Es el sexto elemento del grupo 2 de la tabla periódica, también conocida como los metales alcalinos de la tierra. El radio puro es casi incoloro, pero se combina fácilmente con el nitrógeno (en lugar del oxígeno) en la exposición al aire, formando una capa superficial negra de nitruro de radio (Ra3N2).",
-         "symbol":"Sra.",
+         "symbol":"Ra",
          "xpos":2,
          "ypos":7,
          "shells":[
@@ -3947,7 +3947,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Thorium",
          "spectral_img":null,
          "summary":"El torio es un elemento químico con el símbolo Th y el número atómico 90. Un metal actinuro radiactivo, el torio es uno de los dos únicos elementos significativamente radiactivos que todavía se producen de forma natural en grandes cantidades como elemento primordial (el otro es uranio). Fue descubierto en 1828 por el reverendo noruego y mineralogista aficionado Morten Thrane Esmark e identificado por el químico sueco Jöns Jakob Berzelius, quien lo nombró después de Thor, el dios nórdico del trueno.",
-         "symbol":"N °",
+         "symbol":"Th",
          "xpos":4,
          "ypos":10,
          "shells":[
@@ -3989,7 +3989,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Protactinium",
          "spectral_img":null,
          "summary":"El protactinio es un elemento químico con el símbolo Pa y el número atómico 91. Es un metal denso y plateado que reacciona fácilmente con oxígeno, vapor de agua y ácidos inorgánicos. Forma varios compuestos químicos donde el protactinio suele estar presente en el estado de oxidación +5, pero también puede suponer + 4 e incluso + 2 o + 3 estados.",
-         "symbol":"PPA",
+         "symbol":"Pa",
          "xpos":5,
          "ypos":10,
          "shells":[
@@ -4224,7 +4224,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Berkelium",
          "spectral_img":null,
          "summary":"Berkelium es un elemento químico radiactivo transuránico con el símbolo Bk y el número atómico 97. Es miembro de la serie de elementos actinida y transuranium. Lleva el nombre de la ciudad de Berkeley, California, la ubicación del Laboratorio de Radiación de la Universidad de California donde fue descubierto en diciembre de 1949.",
-         "symbol":"BK",
+         "symbol":"Bk",
          "xpos":11,
          "ypos":10,
          "shells":[
@@ -4263,7 +4263,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Californium",
          "spectral_img":null,
          "summary":"El Californium es un elemento químico metálico radiactivo con el símbolo Cf y el número atómico 98. El elemento se hizo por primera vez en 1950 en el Laboratorio de Radiación de la Universidad de California en Berkeley, al bombardear el curium con partículas alfa (iones helio-4). Es un elemento actinuro, el sexto elemento de transuranio a ser sintetizado, y tiene la segunda masa atómica más alta de todos los elementos que se han producido en cantidades lo suficientemente grandes como para ver con el ojo sin ayuda (después del einsteinium).",
-         "symbol":"Véase",
+         "symbol":"Cf",
          "xpos":12,
          "ypos":10,
          "shells":[
@@ -4302,7 +4302,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Einsteinium",
          "spectral_img":null,
          "summary":"El Einsteinium es un elemento sintético con el símbolo Es y el número atómico 99. Es el séptimo elemento transuránico, y una actinida. El Einsteinium fue descubierto como un componente de los escombros de la primera explosión de hidrógeno en 1952, y bautizada con el nombre de Albert Einstein.",
-         "symbol":"ES",
+         "symbol":"Es",
          "xpos":13,
          "ypos":10,
          "shells":[
@@ -4614,7 +4614,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Bohrium",
          "spectral_img":null,
          "summary":"Bohrium es un elemento químico con el símbolo Bh y el número atómico 107. Lleva el nombre del físico danés Niels Bohr. Es un elemento sintético (un elemento que se puede crear en un laboratorio pero que no se encuentra en la naturaleza) y radiactivo; el isótopo conocido más estable, 270Bh, tiene una vida media de aproximadamente 61 segundos.",
-         "symbol":"BH",
+         "symbol":"Bh",
          "xpos":7,
          "ypos":7,
          "shells":[
@@ -4653,7 +4653,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Hassium",
          "spectral_img":null,
          "summary":"El Hasio es un elemento químico con el símbolo Hs y el número atómico 108, llamado así por el estado alemán de Hesse. Es un elemento sintético (un elemento que se puede crear en un laboratorio pero que no se encuentra en la naturaleza) y radiactivo; el isótopo conocido más estable, 269Hs, tiene una vida media de aproximadamente 9,7 segundos, aunque un estado metestable no confirmado, 277mHs, puede tener una vida media más larga de unos 130 segundos. Hasta la fecha se han sintetizado más de 100 átomos de hasio.",
-         "symbol":"HS",
+         "symbol":"Hs",
          "xpos":8,
          "ypos":7,
          "shells":[
@@ -4731,7 +4731,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Darmstadtium",
          "spectral_img":null,
          "summary":"El darmstadtium es un elemento químico con el símbolo Ds y el número atómico 110. Es un elemento sintético extremadamente radiactivo. El isótopo conocido más estable, el darmstadtio-281, tiene una vida media de aproximadamente 10 segundos.",
-         "symbol":"D",
+         "symbol":"Ds",
          "xpos":10,
          "ypos":7,
          "shells":[
@@ -4809,7 +4809,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Copernicium",
          "spectral_img":null,
          "summary":"Copernicium es un elemento químico con el símbolo Cn y número atómico 112. Es un elemento sintético extremadamente radiactivo que sólo puede ser creado en un laboratorio. El isótopo conocido más estable, el copernicio-285, tiene una vida media de aproximadamente 29 segundos, pero es posible que este isótopo de copernicio pueda tener un isómero nuclear con una vida media más larga, 8.9 min.",
-         "symbol":"Nc",
+         "symbol":"Cn",
          "xpos":12,
          "ypos":7,
          "shells":[
@@ -4848,7 +4848,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Ununtrium",
          "spectral_img":null,
          "summary":"El nihonio es un elemento químico con número atómico 113. Tiene un símbolo Nh. Es un elemento sintético (un elemento que se puede crear en un laboratorio pero que no se encuentra en la naturaleza) y es extremadamente radiactivo; su isótopo conocido más estable, el nihonio-286, tiene una vida media de 20 segundos.",
-         "symbol":"NH",
+         "symbol":"Nh",
          "xpos":13,
          "ypos":7,
          "shells":[
@@ -5004,7 +5004,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Tennessine",
          "spectral_img":null,
          "summary":"La tennesina es un elemento químico artificial superpesado con un número atómico de 117 y un símbolo de Ts. También conocido como eka-astatina o elemento 117, es el segundo elemento más pesado conocido y penúltimo elemento del 7º período de la tabla periódica. A partir de 2016, se han observado quince átomos de tennesina: seis cuando se sintetizó por primera vez en 2010, siete en 2012, y dos en 2014.",
-         "symbol":"T",
+         "symbol":"Ts",
          "xpos":17,
          "ypos":7,
          "shells":[
@@ -5082,7 +5082,7 @@
          "source":"https:\/\/en.wikipedia.org\/wiki\/Ununennium",
          "spectral_img":null,
          "summary":"Ununennium, también conocido como eka-francium o simplemente el elemento 119, es el hipotético elemento químico con el símbolo Uue y el número atómico 119. Ununennium y Uue son el nombre y símbolo del IUPAC sistemático temporal, respectivamente, hasta que se decida un nombre permanente. En la tabla periódica de los elementos, se espera que sea un elemento de s-bloque, un metal alcalino, y el primer elemento en el octavo periodo.",
-         "symbol":"Uue",
+         "symbol":"Ue",
          "xpos":1,
          "ypos":8,
          "shells":[
