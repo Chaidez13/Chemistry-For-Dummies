@@ -59,7 +59,11 @@ export default {
     drawer: null,
     opciones: [
       { opcion: "Juegos", icon: "mdi-gamepad-variant", ruta: "/" },
-      { opcion: "Opciones", icon: "mdi-cogs", ruta: "/options" },
+      {
+        opcion: "Enciclopedia",
+        icon: "mdi-book-open-variant",
+        ruta: "/encyclopedia",
+      },
       {
         opcion: "Estadísticas",
         icon: "mdi-google-analytics",
@@ -70,6 +74,7 @@ export default {
         icon: "mdi-format-list-numbered",
         ruta: "/ranking",
       },
+      { opcion: "Opciones", icon: "mdi-cogs", ruta: "/options" },
     ],
   }),
   computed: {
@@ -92,5 +97,3 @@ export default {
 
 //https://github.com/neelpatel05/periodic-table-api
 </script>
-
-
