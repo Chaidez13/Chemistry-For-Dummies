@@ -9,21 +9,21 @@
 
 ## How To Run
 Esta aplicacion requiere Node y PHP Composer, el frontend se encuentra en resources/js/components/ui/src
+```
+composer install 
+```
 Tanto en la raiz como en el front
 ```
 npm install
 ```
 ```
-php composer
+php artisan key:generate
 ```
 ```
 php artisan migrate:fresh --seed
 ```
 ```
 php artisan serve 
-```
-```
-php artisan queue:work --tries=3 --timeout=0
 ```
 En el front
 ```
