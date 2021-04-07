@@ -7,6 +7,28 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+## How To Run
+Esta aplicacion requiere Node y PHP Composer, el frontend se encuentra en resources/js/components/ui/src
+Tanto en la raiz como en el front
+```
+npm install
+```
+```
+php composer
+```
+```
+npm run database
+```
+```
+php artisan serve 
+```
+```
+php artisan queue:work --tries=3 --timeout=0
+```
+En el front
+```
+npm run serve
+```
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

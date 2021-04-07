@@ -2,7 +2,7 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="620">
       <v-card max-width="616">
-        <v-form ref="form">
+        <v-form ref="form" style="overflow-y: hidden; overflow-x: hidden;">
           <v-card-title>
             <span v-if="registro" class="headline">Registrarse</span>
             <span v-if="!registro" class="headline">Iniciar Sesión</span>

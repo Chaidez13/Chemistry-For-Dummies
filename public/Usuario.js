@@ -311,7 +311,13 @@ var render = function() {
             [
               _c(
                 "v-form",
-                { ref: "form" },
+                {
+                  ref: "form",
+                  staticStyle: {
+                    "overflow-y": "hidden",
+                    "overflow-x": "hidden"
+                  }
+                },
                 [
                   _c("v-card-title", [
                     _vm.registro
