@@ -17,7 +17,7 @@ npm install
 php composer
 ```
 ```
-npm run database
+php artisan migrate:fresh --seed
 ```
 ```
 php artisan serve 
